@@ -19,8 +19,12 @@ public class Post {
 
     private String imageurl;
 
+    private String content;
+
     @Column(nullable = false)
     private Date date;
+
+    private Long view;
 
     @ManyToOne
     @JoinColumn(name = "iduser")

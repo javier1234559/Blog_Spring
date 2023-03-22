@@ -15,7 +15,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/")
+    @GetMapping("/fds")
     public String test(Model model) {
         List<User> users = userService.findAllUsers();
         StringBuilder usersStr = new StringBuilder();
