@@ -1,6 +1,23 @@
+:root{
+    --main-font: 'Roboto', sans-serif;
+    
+}
+.text-overflow-custom{
+    overflow: hidden;   
+    display: -webkit-box;
+    -webkit-line-clamp: 1; 
+            line-clamp: 1; 
+    -webkit-box-orient: vertical;  
+}
+.center-custom{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 body{
-    font-family: 'Patrick Hand', cursive;
+    /* font-family: 'Patrick Hand', cursive; */
+    font-family: var(--main-font);
     font-size: 25px;
 }
 .font-inter{
@@ -50,7 +67,7 @@ a:hover{
     border-radius: 10%;
     cursor: pointer;
     border: none;
-
+    overflow: hidden;
 }
 .card-rounded-custom:hover{
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -61,20 +78,67 @@ a:hover{
     transition: all 0.2s linear;
 }
 .card-img-custom{
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTbqoypzOFoz9OjPL-ID5nZyjPjLIc27ePbgUGWRa46g&s');
     border-radius: 10%;
     border:  1px solid #ccc;
     height: 180px;
-    object-fit: cover;
+    object-fit: contain;
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+.card-img-custom::after{
+    content:" ";
+    border-radius: 10%;
+    position: absolute;
+    z-index: 2;
+    height: 100%;
+    width: 100%;
+    display: block;
+    background-color: rgba(0, 0, 0,0.3);
+}
+.car-img-view-custom{
+    position: absolute;
+    z-index: 3;
+    font-size: 1rem;
+    padding: 1rem;
+    top: 0;
+    right: 0;
+    color :#fff;
+    background-position: center center;
 }
 .card-text-custom{  
+    color: #514f4f;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
     overflow: hidden;   
    display: -webkit-box;
-   -webkit-line-clamp: 2; 
-           line-clamp: 2; 
+   -webkit-line-clamp: 3; 
+           line-clamp: 3; 
    -webkit-box-orient: vertical;  
    margin: 0;
 }
-
+.card-tile-custom{
+    font-family: var(--main-font);
+    font-size: 1.2em;
+    overflow: hidden;   
+    display: -webkit-box;
+    -webkit-line-clamp: 1; 
+            line-clamp: 1; 
+    -webkit-box-orient: vertical;  
+    /* color:#515151; */
+}
+.card-subtile-custom{
+ 
+    font-size:0.8rem ;
+    overflow: hidden;   
+    display: -webkit-box;
+   -webkit-line-clamp: 3; 
+           line-clamp: 3; 
+    text-overflow: ellipsis;
+    white-space:nowrap;
+}
 .top-post p{
     margin-left:2rem ;
     padding: 0;
@@ -179,4 +243,83 @@ div.post-category-custom:hover{
 }
 .detail-post-commented-custom p{
     text-transform: capitalize;
+}
+/* FORGOT CUSTOM */
+
+.form-forgot-custom {
+    margin-top: 7rem;
+}
+
+.form-forgot-custom form{
+    height: 500px;
+    width: 500px;
+}
+.form-forgot-custom form h1{
+    text-align: center;
+}
+.form-forgot-custom form label{
+    font-size: 1rem;
+}
+
+.modal-title{
+    text-align: center;
+}
+
+/* LOGIN CUSTOM */
+.modal-login-custom{
+    border-radius: 5%;
+    overflow: hidden;
+    padding: 10px;
+}
+
+.modal-login-custom #loginLabel{
+    text-align: center;
+    font-weight: 600;
+    font-size: 2rem;
+}
+
+.modal-login-custom label{
+    font-size: 1rem;
+}
+.modal-login-custom input{
+    font-size: 1rem;
+    padding: 0.5rem;
+}
+
+.hero-custom-edit{
+    position: absolute;
+    color: #fff;
+    font-size: 2rem;
+    bottom: 0;
+    right: 0;
+    padding: 50px;
+    z-index: 5;
+}
+
+.article-wrapper-custom #editor{
+    border-radius: 10px;
+}
+.article-wrapper-custom  button{
+    background-color: #fff !important;
+    box-shadow: unset !important;  
+    border: #000 solid 0.2px !important ; 
+    border-radius: 0px !important;
+    color: #000 !important;
+}
+.article-wrapper-custom  input{
+    border: unset !important ; 
+    border-radius: 0px !important;
+    color: #000 !important;
+    outline: none !important;
+}
+.article-wrapper-custom  select{
+    outline: none !important;
+    box-shadow: unset !important;  
+}
+.article-wrapper-custom .ck-focused{
+    border-color: #333 !important;
+
+}
+.article-wrapper-custom  select:focus{
+    border-color: #000;
 }

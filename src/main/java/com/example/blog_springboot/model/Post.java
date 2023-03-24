@@ -8,6 +8,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
+@AllArgsConstructor
 @Table(name = "Post")
 public class Post {
     @Id
@@ -30,13 +31,4 @@ public class Post {
     @JoinColumn(name = "iduser")
     private User user;
 
-    public Post() {}
-
-//    public Post(int idpost, String title, String imageurl, Date date, User user) {
-//        this.idpost = idpost;
-//        this.title = title;
-//        this.imageurl = imageurl;
-//        this.date = date;
-//        this.user = user;
-//    }
 }

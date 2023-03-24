@@ -59,100 +59,28 @@
       </div>
     </nav>
     <!-- Page Header-->
-    <header class="masthead container hero-custom" style="background-image: url('/static/product/assets/img/home-bg.jpg')" th:style="'background-image: url(' + @{/product/assets/img/home-bg.jpg} + ')'">
-      <div class="container position-relative px-4 px-lg-5">
-        <div class="row gx-4 gx-lg-5 justify-content-center">
-          <div class="col-md-10 col-lg-8 col-xl-7">
-            <div class="site-heading">
-              <h1>Clean Blog</h1>
-              <span class="subheading">A Blog Theme by Start Bootstrap</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
     <!-- Main Content-->
-    <div class="container px-4 px-lg-5">
-      <div class="row gx-4 gx-lg-5">
-        <!-- Cards -->
-        <div class="col-md-8 col-12 row">
-          <div class="row g-1 g-2 gy-4" th:if="${listPost != null }">
-            <div class="col" th:each="post: ${listPost}">
-              <div class="card card-rounded-custom" style="width: 20rem">
-                <!-- <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTbqoypzOFoz9OjPL-ID5nZyjPjLIc27ePbgUGWRa46g&s" class="card-img-top card-img-custom" alt="..." /> -->
-                <div class="card-img-custom" th:style="'background-image: url(' + ${post.getImageurl()} + ')'">
-                  <span class="ps-4 car-img-view-custom">
-                    <span><i class="bi bi-eye"></i></span>
-                    <span class="" th:text="${post.getView()} "></span>
-                  </span>
-                </div>
-                <div class="card-body" style="font-size: 1.2rem">
-                  <h5 class="card-title card-tile-custom" th:text="${post.getTitle()}"></h5>
-                  <div class="row">
-                    <small class="post-meta col">
-                      <smal class="card-subtile-custom" th:text="${post.getDate()}">Posted by Start Bootstrap on August 24, 2022</smal>
-                    </small>
-                  </div>
-                  <p class="card-text-custom text-secondary-emphasis" th:text="${post.getContent()}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card card-rounded-custom" style="width: 20rem">
-                <!-- <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTbqoypzOFoz9OjPL-ID5nZyjPjLIc27ePbgUGWRa46g&s" class="card-img-top card-img-custom" alt="..." /> -->
-                <div class="card-img-custom">
-                  <span class="ps-4 car-img-view-custom">
-                    <span><i class="bi bi-eye"></i></span>
-                    <span class="">20.000k</span>
-                  </span>
-                </div>
-                <div class="card-body" style="font-size: 1.2rem">
-                  <h5 class="card-title card-tile-custom">Card title Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente iusto soluta accusantium ea error commodi libero quia consectetur dolor ab ullam non natus porro esse beatae placeat recusandae, repellat rem!</h5>
-                  <div class="row">
-                    <small class="post-meta col">
-                      <smal class="card-subtile-custom">Posted by Start Bootstrap on August 24, 2022</smal>
-                    </small>
-                  </div>
-                  <p class="card-text-custom text-secondary-emphasis">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
-              </div>
-            </div>
+    <div class="container mt-8">
+      <div class="center-custom form-forgot-custom">
+        <form class="row g-3 form-forgot-custom">
+          <h1 class="col-md-12 h1">Forgot Password</h1>
+          <div class="col-md-6">
+            <label for="inputPassword4" class="form-label">Enter Code from Email</label>
+            <input type="text" class="form-control" id="inputPassword4" />
           </div>
-        </div>
-        <!-- Post Category-->
-        <div class="col-md-4 col-12">
-          <div class="border bg-blue top-post mb-5 p-4 post-category-custom post-category-items-custom">
-            <p class="text-center">Top Post</p>
-            <div class="fs-6 d-flex py-0">
-              <p class="">1</p>
-              <p class="">Title</p>
-              <p class="top-post-limit-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit deserunt numquam vel cumque perspiciatis eius amet architecto dolorum maxime atque ex provident, voluptatum officia! Distinctio necessitatibus ab cupiditate quo quod.</p>
-            </div>
-            <div class="fs-6 d-flex py-0">
-              <p class="">1</p>
-              <p class="">Title</p>
-              <p class="top-post-limit-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit deserunt numquam vel cumque perspiciatis eius amet architecto dolorum maxime atque ex provident, voluptatum officia! Distinctio necessitatibus ab cupiditate quo quod.</p>
-            </div>
-            <div class="fs-6 d-flex py-0">
-              <p class="">1</p>
-              <p class="">Title</p>
-              <p class="top-post-limit-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit deserunt numquam vel cumque perspiciatis eius amet architecto dolorum maxime atque ex provident, voluptatum officia! Distinctio necessitatibus ab cupiditate quo quod.</p>
-            </div>
+          <div class="col-12">
+            <label for="inputAddress" class="form-label">New Password</label>
+            <input type="password" class="form-control" id="inputAddress" placeholder="Input new pass" />
           </div>
-          <div class="border bg-blue top-post mb-5 p-4 post-category-custom">
-            <p class="text-center mb-4">Category</p>
-            <div class="row post-category-items-custom">
-              <div class="col">Tag</div>
-              <div class="col">Tag</div>
-              <div class="col">Tag</div>
-            </div>
+          <div class="col-12">
+            <label for="inputAddress2" class="form-label">Repeart Password</label>
+            <input type="password" class="form-control" id="inputAddress2" placeholder="Repeat password" />
           </div>
-        </div>
+          <div class="col-md-12 offset-md-10" >
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
       </div>
-    </div>
-
-    <div class="d-flex justify-content-center my-5">
-      <a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a>
     </div>
 
     <!-- Footer-->
@@ -195,23 +123,20 @@
     <!-- Modal Login -->
     <div class="modal fade" id="login" tabindex="-1" aria-labelledby="loginLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content modal-login-custom">
+        <div class="modal-content">
           <div class="modal-header">
+            <h5 class="modal-title" id="loginLabel">Login</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <div class="mb-3 row">
-              <h1 class="h3" id="loginLabel">Login</h1>
-            </div>
-            
-            <div class="mb-3 row">
-              <label for="staticEmail" class="col-sm-2 col-form-label" >Email</label>
+              <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
               <div class="col-sm-10">
-                <input type="email" class="form-control" id="staticEmail" />
+                <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com" />
               </div>
             </div>
             <div class="mb-3 row">
-              <label for="inputPassword" class="col-sm-2 col-form-label" >Password</label>
+              <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
               <div class="col-sm-10">
                 <input type="password" class="form-control" id="inputPassword" />
               </div>
@@ -244,8 +169,6 @@
         </div>
       </div>
     </div>
-
-    
 
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

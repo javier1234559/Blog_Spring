@@ -20,13 +20,13 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "pass")
+    @Column(name = "password")
     private String password;
 
     @Column(name = "phone")
     private String phone;
 
-    @Column(name = "descrip")
+    @Column(name = "description")
     private String description;
 
     @Column(name = "imageurl")
