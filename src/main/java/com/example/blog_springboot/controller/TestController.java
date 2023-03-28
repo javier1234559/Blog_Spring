@@ -52,6 +52,7 @@ public class TestController {
     }
     @GetMapping("/display")
     public String display(){
+        System.out.print("Test git");
         return  "display";
     }
 
