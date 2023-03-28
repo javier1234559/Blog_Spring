@@ -187,14 +187,15 @@
       </div>
     </div>
 
-    <!-- Ballon CKEDITOR5 -->
-    <!-- <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script> -->
-    <!-- <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/balloon/ckeditor.js"></script> -->
+   
     <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
 
     <script>
       ClassicEditor
-        .create( document.querySelector( '#editor' ) )
+        .create( document.querySelector( '#editor' ), {
+          plugins: [ 'paste', 'uploadImage' ],
+          toolbar: [ 'pasteFromOffice', '|', 'uploadImage' ]
+        } )
         .catch( error => {
             console.error( error );
         } );

@@ -1,9 +1,13 @@
 package com.example.blog_springboot.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
+
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
 @Table(name = "Notification")
 public class Notification {
 
@@ -11,14 +15,16 @@ public class Notification {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idnoti;
 
-    @Column(name = "imageurl")
-    private String imageurl;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "iduser")
+    private User user;
 
-    @Column(name = "title")
+    @Lob
+    private byte[] image;
+
     private String title;
 
-    @Column(name = "content")
+    @Lob
     private String content;
-
 
 }

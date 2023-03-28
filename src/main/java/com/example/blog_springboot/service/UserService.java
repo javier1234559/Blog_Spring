@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 public interface UserService {
-
-
-
-    public List<User> findAllUsers() ;
+    User createUser(User user);
+    User updateUser(int id, User user);
+    void deleteUser(int id);
+    User getUserById(int id);
+//    User getUserByEmail(String email);
+    List<User> getAllUsers();
 }

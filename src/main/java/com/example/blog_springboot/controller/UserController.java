@@ -17,7 +17,7 @@ public class UserController {
 
     @GetMapping("/fds")
     public String test(Model model) {
-        List<User> users = userService.findAllUsers();
+        List<User> users = userService.getAllUsers();
         StringBuilder usersStr = new StringBuilder();
         for (User user : users) {
             usersStr.append(user.toString()).append("\n");
@@ -27,7 +27,7 @@ public class UserController {
     }
     @GetMapping("/users")
     public String findAllUsers(Model model) {
-        List<User> users = userService.findAllUsers();
+        List<User> users = userService.getAllUsers();
         StringBuilder usersStr = new StringBuilder();
         for (User user : users) {
             usersStr.append(user.toString()).append("\n");

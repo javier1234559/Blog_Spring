@@ -4,17 +4,42 @@ import com.example.blog_springboot.repository.PostRepository;
 import com.example.blog_springboot.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class PostServiceImpl implements PostService {
 
-    @Autowired
-    private PostRepository postRepository;
+    private final PostRepository postRepository;
+
+    public PostServiceImpl(PostRepository postRepository) {
+        this.postRepository = postRepository;
+    }
+
     @Override
-    public List<Post> getAllPosts() {
-        return postRepository.findAll();
+    public Post createPost(Post post) {
+        return postRepository.save(post);
+    }
+
+    @Override
+    public Post updatePost(int id, Post post) {
+        Post updatedPost = postRepository.findById(id).orElse(null);
+        if (updatedPost != null) {
+            updatedPost.setTitle(post.getTitle());
+            updatedPost.setContent(post.getContent());
+            updatedPost.setImage(post.getImage());
+            updatedPost.setDate(post.getDate());
+            updatedPost.setView(post.getView());
+            postRepository.save(updatedPost);
+        }
+        return updatedPost;
+    }
+
+    @Override
+    public void deletePost(int id) {
+        postRepository.deleteById(id);
     }
 
     @Override
@@ -22,23 +47,13 @@ public class PostServiceImpl implements PostService {
         return postRepository.findById(id).orElse(null);
     }
 
+    @Override
+    public List<Post> getAllPosts() {
+        return postRepository.findAll();
+    }
+//
 //    @Override
-//    public List<Post> getPostsByUserId(Long userId) {
+//    public List<Post> getPostsByUserId(int userId) {
 //        return postRepository.findByUserId(userId);
 //    }
-
-    @Override
-    public void savePost(Post post) {
-        postRepository.save(post);
-    }
-
-    @Override
-    public void updatePost(Post post) {
-        postRepository.save(post);
-    }
-
-    @Override
-    public void deletePostById(int id) {
-        postRepository.deleteById(id);
-    }
 }

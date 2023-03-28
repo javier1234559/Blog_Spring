@@ -14,15 +14,19 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idcomment;
 
-    @ManyToOne
-    @JoinColumn(name = "iduser")
-    private User user;
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idpost")
     private Post post;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "iduser")
+    private User user;
+
+    @Lob
+    private String content;
+
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
-    private Date date ;
+    private Date date;
 
 }

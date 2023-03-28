@@ -1,21 +1,20 @@
 package com.example.blog_springboot.model;
 
-
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
 @Entity
-@Table(name = "Category")
-public class Category {
+@Getter
+@Setter
+@Table(name = "TopPost")
+public class TopPost {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idcategory;
+    private int idtoppost;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idpost")
     private Post post;
 
-    @Column(nullable = false)
-    private String name;
 }

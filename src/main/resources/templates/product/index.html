@@ -78,24 +78,25 @@
         <div class="col-md-8 col-12 row">
           <div class="row g-1 g-2 gy-4" th:if="${listPost != null }">
             <div class="col" th:each="post: ${listPost}">
-              <div class="card card-rounded-custom" style="width: 20rem">
-                <!-- <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTbqoypzOFoz9OjPL-ID5nZyjPjLIc27ePbgUGWRa46g&s" class="card-img-top card-img-custom" alt="..." /> -->
-                <div class="card-img-custom" th:style="'background-image: url(' + ${post.getImageurl()} + ')'">
+                <a th:href="@{/post(id=${post.getIdpost()})}">
+                    <div class="card card-rounded-custom" style="width: 20rem">
+                        <div class="card-img-custom" th:style="'background-image: url(' + ${post.getImage()} + ')'">
                   <span class="ps-4 car-img-view-custom">
                     <span><i class="bi bi-eye"></i></span>
                     <span class="" th:text="${post.getView()} "></span>
                   </span>
-                </div>
-                <div class="card-body" style="font-size: 1.2rem">
-                  <h5 class="card-title card-tile-custom" th:text="${post.getTitle()}"></h5>
-                  <div class="row">
-                    <small class="post-meta col">
-                      <smal class="card-subtile-custom" th:text="${post.getDate()}">Posted by Start Bootstrap on August 24, 2022</smal>
-                    </small>
-                  </div>
-                  <p class="card-text-custom text-secondary-emphasis" th:text="${post.getContent()}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
-              </div>
+                        </div>
+                        <div class="card-body" style="font-size: 1.2rem">
+                            <h5 class="card-title card-tile-custom" th:text="${post.getTitle()}"></h5>
+                            <div class="row">
+                                <small class="post-meta col">
+                                    <smal class="card-subtile-custom" th:text="${post.getDate()}">Posted by <span th:text="${post.getUser().getName()}"> </span> on <span th:text="${post.getDate()}"> </span> </smal>
+                                </small>
+                            </div>
+                            <p class="card-text-custom text-secondary-emphasis" th:text="${post.getContent()}">.</p>
+                        </div>
+                    </div>
+                </a>
             </div>
             <div class="col">
               <div class="card card-rounded-custom" style="width: 20rem">
