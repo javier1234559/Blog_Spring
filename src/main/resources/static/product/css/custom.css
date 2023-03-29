@@ -58,6 +58,9 @@ a{
     color:inherit;
 }
 a:hover{
+    color:inherit !important;
+}
+nav a:hover{
     color: #fff;
 }
 .dropdown-toggle::after{

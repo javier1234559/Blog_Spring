@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head th:replace="product/fragment :: head-meta">
+  </head>
+  <body>
+    <!-- Navigation-->
+    <div th:replace="product/fragment :: nav"></div>
+    <nav id = "nav"></nav>
+    <!-- Page Header-->
+    <header class="masthead container hero-custom"
+            th:style="'background-image: url(' + ${@environment.getProperty('SERVER_PATH')} + '/uploaded/image/post/' + ${post.getIdpost()}  +')'">
+      <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+          <div class="col-md-10 col-lg-8 col-xl-7">
+            <div class="post-heading">
+              <h1>[[${post.getTitle()}]]</h1>
+              <!-- <h2 class="subheading">Problems look mighty small from 150 miles up</h2> -->
+              <span class="meta">
+                Posted by
+                <a href="#!" th:text="${post.getUser().getName()}"></a>
+                on [[${#dates.format(post.date, 'dd/MM/yyyy')}]]
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- Post Content-->
+    <article class="mb-4">
+      <div class="container px px-lg">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+          <div class="col-md-8 col-12">
+            <div class="row">
+              <div class="col-lg-10 col-12">
+                <h1 class="detail-post-title-custom font-inter" th:text="${post.getTitle()}"></h1>
+              </div>
+              <div class="col-lg-2  col-12 detail-post-share-custom">
+                <div class="detail-post-share-title-custom">
+                  <span>
+                    Share
+                    <i class="bi bi-share"></i>
+                  </span>
+                </div>
+                <div class="detail-post-share-icons-custom">
+                  <a href="#">
+                    <i class="bi bi-twitter"></i>
+                  </a>
+                  <a href="#">
+                    <i class="bi bi-facebook"></i>
+                  </a>
+                  <a href="#">
+                    <i class="bi bi-linkedin"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="col-12" >
+                [(${post.getContent()})]
+              </div>
+              <div class="col-12">
+                <form class="detail-post-form-comment-custom">
+                  <div class="mb-3">
+                    <label for="exampleInputtext1" class="form-label font-inter">Comments</label>
+                    <div class="d-flex post-comment-input-custom">
+                      <img src="https://pbs.twimg.com/media/FkKORoyUcAErPlB.jpg:large" alt="" />
+                      <input type="text" class="form-control" id="exampleInputtext1" aria-describedby="textHelp" />
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+              </div>
+              <div class="col-12">
+                <div class="mb-3">
+                  <div class="d-flex post-comment-input-custom mt-5">
+                    <img src="https://pbs.twimg.com/media/FkKORoyUcAErPlB.jpg:large" alt="" />
+                    <div class="ms-4 detail-post-commented-custom">
+                      <p class="m-0 fs-4 font-inter">javier</p>
+                      <small class="fs-4">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptate provident dolores exercitationem, quae voluptates tempora aspernatur unde ullam dolorem mollitia, minus libero quis ratione sapiente, ea tenetur. Optio, illo autem.</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-12">
+            <div class="border bg-blue top-post mb-5 p-4 post-category-custom post-category-items-custom">
+              <p class="text-center">Top Post</p>
+              <div class="fs-6 d-flex py-0">
+                <p class="">1</p>
+                <p class="">Title</p>
+                <p class="top-post-limit-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit deserunt numquam vel cumque perspiciatis eius amet architecto dolorum maxime atque ex provident, voluptatum officia! Distinctio necessitatibus ab cupiditate quo quod.</p>
+              </div>
+              <div class="fs-6 d-flex py-0">
+                <p class="">1</p>
+                <p class="">Title</p>
+                <p class="top-post-limit-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit deserunt numquam vel cumque perspiciatis eius amet architecto dolorum maxime atque ex provident, voluptatum officia! Distinctio necessitatibus ab cupiditate quo quod.</p>
+              </div>
+              <div class="fs-6 d-flex py-0">
+                <p class="">1</p>
+                <p class="">Title</p>
+                <p class="top-post-limit-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit deserunt numquam vel cumque perspiciatis eius amet architecto dolorum maxime atque ex provident, voluptatum officia! Distinctio necessitatibus ab cupiditate quo quod.</p>
+              </div>
+            </div>
+            <div class="border bg-blue top-post mb-5 p-4 post-category-custom">
+              <p class="text-center mb-4">Category</p>
+              <div class="row post-category-items-custom">
+                <div class="col">Tag</div>
+                <div class="col">Tag</div>
+                <div class="col">Tag</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+   
+    <!-- Footer-->
+    <div th:replace="product/fragment :: footer"></div>
+    <div id="footer"></div>
+    <!-- Modal-->
+    <div th:replace="product/fragment :: nav-modal"></div>
+    <div id="nav-modal"></div>
+
+    
+ <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="/static/product/js/custom.js"  th:src="@{/product/js/custom.js}"></script>
+
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+  </body>
+</html>

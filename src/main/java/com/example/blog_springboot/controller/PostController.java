@@ -21,22 +21,29 @@ import java.util.Optional;
 @RequestMapping("/posts")
 public class PostController {
 
-    @Autowired
-    private PostService postService;
+    private final PostService postService ;
+
+    public PostController(PostService postService) {
+        this.postService = postService;
+    }
 
     @GetMapping("/")
-    public String getAllPostsHome(Model model) {
-        List<Post> posts = postService.getAllPosts();
-        StringBuilder str = new StringBuilder();
-        for (Post post : posts) {
-            str.append(post.toString()).append("\n");
-        }
-        model.addAttribute("post", str.toString());
+    public String getAllPosts(Model model) {
+        List<Post> listPost = postService.getAllPosts();
+        model.addAttribute("listPost", listPost);
         return "product/index";
     }
-    @GetMapping("/list")
-    public List<Post> getAllPosts() {
-        return postService.getAllPosts();
+
+    @GetMapping("/{id}")
+    public String getPostById(@PathVariable("id") int id , Model model) {
+        Optional<Post> optionalPost = Optional.ofNullable(postService.getPostById(id));
+        if (optionalPost.isPresent()) {
+            Post post = postService.getPostById(id);
+            model.addAttribute("post", post);
+            return "product/detailpost";
+        } else {
+            return "product/index";
+        }
     }
 
     @PostMapping("")
