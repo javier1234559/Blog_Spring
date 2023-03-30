@@ -21,7 +21,7 @@ import java.util.Optional;
 @RequestMapping("/posts")
 public class PostController {
 
-    private final PostService postService ;
+    private final PostService postService;
 
     public PostController(PostService postService) {
         this.postService = postService;
@@ -34,8 +34,9 @@ public class PostController {
         return "product/index";
     }
 
+
     @GetMapping("/{id}")
-    public String getPostById(@PathVariable("id") int id , Model model) {
+    public String getPostById(@PathVariable("id") int id, Model model) {
         Optional<Post> optionalPost = Optional.ofNullable(postService.getPostById(id));
         if (optionalPost.isPresent()) {
             Post post = postService.getPostById(id);
@@ -62,6 +63,7 @@ public class PostController {
             return ResponseEntity.notFound().build();
         }
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<Post> updatePost(@PathVariable("id") int id, @RequestBody Post post) {
         Optional<Post> optionalPost = Optional.ofNullable(postService.getPostById(id));
@@ -71,7 +73,7 @@ public class PostController {
             existingPost.setContent(post.getContent());
             existingPost.setImage(post.getImage());
             existingPost.setView(post.getView());
-            Post savedPost = postService.updatePost(id,post);
+            Post savedPost = postService.updatePost(id, post);
             return ResponseEntity.ok().body(savedPost);
         } else {
             return ResponseEntity.notFound().build();

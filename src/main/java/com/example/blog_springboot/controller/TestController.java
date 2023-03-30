@@ -28,7 +28,7 @@ public class TestController {
     public String Home (){
         return "test";
     }
-    @PostMapping ("/test")
+    @PostMapping ("/post")
     public String savePost(@RequestParam("title") String title,
                            @RequestParam("content") String content,
                            @RequestParam("image") MultipartFile image) {

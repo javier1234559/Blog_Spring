@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head th:replace="product/fragment :: head-meta">
-  </head>
+  <!-- <head th:replace="product/fragment :: head-meta">
+  </head> -->
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -21,25 +21,32 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous" />
     <!-- Custome Css -->
     <link rel="stylesheet" href="/static/product/css/custom.css" />
+    <link rel="stylesheet" href="/static/product/js/custom.js">
   </head>
   <body>
     <!-- Navigation-->
     <div th:replace="product/fragment :: nav"></div>
-    <nav id = "nav"></nav>
+    <nav id="nav"></nav>
     <!-- Page Header-->
     <header class="masthead container hero-custom" style="background-image: url('/static/product/assets/img/home-bg.jpg')">
-      <div class="hero-custom-edit"><i class="bi bi-pencil-square"></i></div>
+      <div class="hero-custom-edit">
+        <label for="image-input">
+          <i class="bi bi-pencil-square"></i>
+        </label>
+        <input id="image-input"  type="file" style="display: none;">
+      </div>
       <div class="container position-relative px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
           <div class="col-md-10 col-lg-8 col-xl-7">
             <div class="post-heading">
-              <h1>Man must explore, and this is exploration at its greatest</h1>
-              <h2 class="subheading">Problems look mighty small from 150 miles up</h2>
-              <span class="meta">
+              <!-- <h1 id="titlechange" >Man must explore, and this is exploration at its greatest</h1> -->
+              <h1 id="titlechange"></h1>
+              <!-- <h2 class="subheading">Problems look mighty small from 150 miles up</h2> -->
+              <!-- <span class="meta">
                 Posted by
                 <a href="#!">Start Bootstrap</a>
                 on August 24, 2022
-              </span>
+              </span> -->
             </div>
           </div>
         </div>
@@ -48,28 +55,29 @@
     <!-- Post Content-->
     <article class="mb-4">
       <div class="container article-wrapper-custom">
-        
         <div class="row mb-4">
           <form action="" class="row g-3">
-          <input class="col-10" type="text" name="" id=""placeholder="Title ..." >
-          <div class="col-2">
-            <label for="inputGroupSelect04" class="fs-6 ms-2">Category</label>
-            <div class="input-group">
-              <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
-                <option selected>Choose...</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
+            <input class="col-10  changetileEvent" type="text" name="" id="title-input" placeholder="Title ..." />
+            <div class="col-2">
+              <label for="category-select" class="fs-6 ms-2">Category</label>
+              <div class="input-group">
+                <select class="form-select" id="category-select" aria-label="Example select with button addon">
+                  <option selected>Choose...</option>
+                  <option value="Technology">Technology</option>
+                  <option value="Education">Education</option>
+                  <option value="Life">Life</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
             </div>
-          </div>
+            <div class="col-12">
+              <textarea class="col-12" id="editor"></textarea>
+            </div>
+            <button type="button" class="col-1 offset-md-12 mt-4 btn ms-1" id="submit" >Publish</button>
+          </form>
         </div>
-          <div id="editor"></div>
-          <button type="button" class="col offset-md-12 mt-4 btn btn-primary">Publish</button>
-        </form>
       </div>
     </article>
-
 
     <!-- Footer-->
     <div th:replace="product/fragment :: footer"></div>
@@ -78,18 +86,25 @@
     <div th:replace="product/fragment :: nav-modal"></div>
     <div id="nav-modal"></div>
 
-
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="/static/product/js/custom.js"  th:src="@{/product/js/custom.js}"></script>
+    <script src="/static/product/js/custom.js" th:src="@{/product/js/custom.js}"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
     <script>
+      let editor;
+      const URL_REQUEST = "/post"
       ClassicEditor
-        .create( document.querySelector( '#editor' ), {
-        } )
-        .catch( error => {
-            console.error( error );
-        } );
-
+          .create( document.querySelector( '#editor' ) )
+          .then( newEditor => {
+              editor = newEditor;
+          } )
+          .catch( error => {
+              console.error( error );
+          } );
+          
+      document.querySelector( '#submit' ).addEventListener( 'click', () => {
+          createPost();
+      });
+   
     </script>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
