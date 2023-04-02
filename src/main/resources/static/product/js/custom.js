@@ -2,6 +2,8 @@
 
 //1. Post Blog Ajax
 function createPost(){
+    const URL_REQUEST = "/posts/createpost"
+
    // Lấy giá trị từ các input
    const editorData = editor.getData();
    const title = $('#title-input').val();
@@ -19,7 +21,7 @@ function createPost(){
    formData.append('category', category);
    formData.append('editorData', editorData);
    console.log(formData);
-
+    console.log(title);
    $.ajax({
      url: URL_REQUEST,
      type: 'POST',

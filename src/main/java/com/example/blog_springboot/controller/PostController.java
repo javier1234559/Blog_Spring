@@ -1,8 +1,10 @@
 package com.example.blog_springboot.controller;
 
+import com.example.blog_springboot.model.Category;
 import com.example.blog_springboot.model.Post;
 import com.example.blog_springboot.model.User;
 import com.example.blog_springboot.repository.PostRepository;
+import com.example.blog_springboot.service.CategoryService;
 import com.example.blog_springboot.service.PostService;
 import com.example.blog_springboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +14,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,19 +26,19 @@ import java.util.Optional;
 @RequestMapping("/posts")
 public class PostController {
 
-    private final PostService postService;
+    @Autowired
+    private PostService postService ;
+    @Autowired
+    private CategoryService categoryService ;
+    @Autowired
+    private UserService userService ;
 
-    public PostController(PostService postService) {
-        this.postService = postService;
-    }
-
-    @GetMapping("/")
+    @GetMapping(value = { "/", "/home" })
     public String getAllPosts(Model model) {
         List<Post> listPost = postService.getAllPosts();
         model.addAttribute("listPost", listPost);
         return "product/index";
     }
-
 
     @GetMapping("/{id}")
     public String getPostById(@PathVariable("id") int id, Model model) {
@@ -47,10 +52,31 @@ public class PostController {
         }
     }
 
-    @PostMapping("")
-    public ResponseEntity<Post> createPost(@RequestBody Post post) {
-        Post savedPost = postService.createPost(post);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedPost);
+    @PostMapping("/createpost")
+    public String createPost(@RequestParam("image") MultipartFile image,
+                                           @RequestParam("title") String title,
+                                           @RequestParam("category") String category,
+                                           @RequestParam("editorData") String editorData) {
+        Category newCategory = new Category();
+        Post post = new Post();
+        User currentUser = userService.getUserById(1);
+        try {
+            post.setDate(new Date());
+            post.setTitle(title);
+            post.setUser(currentUser);
+            post.setContent(editorData);
+            byte[] convertToByte = image.getBytes();
+            post.setImage(convertToByte);
+
+            Post savedpost = postService.createPost(post);
+            newCategory.setPost(savedpost);
+            newCategory.setName(category);
+            categoryService.createCategory(newCategory);
+            return "redirect:/";
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "redirect:/test/";
     }
 
     @DeleteMapping("/{id}")
