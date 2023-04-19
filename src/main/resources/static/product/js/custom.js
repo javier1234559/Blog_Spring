@@ -63,6 +63,7 @@ $(document).ready(function() {
   }
 });
 
+
 //Function custom for display 
 function changeTitleCreatePost(){
   const titlechange = document.querySelector("#titlechange");
@@ -73,4 +74,30 @@ function changeTitleCreatePost(){
     document.title = value;
   });
 }
-changeTitleCreatePost();
+
+function checkFileSize(fileId) {
+  const fileInput = document.getElementById(fileId);
+  const file = fileInput.files[0];
+  const fileSize = file.size / 1024 / 1024; // Convert bytes to MB
+  if (fileSize > 2) {
+    alert('The selected file is no larger than 2MB.');
+    return false;
+  }
+  return true;
+}
+
+
+function previewImage(imageId, fileId) {
+  const image = document.getElementById(imageId);
+  const fileInput = document.getElementById(fileId);
+  fileInput.addEventListener('change', function() {
+    if (!checkFileSize(fileId)) {
+      fileInput.value = ''; // Clear the file input to allow the user to select a new file
+      return;
+    }
+    const file = fileInput.files[0];
+    const url = URL.createObjectURL(file);
+    console.log(url);
+    image.style.backgroundImage = `url(${url})`;
+  });
+}

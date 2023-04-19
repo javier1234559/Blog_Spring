@@ -21,134 +21,217 @@
     <!-- Custome Css -->
     <link rel="stylesheet" href="/static/product/css/custom.css" th:href="@{/product/css/custom.css}" />
   </head>
-<body>
+  <body>
     <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-light nav-custome" id="mainNav" th:fragment="nav">
-    <div class="container px-4 px-lg-5">
-      <a class="navbar-brand" href="index.html">Blog.com</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        Menu
-        <i class="fas fa-bars"></i>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ms-auto py-4 py-lg-0">
-          <li class="nav-item">
-            <a class="nav-link px-lg-3 py-3 py-lg-4" href="/" >Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link px-lg-3 py-3 py-lg-4" href="/test/test" >About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link px-lg-3 py-3 py-lg-4" href="/contact" >Contact</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link px-lg-3 py-3 py-lg-4" href="/createpost" >Write</a>
-          </li>
-        </ul>
-      </div>
-      <div class="nav-item dropdown text-light no-arrow">
-        <a class="dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <!-- <span class="mr-2 d-none d-lg-inline small"
-                  >Name</span
-                > -->
-          <span class="me-4"><i class="bi bi-bell-fill" data-bs-toggle="modal" data-bs-target="#notification"></i></span>
-          <i class="bi bi-person-circle fs-1" data-bs-toggle="modal" data-bs-target="#login"></i>
-        </a>
-        <i class="bi bi-search ps-4" style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#search"></i>
-      </div>
-    </div>
-  </nav>
-  <!-- Footer -->
-  <footer class="border-top bg-black custome-footer" th:fragment="footer">
-    <div class="container px-4 px-lg-5">
-      <div class="row gx-4 gx-lg-5 justify-content-center align-items-center">
-        <div class="col-md col-12 fs-1 text-center text-light">Blog.com</div>
-        <div class="col-md col-12 small text-center text-muted align-self-end">
-          <p>Copyright &copy; Your Website 2022</p>
-          <p>Phát triễn bới nhóm công nghệ phần mềm</p>
-        </div>
-        <div class="col-md col-12 small text-center text-muted">
-          <p class="fs-3">Contact Us</p>
-          <ul>
-            <a href="#"><i class="bi bi-linkedin"></i></a>
-            <a href="#"><i class="bi bi-twitter"></i></a>
-            <a href="#"><i class="bi bi-facebook"></i></a>
+    <nav class="navbar navbar-expand-lg navbar-light nav-custome" id="mainNav" th:fragment="nav">
+      <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="index.html">Blog.com</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ms-auto py-4 py-lg-0">
+            <li class="nav-item">
+              <a class="nav-link px-lg-3 py-3 py-lg-4" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link px-lg-3 py-3 py-lg-4" href="about.html">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link px-lg-3 py-3 py-lg-4" href="post.html">Sample Post</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link px-lg-3 py-3 py-lg-4" href="contact.html">Contact</a>
+            </li>
           </ul>
         </div>
+        <div class="nav-item dropdown text-light no-arrow">
+          <i class="dropdown position-relative">
+            <i class="bi bi-bell-fill dropdown-toggle position-relative" data-bs-toggle="dropdown" id="notification-dropdown">
+              <span class="position-absolute translate-middle badge border border-light rounded-circle p-1 mt-n2" style="top: 24%; left: calc(100% - 10px); background-color: #f1b45f"><span class="visually-hidden">unread messages</span></span>
+            </i>
+            <ul class="dropdown-menu position-absolute show-block scaleIn notifaction-menu-custom list-unstyled" aria-labelledby="notification-dropdown">
+              <li class="g-5">
+                <a class="dropdown-item p-0" href="#">
+                  <div class="d-flex comment-item">
+                    <div class=" comment-item-image">
+                      <img src="http://127.0.0.1:5501/static/product/assets/img/home-bg.jpg" alt="User Profile Picture" />
+                    </div>
+                    <div class=" comment-item-content">
+                      <p class="comment-item-content-heading">John Doe</p>
+                      <p class="comment-ttem-content-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur nam doloremque dignissimos qui autem nobis laudantium consequuntur iste explicabo veritatis, fuga mollitia nemo? Ad, ea iste accusantium voluptate beatae excepturi!
+                        Eius numquam praesentium, modi quae molestias quisquam amet omnis facilis accusamus harum minus repellat ducimus dolorem a perspiciatis ea. Illo at quia beatae aliquam et ipsam, officiis eaque sunt quasi!</p>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li class="g-5">
+                <a class="dropdown-item p-0" href="#">
+                  <div class="d-flex comment-item">
+                    <div class=" comment-item-image">
+                      <img src="http://127.0.0.1:5501/static/product/assets/img/home-bg.jpg" alt="User Profile Picture" />
+                    </div>
+                    <div class=" comment-item-content">
+                      <p class="comment-item-content-heading">John Doe</p>
+                      <p class="comment-ttem-content-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur nam doloremque dignissimos qui autem nobis laudantium consequuntur iste explicabo veritatis, fuga mollitia nemo? Ad, ea iste accusantium voluptate beatae excepturi!
+                        Eius numquam praesentium, modi quae molestias quisquam amet omnis facilis accusamus harum minus repellat ducimus dolorem a perspiciatis ea. Illo at quia beatae aliquam et ipsam, officiis eaque sunt quasi!</p>
+                    </div>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </i>
+          <!-- </span> -->
+          <i class="bi bi-person-circle ms-2 fs-1" data-bs-toggle="modal" data-bs-target="#login"></i>
+          <i class="bi bi-search ps-4" style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#search"></i>
+        </div>
       </div>
-    </div>
-  </footer>
-  <!-- Modal -->
-  <div th:fragment="nav-modal">
+    </nav>
+
+    <!--    <nav class="navbar navbar-expand-lg navbar-light nav-custome" id="mainNav" th:fragment="nav">-->
+<!--      <div class="container px-4 px-lg-5">-->
+<!--        <a class="navbar-brand" href="index.html">Blog.com</a>-->
+<!--        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--          Menu-->
+<!--          <i class="fas fa-bars"></i>-->
+<!--        </button>-->
+<!--        <div class="collapse navbar-collapse" id="navbarResponsive">-->
+<!--          <ul class="navbar-nav ms-auto py-4 py-lg-0">-->
+<!--            <li class="nav-item">-->
+<!--              <a class="nav-link px-lg-3 py-3 py-lg-4" href="/">Home</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--              <a class="nav-link px-lg-3 py-3 py-lg-4" href="/test/test">About</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--              <a class="nav-link px-lg-3 py-3 py-lg-4" href="/contact">Contact</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--              <a class="nav-link px-lg-3 py-3 py-lg-4" href="/createpost">Write</a>-->
+<!--            </li>-->
+<!--          </ul>-->
+<!--        </div>-->
+<!--        <div class="nav-item dropdown text-light no-arrow">-->
+<!--          <a class="dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--            &lt;!&ndash; <span class="mr-2 d-none d-lg-inline small"-->
+<!--                  >Name</span-->
+<!--                > &ndash;&gt;-->
+<!--            <span class="me-4"><i class="bi bi-bell-fill" data-bs-toggle="modal" data-bs-target="#notification"></i></span>-->
+<!--            <i class="bi bi-person-circle fs-1" data-bs-toggle="modal" data-bs-target="#login"></i>-->
+<!--          </a>-->
+<!--          <i class="bi bi-search ps-4" style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#search"></i>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </nav>-->
+
+    <!-- Footer -->
+    <footer class="border-top bg-black custome-footer" th:fragment="footer">
+      <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center align-items-center">
+          <div class="col-md col-12 fs-1 text-center text-light">Blog.com</div>
+          <div class="col-md col-12 small text-center text-muted align-self-end">
+            <p>Copyright &copy; Your Website 2022</p>
+            <p>Phát triễn bới nhóm công nghệ phần mềm</p>
+          </div>
+          <div class="col-md col-12 small text-center text-muted">
+            <p class="fs-3">Contact Us</p>
+            <ul>
+              <a href="#"><i class="bi bi-linkedin"></i></a>
+              <a href="#"><i class="bi bi-twitter"></i></a>
+              <a href="#"><i class="bi bi-facebook"></i></a>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
     <!-- Modal -->
-    <!-- Modal Notification -->
-    <div class="modal fade" id="notification" tabindex="-1" aria-labelledby="notificationLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="notificationLabel">notification</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">...</div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+    <div th:fragment="nav-modal">
+      <!-- Modal -->
+      <!-- Modal Notification -->
+      <div class="modal fade" id="notification" tabindex="-1" aria-labelledby="notificationLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="notificationLabel">notification</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">...</div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <!-- Modal Login -->
-    <div class="modal fade" id="login" tabindex="-1" aria-labelledby="loginLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content modal-login-custom">
-          <div class="modal-header">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="mb-3 row">
-              <h1 class="h3" id="loginLabel">Login</h1>
+      <!-- Modal Login -->
+      <div class="modal fade" id="login" tabindex="-1" aria-labelledby="loginLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content modal-login-custom">
+            <div class="modal-header">
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            
-            <div class="mb-3 row">
-              <label for="staticEmail" class="col-sm-2 col-form-label" >Email</label>
-              <div class="col-sm-10">
-                <input type="email" class="form-control" id="staticEmail" />
+            <div class="modal-body">
+              <div class="mb-3 row">
+                <h1 class="h3" id="loginLabel">Login</h1>
+              </div>
+
+              <div class="mb-3 row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                  <input type="email" class="form-control" id="staticEmail" />
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                <div class="col-sm-10">
+                  <input type="password" class="form-control" id="inputPassword" />
+                </div>
               </div>
             </div>
-            <div class="mb-3 row">
-              <label for="inputPassword" class="col-sm-2 col-form-label" >Password</label>
-              <div class="col-sm-10">
-                <input type="password" class="form-control" id="inputPassword" />
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Login</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal Search -->
+      <!-- Modal Search -->
+      <div class="modal fade" id="search" tabindex="-1" aria-labelledby="searchLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Search</h5>
+              <input type="text" class="form-control mx-2 search-input-custom" />
+              <i class="bi bi-search" style="cursor: pointer"></i>
+              <!-- <button class="btn btn-outline-success" type="button"><i class="bi bi-search"></i></button> -->
+            </div>
+            <div class="modal-body">
+              <select class="form-select mb-3 search-combobox-custom" aria-label=".form-select-lg example">
+                <option selected>Select an option</option>
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+                <option value="3">Option 3</option>
+              </select>
+              <div class="d-flex justify-content-center">
+                <div class="main-container-searchItems">
+                  <img class="main-image" src="http://127.0.0.1:5500/static/product/assets/img/home-bg.jpg" />
+                  <div class="main-content">
+                    <h2 class="main-title">Title</h2>
+                    <div class="tags-container">
+                      <div class="tag">tag1</div>
+                      <div class="tag">tag2</div>
+                      <div class="tag">tag3</div>
+                      <!-- more tags here -->
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Login</button>
-          </div>
         </div>
       </div>
     </div>
-    <!-- Modal Search -->
-    <div class="modal fade" id="search" tabindex="-1" aria-labelledby="searchLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="searchLabel">Search</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <label for="searchInput" class="form-label">Search</label>
-            <input type="password" id="searchInput" class="form-control" aria-describedby="passwordHelpBlock" />
-            <div id="passwordHelpBlock" class="form-text">Nhap tu khoa can tim</div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Search</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</body>
+  </body>
 </html>

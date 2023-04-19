@@ -53,8 +53,9 @@
                   </a>
                 </div>
               </div>
-              <div class="col-12" >
-                [(${post.getContent()})]
+              <div class="col-12"  >
+                <div th:utext="${post.getContent()}"></div>
+<!--                [[${post.getContent()}]]-->
               </div>
               <div class="col-12">
                 <form class="detail-post-form-comment-custom">

@@ -1,69 +1,84 @@
- <!-- Modal -->
-    <!-- Modal Notification -->
-    <div class="modal fade" id="notification" tabindex="-1" aria-labelledby="notificationLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="notificationLabel">notification</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<!-- Modal -->
+<!-- Modal Notification -->
+<div class="modal fade" id="notification" tabindex="-1" aria-labelledby="notificationLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="notificationLabel">notification</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">...</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal Login -->
+<div class="modal fade" id="login" tabindex="-1" aria-labelledby="loginLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content modal-login-custom">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3 row">
+          <h1 class="h3" id="loginLabel">Login</h1>
+        </div>
+
+        <div class="mb-3 row">
+          <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+          <div class="col-sm-10">
+            <input type="email" class="form-control" id="staticEmail" />
           </div>
-          <div class="modal-body">...</div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+        <div class="mb-3 row">
+          <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+          <div class="col-sm-10">
+            <input type="password" class="form-control" id="inputPassword" />
           </div>
         </div>
       </div>
-    </div>
-    <!-- Modal Login -->
-    <div class="modal fade" id="login" tabindex="-1" aria-labelledby="loginLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content modal-login-custom">
-          <div class="modal-header">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="mb-3 row">
-              <h1 class="h3" id="loginLabel">Login</h1>
-            </div>
-            
-            <div class="mb-3 row">
-              <label for="staticEmail" class="col-sm-2 col-form-label" >Email</label>
-              <div class="col-sm-10">
-                <input type="email" class="form-control" id="staticEmail" />
-              </div>
-            </div>
-            <div class="mb-3 row">
-              <label for="inputPassword" class="col-sm-2 col-form-label" >Password</label>
-              <div class="col-sm-10">
-                <input type="password" class="form-control" id="inputPassword" />
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Login</button>
-          </div>
-        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Login</button>
       </div>
     </div>
-    <!-- Modal Search -->
-    <div class="modal fade" id="search" tabindex="-1" aria-labelledby="searchLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="searchLabel">Search</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <label for="searchInput" class="form-label">Search</label>
-            <input type="password" id="searchInput" class="form-control" aria-describedby="passwordHelpBlock" />
-            <div id="passwordHelpBlock" class="form-text">Nhap tu khoa can tim</div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Search</button>
-          </div>
+  </div>
+</div>
+<!-- Modal Search -->
+<div class="modal fade" id="search" tabindex="-1" aria-labelledby="searchLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Search</h5>
+        <input type="text" class="form-control mx-2 search-input-custom" />
+        <i class="bi bi-search" style="cursor: pointer"></i>
+        <!-- <button class="btn btn-outline-success" type="button"><i class="bi bi-search"></i></button> -->
+      </div>
+      <div class="modal-body">
+        <select class="form-select mb-3 search-combobox-custom" aria-label=".form-select-lg example">
+          <option selected>Select an option</option>
+          <option value="1">Option 1</option>
+          <option value="2">Option 2</option>
+          <option value="3">Option 3</option>
+        </select>
+        <div class="d-flex justify-content-center">
+          <div class="main-container-searchItems">
+            <img class="main-image" src="http://127.0.0.1:5501/static/product/assets/img/home-bg.jpg"/>
+            <div class="main-content">
+                <h2 class="main-title">Title</h2>
+                <div class="tags-container">
+                    <div class="tag">tag1</div>
+                    <div class="tag">tag2</div>
+                    <div class="tag">tag3</div>
+                    <!-- more tags here -->
+                </div>
+            </div>
+        </div>
         </div>
       </div>
-    </div>
+     </div>
+  </div>
+</div>
