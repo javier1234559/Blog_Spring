@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" >
-  <head th:replace="product/fragment :: head-meta">
-  </head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="product/fragment :: head-meta"></head>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Clean Blog</title>
-    <link rel="icon" type="image/x-icon" href="/static/product/assets/favicon.ico"  />
+    <link rel="icon" type="image/x-icon" href="/static/product/assets/favicon.ico" />
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
@@ -26,7 +25,7 @@
   <body>
     <!-- Navigation-->
     <div th:replace="product/fragment :: nav"></div>
-    <nav id = "nav"></nav>
+    <nav id="nav"></nav>
     <!-- Page Header-->
     <header class="masthead container hero-custom" style="background-image: url('/static/product/assets/img/home-bg.jpg')" th:style="'background-image: url(' + @{/product/assets/img/home-bg.jpg} + ')'">
       <div class="container position-relative px-4 px-lg-5">
@@ -48,11 +47,11 @@
           <div class="row g-1 g-2 gy-4" th:if="${listPost != null }">
             <div class="col" th:each="post: ${listPost}">
               <a th:href="@{/posts/} + ${post.getIdpost()}">
-              <!-- th:href="@{/post(id=${post.getIdpost()})}" -->
+                <!-- th:href="@{/post(id=${post.getIdpost()})}" -->
                 <div class="card card-rounded-custom" style="width: 20rem">
                   <div class="card-img-custom" th:style="'background-image: url(' + ${@environment.getProperty('SERVER_PATH')} + '/uploaded/image/post/' + ${post.getIdpost()}  +')'">
                     <span class="ps-4 car-img-view-custom">
-                      <span><i class="bi bi-eye" ></i></span>
+                      <span><i class="bi bi-eye"></i></span>
                       <span class="" th:text="${post.getView()}"></span>
                     </span>
                   </div>
@@ -60,7 +59,12 @@
                     <h5 class="card-title card-tile-custom" th:text="${post.getTitle()}"></h5>
                     <div class="row">
                       <small class="post-meta col">
-                        <smal class="card-subtile-custom" th:text="${post.getDate()}">Posted by <span th:text="${post.getUser().getName()}"> </span> on <span th:text="${post.getDate()}"> </span> </smal>
+                        <smal class="card-subtile-custom" th:text="${post.getDate()}">
+                          Posted by
+                          <span th:text="${post.getUser().getName()}"></span>
+                          on
+                          <span th:text="${post.getDate()}"></span>
+                        </smal>
                       </small>
                     </div>
                     <p class="card-text-custom text-secondary-emphasis" th:text="${post.getContent()}"></p>
@@ -94,30 +98,31 @@
         <div class="col-md-4 col-12">
           <div class="border bg-blue top-post mb-5 p-4 post-category-custom post-category-items-custom">
             <p class="text-center">Top Post</p>
-            <div class="fs-6 d-flex py-0">
-              <p class="">1</p>
-              <p class="">Title</p>
-              <p class="top-post-limit-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit deserunt numquam vel cumque perspiciatis eius amet architecto dolorum maxime atque ex provident, voluptatum officia! Distinctio necessitatibus ab cupiditate quo quod.</p>
-            </div>
-            <div class="fs-6 d-flex py-0">
-              <p class="">1</p>
-              <p class="">Title</p>
-              <p class="top-post-limit-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit deserunt numquam vel cumque perspiciatis eius amet architecto dolorum maxime atque ex provident, voluptatum officia! Distinctio necessitatibus ab cupiditate quo quod.</p>
-            </div>
-            <div class="fs-6 d-flex py-0">
-              <p class="">1</p>
-              <p class="">Title</p>
-              <p class="top-post-limit-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit deserunt numquam vel cumque perspiciatis eius amet architecto dolorum maxime atque ex provident, voluptatum officia! Distinctio necessitatibus ab cupiditate quo quod.</p>
-            </div>
+            <a class="dropdown-item p-0" href="#">
+              <div class="d-flex category-setting-item">
+                <div class="category-setting-item-image">
+                  <img src="http://127.0.0.1:5501/static/product/assets/img/home-bg.jpg" alt="User Profile Picture" />
+                </div>
+                <div class="category-setting-item-content">
+                  <p class="category-setting-item-content-heading">John Doe</p>
+                  <p class="category-setting-ttem-content-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur nam doloremque dignissimos qui autem nobis laudantium consequuntur iste explicabo veritatis, fuga mollitia nemo? Ad, ea iste accusantium voluptate beatae excepturi! Eius numquam praesentium, modi quae molestias quisquam amet omnis facilis accusamus harum minus repellat ducimus dolorem a perspiciatis ea. Illo at quia beatae aliquam et ipsam, officiis eaque sunt quasi!</p>
+                </div>
+                <div class="pointer p-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                  </svg>
+                </div>
+              </div>
+            </a>
           </div>
-          <div class="border bg-blue top-post mb-5 p-4 post-category-custom">
+          <!-- <div class="border bg-blue top-post mb-5 p-4 post-category-custom">
             <p class="text-center mb-4">Category</p>
             <div class="row post-category-items-custom">
-              <div class="col">Tag</div>
-              <div class="col">Tag</div>
+              <div class="col">Xã Hội</div>
+              <div class="col">Gíao dục</div>
               <div class="col">Tag</div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -136,6 +141,5 @@
     <!-- <script src="js/scripts.js"></script> -->
   </body>
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <script src="/static/product/js/custom.js"  th:src="@{/product/js/custom.js}"></script>
-  
+  <script src="/static/product/js/custom.js" th:src="@{/product/js/custom.js}"></script>
 </html>

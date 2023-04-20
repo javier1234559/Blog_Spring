@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>SB Admin 2 - Tables</title>
+    <!-- Custom fonts for this template -->
+    <link th:href="@{/dashboard/vendor/fontawesome-free/css/all.min.css}" href="/static/dashboard/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/dashboard/css/sb-admin-2.min.css" th:href="@{/dashboard/css/sb-admin-2.min.css}" />
+    <link href="/static/dashboard/vendor/datatables/dataTables.bootstrap4.min.css" th:href="@{/dashboard/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/dashboard/css/custom.css" th:href="@{/dashboard/css/custom.css}" />
+  </head>
+
+  <body id="page-top">
+    <!-- Topbar -->
+    <div th:replace="dashboard/fragment :: topbar"></div>
+    <nav id="topbar"></nav>
+    <!-- End of Topbar -->
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <div th:replace="dashboard/fragment :: sidebar"></div>
+      <aside id="sidebar"></aside>
+      <!-- End of Sidebar -->
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+          
+        </div>
+          <!-- Begin Page Content -->
+          <div class="container-fluid">
+            <div class="row">
+              <!-- Earnings (Monthly) Card Example -->
+              <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Post</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">3</div>
+                      </div>
+                      <div class="col-auto">
+                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Earnings (Monthly) Card Example -->
+              <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-success shadow h-100 py-2">
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Views</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">215,000</div>
+                      </div>
+                      <div class="col-auto">
+                       
+                        <i class="bi bi-eye fa-2x text-gray-300"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Earnings (Monthly) Card Example -->
+              <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-info shadow h-100 py-2">
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Comment</div>
+                        <div class="row no-gutters align-items-center">
+                          <div class="col-auto">
+                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50</div>
+                          </div>
+                          <div class="col">
+                            <!-- <div class="progress progress-sm mr-2">
+                              <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div> -->
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-auto">
+                        <i class="fas fa-comments fa-2x text-gray-300"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Pending Requests Card Example -->
+              <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-warning shadow h-100 py-2">
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Pending Posts</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                      </div>
+                      <div class="col-auto">
+                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- DataTales Example -->
+            <div class="card shadow mt-2 mb-4">
+              <div class="card-header py-3 d-flex justify-content-between" style="width:100%">
+                <h5 class="m-0 font-weight-bold text-primary ">Users</h5>
+                <a href="updateaccount.html"><button type="submit" class="btn btn-primary px-4">New</button></a>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Position</th>
+                        <th>Office</th>
+                        <th>Age</th>
+                        <th>Start date</th>
+                        <th>Salary</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Tiger Nixon</td>
+                        <td>System Architect</td>
+                        <td>Edinburgh</td>
+                        <td>61</td>
+                        <td>2011/04/25</td>
+                        <td>$320,800</td>
+                      </tr>
+                      <tr>
+                        <td>Garrett Winters</td>
+                        <td>Accountant</td>
+                        <td>Tokyo</td>
+                        <td>63</td>
+                        <td>2011/07/25</td>
+                        <td>$170,750</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /.container-fluid -->
+        </div>
+        <!-- End of Main Content -->
+      </div>
+      <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
+    <div th:replace="dashboard/fragment :: footer"></div>
+    <nav id="footer"></nav>
+    <!-- Modal -->
+    <div th:replace="dashboard/fragment :: modal"></div>
+    <nav id="modal"></nav>
+
+    <script src="/static/dashboard/vendor/jquery/jquery.min.js" th:href="@{/dashboard/vendor/jquery/jquery.min.js}"></script>
+    <script src="/static/dashboard/vendor/bootstrap/js/bootstrap.bundle.min.js" th:href="@{/dashboard/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="/static/dashboard/vendor/jquery-easing/jquery.easing.min.js" th:href="@{/dashboard/vendor/jquery-easing/jquery.easing.min.js}"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="/static/dashboard/js/sb-admin-2.min.js" th:href="@{/dashboard/js/sb-admin-2.min.js}"></script>
+    <script src="/static/dashboard/js/custom.js" th:src="@{/dashboard/js/custom.js}"></script>
+    <!-- Page level plugins -->
+    <script src="/static/dashboard/vendor/datatables/jquery.dataTables.min.js" th:href="@{/dashboard/vendor/datatables/jquery.dataTables.min.js}"></script>
+    <script src="/static/dashboard/vendor/datatables/dataTables.bootstrap4.min.js" th:href="@{/dashboard/vendor/datatables/dataTables.bootstrap4.min.js}"></script>
+    <!-- Page level custom scripts -->
+    <script src="/static/dashboard/js/demo/datatables-demo.js" th:href="@{/dashboard/js/demo/datatables-demo.js}"></script>
+  </body>
+</html>
