@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head th:replace="product/fragment :: head-meta">
   </head>
   <head>
@@ -7,49 +7,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Clean Blog - Start Bootstrap Theme</title>
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <title>Clean Blog</title>
+    <link rel="icon" type="image/x-icon" href="/static/product/assets/favicon.ico" />
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Patrick+Hand&family=Quicksand:wght@300;400;500;600;700&family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="/static/product/css/styles.css" rel="stylesheet" />
+    <link href="/static/product/css/styles.css" th:href="@{/product/css/styles.css}" rel="stylesheet" />
     <!--Boostrap Icon -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous" />
     <!-- Custome Css -->
-    <link rel="stylesheet" href="/static/product/css/custom.css" />
+    <link rel="stylesheet" href="/static/product/css/custom.css" th:href="@{/product/css/custom.css}" />
   </head>
   <body>
     <!-- Navigation-->
     <div th:replace="product/fragment :: nav"></div>
-    <nav id="nav"></nav>
+    <nav id = "nav"></nav>
     <!-- Page Header-->
-    <header class="masthead" style="background-image: url('/static/product/assets/img/about-bg.jpg')">
-      <div class="container position-relative px-4 px-lg-5">
-        <div class="row gx-4 gx-lg-5 justify-content-center">
-          <div class="col-md-10 col-lg-8 col-xl-7">
-            <div class="page-heading">
-              <h1>About This Website</h1>
-              <span class="subheading">This is what we do.</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
     <!-- Main Content-->
-    <main class="mb-4">
-      <div class="container px-4 px-lg-5">
-        <div class="row gx-4 gx-lg-5 justify-content-center">
-          <div class="col-md-10 col-lg-8 col-xl-7">
-            <p>Đây là website đề tài của môn công nghệ phần mềm. Website được sử dụng công nghệ Spring boot và Thymeleaf . Với giao diện được thiết kế và chỉnh sửa dựa trên template boostrap 4</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius praesentium recusandae illo eaque architecto error, repellendus iusto reprehenderit, doloribus, minus sunt. Numquam at quae voluptatum in officia voluptas voluptatibus, minus!</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut consequuntur magnam, excepturi aliquid ex itaque esse est vero natus quae optio aperiam soluta voluptatibus corporis atque iste neque sit tempora!</p>
+    <div class="container mt-8">
+      <div class="center-custom form-forgot-custom">
+        <form class="row g-3 " style="height:400px ; width:400px; ">
+          <h1 class="col-md-12 h1">Login</h1>
+          <div class="col-12">
+            <label for="inputAddress" class="form-label">Email</label>
+            <input type="email" class="form-control" id="inputAddress" placeholder="Email" />
           </div>
-        </div>
+          <div class="col-12">
+            <label for="inputAddress2" class="form-label">Password</label>
+            <input type="password" class="form-control" id="inputAddress2" placeholder="Password" />
+          </div>
+          <div class="col-12 d-flex flex-wrap justify-content-between" >
+            <a href="forgotpass.html" class="forgotpass-link" >Forgot password ?</a>
+            <button type="submit" class="btn btn-primary " style="height:2.6rem;">Login</button>
+          </div>
+        </form>
       </div>
-    </main>
+    </div>
+
     <!-- Footer-->
     <div th:replace="product/fragment :: footer"></div>
     <div id="footer"></div>
