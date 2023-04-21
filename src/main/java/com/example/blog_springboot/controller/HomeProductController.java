@@ -33,4 +33,29 @@ public class HomeProductController {
         return "/product/createpost";
     }
 
+    @GetMapping("/login")
+    public String getLogin(){
+        return "/product/login";
+    }
+
+    @GetMapping("/register")
+    public String getRegister(){
+        return "/product/register";
+    }
+
+    @GetMapping("/updatepost")
+    public String getPostSetting(){
+        return "/product/updatepost";
+    }
+
+    @GetMapping("/usersetting")
+    public String getUserSetting(){
+        return "/product/usersetting";
+    }
+
+    @GetMapping("/forgotpass")
+    public String getForgotPass(){
+        return "/product/forgotpass";
+    }
+
 }

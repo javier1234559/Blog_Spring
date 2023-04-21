@@ -37,7 +37,7 @@
               <span class="meta">
                 Posted by
                 <a href="#!" th:text="${post.getUser().getName()}"></a>
-                on [[${dates.format(post.date, 'dd/MM/yyyy')}]]
+                on [[${#dates.format(post.date, 'dd/MM/yyyy')}]]
               </span>
             </div>
           </div>

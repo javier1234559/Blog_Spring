@@ -36,12 +36,12 @@
           <div class="container-fluid">
             <!-- DataTales Example -->
             <div class="card shadow mt-2 mb-4">
-              <div class="card-header py-3 d-flex justify-content-between" style="width:100%">
-                <h5 class="m-0 font-weight-bold text-primary ">Posts</h5>
+              <div class="card-header py-3 d-flex justify-content-between" style="width: 100%">
+                <h5 class="m-0 font-weight-bold text-primary">Posts</h5>
                 <div>
-                  <a href="postdashboard.html"><button type="button" class="btn btn-outline-warning px-4 active" >Pending</button></a>
-                  <a href="postaccepted.html"><button type="button" class="btn btn-outline-success px-4">Approved</button></a>
-                  <a href="postrejected.html"><button type="button" class="btn btn-outline-danger px-4">Rejected</button></a>
+                  <a href="postdashboard"><button type="button" class="btn btn-outline-warning px-4 active">Pending</button></a>
+                  <a href="postaccepted"><button type="button" class="btn btn-outline-success px-4">Approved</button></a>
+                  <a href="postrejected"><button type="button" class="btn btn-outline-danger px-4">Rejected</button></a>
                 </div>
               </div>
               <div class="card-body">
@@ -53,7 +53,7 @@
                         <th>Position</th>
                         <th>Office</th>
                         <th>Age</th>
-                        <th>Start date</th> 
+                        <th>Start date</th>
                         <th>Salary</th>
                         <th>Button</th>
                       </tr>
@@ -100,13 +100,14 @@
     <script src="/static/dashboard/vendor/bootstrap/js/bootstrap.bundle.min.js" th:href="@{/dashboard/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
     <!-- Core plugin JavaScript-->
     <script src="/static/dashboard/vendor/jquery-easing/jquery.easing.min.js" th:href="@{/dashboard/vendor/jquery-easing/jquery.easing.min.js}"></script>
-    <!-- Custom scripts for all pages-->
-    <script src="/static/dashboard/js/sb-admin-2.min.js" th:href="@{/dashboard/js/sb-admin-2.min.js}"></script>
-    <script src="/static/dashboard/js/custom.js" th:src="@{/dashboard/js/custom.js}"></script>
+
     <!-- Page level plugins -->
     <script src="/static/dashboard/vendor/datatables/jquery.dataTables.min.js" th:href="@{/dashboard/vendor/datatables/jquery.dataTables.min.js}"></script>
     <script src="/static/dashboard/vendor/datatables/dataTables.bootstrap4.min.js" th:href="@{/dashboard/vendor/datatables/dataTables.bootstrap4.min.js}"></script>
     <!-- Page level custom scripts -->
     <script src="/static/dashboard/js/demo/datatables-demo.js" th:href="@{/dashboard/js/demo/datatables-demo.js}"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="/static/dashboard/js/sb-admin-2.min.js" th:href="@{/dashboard/js/sb-admin-2.min.js}"></script>
+    <script src="/static/dashboard/js/custom.js" th:src="@{/dashboard/js/custom.js}"></script>
   </body>
 </html>

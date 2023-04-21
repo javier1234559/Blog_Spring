@@ -36,5 +36,6 @@ public class Post {
     private Date date;
 
     private int view;
-
+    @Column(nullable = false)
+    private String status;
 }

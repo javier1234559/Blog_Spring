@@ -28,16 +28,6 @@ public class CommentServiceImpl implements CommentService {
         return commentRepository.findAll();
     }
 
-//    @Override
-//    public List<Comment> getCommentByPostId(int postId) {
-//        return commentRepository.findByPostId(postId);
-//    }
-//
-//    @Override
-//    public List<Comment> getCommentByUserId(int userId) {
-//        return commentRepository.findByUserId(userId);
-//    }
-
     @Override
     public Comment createComment(Comment comments) {
         return commentRepository.save(comments);

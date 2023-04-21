@@ -19,12 +19,18 @@ public class Notification {
     @JoinColumn(name = "iduser")
     private User user;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idpost")
+    private Post post;
+
     @Lob
+    @Column(length = 10000000)
     private byte[] image;
 
     private String title;
 
     @Lob
+    @Column(columnDefinition = "TEXT")
     private String content;
 
 }

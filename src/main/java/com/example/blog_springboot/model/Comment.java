@@ -23,6 +23,7 @@ public class Comment {
     private User user;
 
     @Lob
+    @Column(columnDefinition = "TEXT")
     private String content;
 
     @Temporal(TemporalType.TIMESTAMP)

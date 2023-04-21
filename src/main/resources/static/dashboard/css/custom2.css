@@ -1,0 +1,52 @@
+ /* Style the left and right columns */
+ a {
+  color: #000 ;
+  text-decoration: none !important;
+}
+#topbar a{
+  color: #fff;
+}
+.left-column {
+  width: 50%;
+  padding: 20px;
+  border-right: 1px solid #ccc;
+}
+.right-column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  padding: 20px;
+}
+/* Style the div tag on the right side */
+.my-div {
+  max-width: 300px;
+  overflow: hidden;
+}
+.my-div:hover {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  transition: all 0.2s linear;
+}
+.horizon-line {
+  border: none;
+  height: 2px;
+  background-color: #ccc;
+  margin: 0px 0 0px 0;
+}
+.title-setting {
+  margin-top: 5rem;
+  margin-bottom: 1rem;
+  font-size: 30px;
+}
+
+@media (max-width: 768px) {
+  .row {
+    flex-direction: column;
+  }
+  .left-column,
+  .right-column {
+    width: 100%;
+    border: none;
+    margin-left: 0;
+  }
+}

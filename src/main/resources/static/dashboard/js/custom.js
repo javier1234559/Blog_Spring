@@ -10,3 +10,18 @@ $(document).ready(function() {
   }
 });
 
+$(document).ready(function () {
+  $('#example').DataTable({
+    // Add search functionality
+    searching: true,
+    // Add ordering functionality
+    ordering: true,
+    // Set the initial order to be based on the first column
+    order: [[0, 'asc']],
+    // Add pagination functionality
+    paging: true,
+    // Set the number of rows per page to 10
+    info: false,
+  });
+});
+

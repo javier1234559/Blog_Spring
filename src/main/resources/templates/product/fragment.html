@@ -25,7 +25,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light nav-custome" id="mainNav" th:fragment="nav">
       <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="index.html">Blog.com</a>
+        <a class="navbar-brand" href="/">Blog.com</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           Menu
           <i class="fas fa-bars"></i>
@@ -36,7 +36,7 @@
               <a class="nav-link px-lg-3 py-3 py-lg-4" href="/">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link px-lg-3 py-3 py-lg-4" href="/test/test">About</a>
+              <a class="nav-link px-lg-3 py-3 py-lg-4" href="/about">About</a>
             </li>
             <li class="nav-item">
               <a class="nav-link px-lg-3 py-3 py-lg-4" href="/contact">Contact</a>
@@ -48,7 +48,7 @@
         </div>
         <div class="nav-item dropdown text-light no-arrow">
           <i class="dropdown position-relative">
-            <i class="bi bi-bell-fill dropdown-toggle position-relative" data-bs-toggle="dropdown" id="notification-dropdown">
+            <i class="bi bi-bell-fill dropdown-toggle position-relative fs-3" data-bs-toggle="dropdown" id="notification-dropdown">
               <span class="position-absolute translate-middle badge border border-light rounded-circle p-1 mt-n2" style="top: 24%; left: calc(100% - 10px); background-color: #f1b45f"><span class="visually-hidden">unread messages</span></span>
             </i>
             <ul class="dropdown-menu position-absolute show-block scaleIn notifaction-menu-custom list-unstyled" aria-labelledby="notification-dropdown">
@@ -80,12 +80,47 @@
               </li>
             </ul>
           </i>
+          <i class="dropdown position-relative">
+            <i class="bi bi-person-circle ms-2 fs-1" data-bs-toggle="dropdown" id="userSetting"></i>
+            <ul class="dropdown-menu position-absolute show-block scaleIn notifaction-menu-custom list-unstyled" aria-labelledby="userSetting" style="max-width: 2rem">
+              <li class="g-5">
+                <a class="dropdown-item p-1" href="/login">
+                  <div class="d-flex comment-item">
+                    <div class="comment-item-content">
+                      <p class="comment-item-content-heading">Logout</p>
+                    </div>
+                    <i class="bi bi-box-arrow-left"></i>
+                  </div>
+                </a>
+              </li>
+              <li class="g-5">
+                <a class="dropdown-item p-1" href="/usersetting">
+                  <div class="d-flex comment-item">
+                    <div class="comment-item-content">
+                      <p class="comment-item-content-heading">Infor</p>
+                    </div>
+                    <i class="bi bi-person-bounding-box"></i>
+                  </div>
+                </a>
+              </li>
+              <li class="g-5">
+                <a class="dropdown-item p-1" href="/updatepost">
+                  <div class="d-flex comment-item">
+                    <div class="comment-item-content">
+                      <p class="comment-item-content-heading">Post</p>
+                    </div>
+                    <i class="bi bi-card-text"></i>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </i>
           <!-- </span> -->
-          <i class="bi bi-person-circle ms-2 fs-1" data-bs-toggle="modal" data-bs-target="#login"></i>
-          <i class="bi bi-search ps-4" style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#search"></i>
+          <i class="bi bi-search ps-4 fs-3" style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#search"></i>
         </div>
       </div>
     </nav>
+    
 
     <!--    <nav class="navbar navbar-expand-lg navbar-light nav-custome" id="mainNav" th:fragment="nav">-->
     <!--      <div class="container px-4 px-lg-5">-->
