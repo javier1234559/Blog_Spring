@@ -62,7 +62,7 @@ $(document).ready(function () {
     $('#nav-modal').load('/templates/product/fragmentjquery/modal.html');
   }
 
-  $('#my-table').DataTable({
+  $('#example').DataTable({
     // Add search functionality
     searching: true,
     // Add ordering functionality
@@ -72,7 +72,7 @@ $(document).ready(function () {
     // Add pagination functionality
     paging: true,
     // Set the number of rows per page to 10
-    pageLength: 10,
+    info: false,
   });
 });
 

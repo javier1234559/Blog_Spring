@@ -38,6 +38,7 @@
             <th>Comment</th>
             <th>View</th>
             <th>Date Created</th>
+            <th>Status</th>
             <th>Edit</th>
             <th>Delete</th>
           </tr>
@@ -52,6 +53,20 @@
             <td>2</td>
             <td>61</td>
             <td>2011-04-25</td>
+            <td>Pending</td>
+            <td><button class="btn btn-outline-primary px-3 custom-button">Edit</button></td>
+            <td><button class="btn btn-outline-danger px-3 custom-button-danger">Delete</button></td>
+          </tr>
+          <tr>
+            <td style="width:120px;">
+              <div class="post-image-setting">
+              <img src="https://images.unsplash.com/photo-1681933859581-55594c9a09a0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60" alt="">
+            </div></td>
+            <td>System Architect</td>
+            <td>2</td>
+            <td>61</td>
+            <td>2011-04-25</td>
+            <td>Active</td>
             <td><button class="btn btn-outline-primary px-3 custom-button">Edit</button></td>
             <td><button class="btn btn-outline-danger px-3 custom-button-danger">Delete</button></td>
           </tr>
@@ -76,7 +91,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="/static/product/js/custom.js" th:src="@{/product/js/custom.js}"></script>
     <script>
-     
+      
     </script>
   </body>
 </html>

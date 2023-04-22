@@ -10,8 +10,12 @@ $(document).ready(function() {
   }
 });
 
+
+
+
 $(document).ready(function () {
-  $('#example').DataTable({
+
+  $('#my-table').DataTable({
     // Add search functionality
     searching: true,
     // Add ordering functionality
@@ -21,7 +25,10 @@ $(document).ready(function () {
     // Add pagination functionality
     paging: true,
     // Set the number of rows per page to 10
-    info: false,
+    pageLength: 10,
   });
+
+
+ 
 });
 
