@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head th:replace="product/fragment :: head-meta"></head>
   <head>
     <meta charset="utf-8" />
@@ -37,7 +37,7 @@
               <span class="meta">
                 Posted by
                 <a href="#!" th:text="${post.getUser().getName()}"></a>
-                on [[${dates.format(post.date, 'dd/MM/yyyy')}]]
+                on [[${#dates.format(post.date, 'dd/MM/yyyy')}]]
               </span>
             </div>
           </div>
@@ -47,7 +47,7 @@
     <!-- Post Content-->
     <article class="mb-4">
       <div class="container px px-lg">
-        <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="row gx-4 gx-lg-5 justify-content-center" >
           <div class="col-md-8 col-12">
             <div class="row">
               <div class="col-lg-10 col-12">
