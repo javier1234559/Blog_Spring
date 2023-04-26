@@ -10,5 +10,5 @@ public interface PostService {
     Post getPostById(int id);
     Post createPost(Post post);
     Post updatePost(int id, Post post);
-    void deletePost(int id);
+    String deletePost(int id);
 }
