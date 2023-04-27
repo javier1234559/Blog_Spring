@@ -39,13 +39,7 @@ public class PostController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Post> updatePost(@PathVariable("id") int id, @RequestBody Post post) {
-        Optional<Post> optionalPost = Optional.ofNullable(postService.getPostById(id));
-        if (optionalPost.isPresent()) {
-            Post savedPost = postService.updatePost(id, post);
-            return ResponseEntity.ok().body(savedPost);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return ResponseEntity.ok(postService.updatePost(id,post));
     }
 
 }

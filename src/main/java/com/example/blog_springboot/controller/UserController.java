@@ -1,8 +1,11 @@
 package com.example.blog_springboot.controller;
 
+import com.example.blog_springboot.dto.UserDTO;
+import com.example.blog_springboot.model.Post;
 import com.example.blog_springboot.model.User;
 import com.example.blog_springboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,43 +16,36 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private UserService userService ;
+    private UserService userService;
 
-//    @GetMapping
-//    public List<User> getAllUsers() {
-//        return userService.getAllUsers();
-//    }
-
+    @GetMapping
+    public ResponseEntity<List<User>> getAllUsers() {
+        return ResponseEntity.ok(userService.getAllUsers());
+    }
 
     @GetMapping("/{id}")
-    public User getUser(@PathVariable Long id) {
-        // code để lấy thông tin user với id tương ứng
-        User user = new User();
-//        user.setId(id);
-//        user.setName("John Doe");
-//        user.setEmail("johndoe@example.com");
-        return user;
+    public ResponseEntity<User> getUserById(@PathVariable int id) {
+        return ResponseEntity.ok(userService.getUserById(id));
     }
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
-        // code để tạo mới user với thông tin từ request body
-        // và trả về user đã tạo
-       // user.setId(1L);
-        return user;
+    public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userdto) {
+        UserDTO savedUser = userService.createUser(userdto);
+        return ResponseEntity.ok(savedUser);
     }
 
     @PutMapping("/{id}")
-    public User updateUser(@PathVariable Long id, @RequestBody User user) {
-        // code để cập nhật thông tin user với id tương ứng từ request body
-        // và trả về user đã cập nhật
-       // user.setId(id);
-        return user;
+    public ResponseEntity<User> updateUser(@PathVariable int id, @RequestBody User user) {
+        User savedUser = userService.updateUser(id, user);
+        return ResponseEntity.ok(savedUser);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable Long id) {
-        // code để xóa user với id tương ứng
-    }
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<String> deleteUser(@PathVariable int id) {
+//        String message = userService.deleteUser(id);
+//        return ResponseEntity.ok(message);
+//    }
+//
+
 }
 

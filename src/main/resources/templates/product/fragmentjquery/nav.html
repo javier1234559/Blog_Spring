@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light nav-custome" id="mainNav" th:fragment="nav">
   <div class="container px-4 px-lg-5">
-    <a class="navbar-brand" href="index.html">Blog.com</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand  d-none d-lg-block d-xl-block" href="index.html">Blog.com</a>
+    <button id="navbarResponsiveMenu" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       Menu
       <i class="fas fa-bars"></i>
     </button>
@@ -21,7 +21,7 @@
         </li>
       </ul>
     </div>
-    <div class="nav-item dropdown text-light no-arrow">
+    <div id="navIcon" class="nav-item dropdown text-light no-arrow" >
       <i class="dropdown position-relative">
         <i class="bi bi-bell-fill dropdown-toggle position-relative fs-3" data-bs-toggle="dropdown" id="notification-dropdown">
           <span class="position-absolute translate-middle badge border border-light rounded-circle p-1 mt-n2" style="top: 24%; left: calc(100% - 10px); background-color: #f1b45f"><span class="visually-hidden">unread messages</span></span>

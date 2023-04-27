@@ -51,32 +51,13 @@ function getDetailPost(id) {
   });
 }
 
-//Function when document is ready
-$(document).ready(function () {
-  fragment();
 
-  //Fragment in jquery
-  function fragment() {
-    $('#nav').load('/templates/product/fragmentjquery/nav.html');
-    $('#footer').load('/templates/product/fragmentjquery/footer.html');
-    $('#nav-modal').load('/templates/product/fragmentjquery/modal.html');
-  }
 
-  $('#example').DataTable({
-    // Add search functionality
-    searching: true,
-    // Add ordering functionality
-    ordering: true,
-    // Set the initial order to be based on the first column
-    order: [[0, 'asc']],
-    // Add pagination functionality
-    paging: true,
-    // Set the number of rows per page to 10
-    info: false,
-  });
-});
+
 
 //Function custom for display
+
+
 function changeTitleCreatePost() {
   const titlechange = document.querySelector('#titlechange');
   const titleInput = document.querySelector('.changetileEvent');
@@ -112,3 +93,75 @@ function previewImage(imageId, fileId) {
     image.style.backgroundImage = `url(${url})`;
   });
 }
+
+
+function handleMenuNavbar(){
+  const navbarResponsiveMenuButton = document.querySelector("#navbarResponsiveMenu");
+  const navbarResponsive = document.querySelector("#navbarResponsive");
+  const navbarIcon = document.querySelector("#navIcon");
+
+  navbarResponsiveMenuButton.addEventListener("click", function() {
+    
+    if (navbarIcon.style.display === 'none' && navbarResponsive.style.backgroundColor === 'white') {
+      navbarIcon.style.display = 'block';
+      navbarResponsive.style.backgroundColor  = 'inherit';
+      navbarResponsive.style.opacity = '1';
+      navbarResponsive.style.marginTop = '0';
+      navbarResponsive.style.padding = '0';
+      navbarResponsive.style.textAlign = 'left';
+    } else {
+      navbarIcon.style.display = 'none';
+      navbarResponsive.style.backgroundColor  = 'white';
+      navbarResponsive.style.opacity = '0.6';
+      navbarResponsive.style.marginTop = '1rem';
+      navbarResponsive.style.padding = '2rem';
+      navbarResponsive.style.textAlign = 'center';
+    }
+  });
+  
+}
+
+
+
+//Function when document is ready
+$(document).ready(function () {
+
+  function fragment() {
+    var deferred = $.Deferred();
+    var promises = [];
+  
+    promises.push($('#nav').load('/templates/product/fragmentjquery/nav.html', function() {
+    }).promise());
+  
+    promises.push($('#footer').load('/templates/product/fragmentjquery/footer.html', function() {
+    }).promise());
+  
+    promises.push($('#nav-modal').load('/templates/product/fragmentjquery/modal.html', function() {
+    }).promise());
+  
+    $.when.apply($, promises).then(function() {
+      deferred.resolve();
+    });
+  
+    return deferred.promise().then(function() {
+      handleMenuNavbar();
+    });
+  }
+  
+  fragment();
+  
+
+  $('#example').DataTable({
+    // Add search functionality
+    searching: true,
+    // Add ordering functionality
+    ordering: true,
+    // Set the initial order to be based on the first column
+    order: [[0, 'asc']],
+    // Add pagination functionality
+    paging: true,
+    // Set the number of rows per page to 10
+    info: false,
+  });
+});
+
