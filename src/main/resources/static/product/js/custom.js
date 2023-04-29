@@ -2,7 +2,7 @@
 
 //1. Post Blog Ajax
 function createPost() {
-  const URL_REQUEST = '/posts/createpost';
+  const URL_REQUEST = '/createnewpost';
 
   // Lấy giá trị từ các input
   const editorData = editor.getData();
@@ -14,27 +14,29 @@ function createPost() {
     alert('Please fill in all fields!');
     return;
   }
-  // Đưa giá trị vào FormData
-  var formData = new FormData();
-  formData.append('image', fileInput);
+  // Đưa giá trị vào formData
+  const formData = new FormData();
+  formData.append('data', fileInput);
   formData.append('title', title);
   formData.append('category', category);
-  formData.append('editorData', editorData);
+  formData.append('content', editorData);
   console.log(formData);
-  console.log(title);
+
   $.ajax({
     url: URL_REQUEST,
-    type: 'POST',
+    type: "POST",
     data: formData,
-    processData: false,
     contentType: false,
+    processData: false,
     success: function (data) {
       alert('Post created!');
+      window.location.href = "/";
     },
     error: function (xhr, status, error) {
-      alert('Error creating post!');
+      alert('Error creating post! ' + error);
     },
   });
+
 }
 
 function getDetailPost(id) {

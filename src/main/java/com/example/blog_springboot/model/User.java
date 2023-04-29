@@ -30,8 +30,11 @@ public class User {
 
     private String description;
 
+
+
     @Lob
-    private byte[] image;
+    @Column(columnDefinition = "TEXT")
+    private String imageurl;
 
     private int status;
 

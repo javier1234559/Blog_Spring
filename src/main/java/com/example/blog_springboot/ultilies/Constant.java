@@ -8,4 +8,8 @@ public  class Constant {
     public static final String NOT_FOUND_WITH_ID = "Not found with id: ";
     public static final String ID_IS_NULL = "Id must not null";
     public static final String FILE_IS_NULL = "File images is null";
+    public static final String STATUS_POST_PENDDING = "Pedding";
+    public static final String STATUS_POST_ACCEPTED = "Accepted";
+    public static final String STATUS_POST_REJECTED = "Rejected";
+
 }

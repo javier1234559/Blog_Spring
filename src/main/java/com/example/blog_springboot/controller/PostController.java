@@ -1,12 +1,13 @@
 package com.example.blog_springboot.controller;
 
+import com.example.blog_springboot.dto.PostDetailDTO;
+import com.example.blog_springboot.dto.PostSearchDTO;
 import com.example.blog_springboot.model.Post;
 import com.example.blog_springboot.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.util.Optional;
 
 
 @RestController
@@ -17,12 +18,12 @@ public class PostController {
     private PostService postService ;
 
     @GetMapping
-    public ResponseEntity<List<Post>> getAllPosts() {
-        return ResponseEntity.ok(postService.getAllPosts());
+    public ResponseEntity<List<PostSearchDTO>> getAllPostSearchDTO() {
+        return ResponseEntity.ok(postService.getAllPostSearchDTO());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Post> getPostById(@PathVariable int id) {
+    public ResponseEntity<PostDetailDTO> getPostById(@PathVariable int id) {
         return ResponseEntity.ok(postService.getPostById(id));
     }
 

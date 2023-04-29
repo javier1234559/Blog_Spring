@@ -3,7 +3,7 @@ package com.example.blog_springboot.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
+import java.sql.Date;
 
 @Getter
 @Setter
@@ -28,14 +28,18 @@ public class Post {
     private String content;
 
     @Lob
-    @Column(length = 10000000)
-    private byte[] image;
+    @Column(columnDefinition = "TEXT")
+    private String imageurl;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
     private Date date;
 
     private int view;
+
+    @Column(nullable = false)
+    private String category;
+
+
     @Column(nullable = false)
     private String status;
 }

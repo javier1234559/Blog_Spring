@@ -13,7 +13,7 @@ public class TopPost {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idtoppost;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idpost")
     private Post post;
 

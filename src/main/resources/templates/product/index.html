@@ -49,7 +49,7 @@
               <a th:href="@{/posts/} + ${post.getIdpost()}">
                 <!-- th:href="@{/post(id=${post.getIdpost()})}" -->
                 <div class="card card-rounded-custom" style="width: 20rem">
-                  <div class="card-img-custom" th:style="'background-image: url(' + ${@environment.getProperty('SERVER_PATH')} + '/uploaded/image/post/' + ${post.getIdpost()}  +')'">
+                  <div class="card-img-custom" th:style="'background-image: url(' + ${@environment.getProperty('SERVER_PATH')} + '/uploaded/' + ${post.getImageurl()}  +')'">
                     <span class="ps-4 car-img-view-custom">
                       <span><i class="bi bi-eye"></i></span>
                       <span class="" th:text="${post.getView()}"></span>
@@ -61,13 +61,13 @@
                       <small class="post-meta col">
                         <smal class="card-subtile-custom" th:text="${post.getDate()}">
                           Posted by
-                          <span th:text="${post.getUser().getName()}"></span>
+                          <span th:text="${post.getUserName()}"></span>
                           on
                           <span th:text="${post.getDate()}"></span>
                         </smal>
                       </small>
                     </div>
-                    <p class="card-text-custom text-secondary-emphasis" th:text="${post.getContent()}"></p>
+                    <p class="card-text-custom text-secondary-emphasis" th:text="${post.getCategory()}"></p>
                   </div>
                 </div>
               </a>
