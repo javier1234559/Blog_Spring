@@ -120,7 +120,6 @@
         </div>
       </div>
     </nav>
-    
 
     <!--    <nav class="navbar navbar-expand-lg navbar-light nav-custome" id="mainNav" th:fragment="nav">-->
     <!--      <div class="container px-4 px-lg-5">-->
@@ -230,37 +229,39 @@
         </div>
       </div>
       <!-- Modal Search -->
-      <!-- Modal Search -->
       <div class="modal fade" id="search" tabindex="-1" aria-labelledby="searchLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title">Search</h5>
-              <input type="text" class="form-control mx-2 search-input-custom" />
-              <i class="bi bi-search" style="cursor: pointer"></i>
-              <!-- <button class="btn btn-outline-success" type="button"><i class="bi bi-search"></i></button> -->
+              <input id="keywordSearch" oninput="handlefilterPostsSearch()" type="text" class="form-control mx-2 search-input-custom" />
+              <i class="bi bi-search" style="cursor: pointer" onclick="handleSearch()"></i>
             </div>
             <div class="modal-body">
-              <select class="form-select mb-3 search-combobox-custom" aria-label=".form-select-lg example">
-                <option selected>Select an option</option>
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
+              <select id="categorySelected" onchange="handlefilterPostsSearch()" class="form-select mb-3 search-combobox-custom" aria-label=".form-select-lg example">
+                <option selected value="All">All</option>
+                <option value="Technology">Technology</option>
+                <option value="Education">Education</option>
+                <option value="Life">Life</option>
               </select>
               <div class="d-flex justify-content-center">
                 <div class="main-container-searchItems">
-                  <img class="main-image" src="http://127.0.0.1:5500/static/product/assets/img/home-bg.jpg" />
+                  <img class="main-image" src="http://127.0.0.1:5501/static/product/assets/img/home-bg.jpg" />
                   <div class="main-content">
                     <h2 class="main-title">Title</h2>
                     <div class="tags-container">
-                      <div class="tag">tag1</div>
-                      <div class="tag">tag2</div>
-                      <div class="tag">tag3</div>
+                      <div class="tag">Technology</div>
+                      <div class="tag">Education</div>
+                      <div class="tag">Life</div>
+                      <div class="tag">Other</div>
                       <!-- more tags here -->
                     </div>
                   </div>
                 </div>
               </div>
+              <div id="searchResults"></div>
+              
+
             </div>
           </div>
         </div>

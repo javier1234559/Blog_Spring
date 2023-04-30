@@ -67,14 +67,17 @@
                         </smal>
                       </small>
                     </div>
-                    <p class="card-text-custom text-secondary-emphasis" th:text="${post.getCategory()}"></p>
+                    <p class="card-text-custom text-secondary-emphasis" >
+                      <div class="htmlparsePost" th:utext="${post.getContent()}">
+                        <h1>Hello World</h1>
+                      </div>
+                    </p>
                   </div>
                 </div>
               </a>
             </div>
             <div class="col">
               <div class="card card-rounded-custom" style="width: 20rem">
-                <!-- <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTbqoypzOFoz9OjPL-ID5nZyjPjLIc27ePbgUGWRa46g&s" class="card-img-top card-img-custom" alt="..." /> -->
                 <div class="card-img-custom">
                   <span class="ps-4 car-img-view-custom">
                     <span><i class="bi bi-eye"></i></span>
@@ -98,6 +101,23 @@
         <div class="col-md-4 col-12">
           <div class="border bg-blue top-post mb-5 p-4 post-category-custom post-category-items-custom">
             <p class="text-center">Top Post</p>
+            <div th:each="post: ${listTopPost}">
+              <a class="dropdown-item p-0" th:href="@{/posts/} + ${post.getIdpost()}">
+                <div class="d-flex category-setting-item">
+                  <div class="category-setting-item-image">
+                    <img src="http://127.0.0.1:5501/static/product/assets/img/home-bg.jpg" alt="User Profile Picture" th:src="${@environment.getProperty('SERVER_PATH')} + '/uploaded/' + ${post.getImageurl()}"/>
+                  </div>
+                  <div class="category-setting-item-content">
+                    <p class="category-setting-item-content-heading" th:text="${post.getTitle()}">titke</p>
+                    <p class="category-setting-ttem-content-content" >
+                      <div class="htmlparse" style="display:contents" th:utext="${post.getContent()}">
+                        <h1>Hello World</h1>
+                      </div>
+                    </p>
+                  </div>
+                </div>
+              </a>
+            </div>
             <a class="dropdown-item p-0" href="#">
               <div class="d-flex category-setting-item">
                 <div class="category-setting-item-image">

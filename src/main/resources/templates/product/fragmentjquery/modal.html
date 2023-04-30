@@ -53,12 +53,12 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Search</h5>
-        <input type="text" class="form-control mx-2 search-input-custom" />
-        <i class="bi bi-search" style="cursor: pointer"></i>
+        <input id="keywordSearch" type="text" class="form-control mx-2 search-input-custom" />
+        <i class="bi bi-search" style="cursor: pointer" onclick="handleSearch('keywordSearch','categorySelected')"></i>
         <!-- <button class="btn btn-outline-success" type="button"><i class="bi bi-search"></i></button> -->
       </div>
       <div class="modal-body">
-        <select class="form-select mb-3 search-combobox-custom" aria-label=".form-select-lg example">
+        <select id="categorySelected" class="form-select mb-3 search-combobox-custom" aria-label=".form-select-lg example">
           <option selected>Select an option</option>
           <option value="1">Technology</option>
           <option value="2">Education</option>
@@ -66,20 +66,23 @@
         </select>
         <div class="d-flex justify-content-center">
           <div class="main-container-searchItems">
-            <img class="main-image" src="http://127.0.0.1:5501/static/product/assets/img/home-bg.jpg"/>
+            <img class="main-image" src="http://127.0.0.1:5501/static/product/assets/img/home-bg.jpg" />
             <div class="main-content">
-                <h2 class="main-title">Title</h2>
-                <div class="tags-container">
-                    <div class="tag">Technology</div>
-                    <div class="tag">Education</div>
-                    <div class="tag">Life</div>
-                    <div class="tag">Other</div>
-                    <!-- more tags here -->
-                </div>
+              <h2 class="main-title">Title</h2>
+              <div class="tags-container">
+                <div class="tag">Technology</div>
+                <div class="tag">Education</div>
+                <div class="tag">Life</div>
+                <div class="tag">Other</div>
+                <!-- more tags here -->
+              </div>
             </div>
-        </div>
+          </div>
+            
+
+
         </div>
       </div>
-     </div>
+    </div>
   </div>
 </div>

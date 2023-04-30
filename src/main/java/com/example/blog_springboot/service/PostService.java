@@ -10,6 +10,7 @@ import java.util.List;
 public interface PostService {
     List<Post> getAllPosts();
     List<PostSearchDTO> getAllPostSearchDTO();
+    List<PostDetailDTO> getAllPostDetailDTO();
     PostDetailDTO getPostById(int id);
     Post createPost(Post post);
     Post createPostDTO(PostCreateDTO post);

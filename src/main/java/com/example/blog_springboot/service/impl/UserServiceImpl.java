@@ -1,6 +1,9 @@
 package com.example.blog_springboot.service.impl;
 
+import com.example.blog_springboot.dto.PostDetailDTO;
 import com.example.blog_springboot.dto.UserDTO;
+import com.example.blog_springboot.dto.UserLoginDTO;
+import com.example.blog_springboot.dto.UserRegisterDTO;
 import com.example.blog_springboot.exception.ResourceExistException;
 import com.example.blog_springboot.exception.ResourceNotFoundException;
 import com.example.blog_springboot.model.User;
@@ -9,6 +12,7 @@ import com.example.blog_springboot.service.UserService;
 
 
 import com.example.blog_springboot.ultilies.Constant;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -24,20 +28,45 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private  UserRepository userRepository;
 
+    @Autowired
+    private ModelMapper mapper;
+
     @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
     @Override
-    public UserDTO createUser(UserDTO userdto) {
+    public User createUser(UserDTO userdto) {
         try {
 //            if (userRepository.existsByMail(request.getMail())) {
 //                throw new ResourceExistException(AppConstant.USER_EXIST);
 //            }
-            User user = new User();
-            userRepository.save(user);
-            return userdto ;
+            User newuser  =  mapper.map(userdto,User.class);
+//            newuser.setDescription("");
+//            newuser.setImageurl("defaultusericonurl");
+//            newuser.setPhone("");
+//            newuser.setRole(1);
+//            newuser.setStatus(1);
+            return userRepository.save(newuser);
+        } catch (DataIntegrityViolationException ex) {
+            throw new RuntimeException("Error creating user", ex);
+        }
+    }
+
+    @Override
+    public User createUserRegister(UserRegisterDTO userRegisterDTO) {
+        try {
+//            if (userRepository.existsByMail(request.getMail())) {
+//                throw new ResourceExistException(AppConstant.USER_EXIST);
+//            }
+            User newuser  =  mapper.map(userRegisterDTO,User.class);
+            newuser.setDescription("");
+            newuser.setImageurl("defaultusericonurl");
+            newuser.setPhone("");
+            newuser.setRole(1);
+            newuser.setStatus(1);
+            return userRepository.save(newuser);
         } catch (DataIntegrityViolationException ex) {
             throw new RuntimeException("Error creating user", ex);
         }
@@ -70,6 +99,16 @@ public class UserServiceImpl implements UserService {
             return optionalUser.get();
         } else {
             throw new ResourceNotFoundException("User not found with id: " + id);
+        }
+    }
+
+    @Override
+    public User getUserByEmailAndPassword(UserLoginDTO userLoginDTO) {
+        Optional<User> optionalUser = userRepository.getUserByEmailAndPass(userLoginDTO.getEmail(),userLoginDTO.getPass());
+        if (optionalUser.isPresent()) {
+            return optionalUser.get();
+        } else {
+            throw new ResourceNotFoundException("User not found with id: " + userLoginDTO.getEmail());
         }
     }
 

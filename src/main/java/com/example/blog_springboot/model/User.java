@@ -30,8 +30,6 @@ public class User {
 
     private String description;
 
-
-
     @Lob
     @Column(columnDefinition = "TEXT")
     private String imageurl;

@@ -1,9 +1,12 @@
 //Function Post AJAX
+//--------------- Global Data -------------
+let posts = null ;
+const SERVER_URL = 'http://localhost:8080';
 
 //------------- COMMON CLASS ------------
 class ApiFacade { // This class is designed like Facade Pattern , will get (data,url) and return a promise 
   constructor() {
-    this.baseUrl = 'http://localhost:8080';
+    this.baseUrl = SERVER_URL;
   }
 
   sendRequest(method, url, data) {
@@ -27,7 +30,8 @@ class ApiFacade { // This class is designed like Facade Pattern , will get (data
   }
 
   get(url) {
-    return this.sendRequest('GET', url);
+    console.log(url)
+    return this.sendRequest('GET', url , null);
   }
 
   post(url, data) {
@@ -53,9 +57,6 @@ class FormDataBuilder { // This class is designed like a Builder Pattern , will 
       const element = document.querySelector(`#${input.id}`);
       if (element) {
         if (element.type === 'file') {
-          console.log(element[0]);
-          console.log(element.files);
-          console.log(element.files[0]);
           yield [input.id, element.files[0]];
         } else {
           yield [input.id, element.value];
@@ -67,6 +68,7 @@ class FormDataBuilder { // This class is designed like a Builder Pattern , will 
   buildFormData() {
     const formData = new FormData();
     for (const [name, value] of this) {
+      if(value === null ) alert("Please fill all input");
       formData.append(name, value);
     }
     return formData;
@@ -84,7 +86,7 @@ class FormDataBuilder { // This class is designed like a Builder Pattern , will 
 //------------- Handle AJAX ------------
 const apiFacade = new ApiFacade();
 
-const  handleWritePost = () => {
+const handleWritePost = () => {
 
   //Declare Data , note ; id must be the same with object id
   const inputList = [
@@ -113,28 +115,98 @@ const  handleWritePost = () => {
     });
 };
 
-const handleSearch = (inputId, selectId) => {
-
-  const keyword = document.querySelector(`#${inputId}`).value;
-  const category = document.querySelector(`#${selectId}`).value;
-  apiFacade
-  .get('/api/posts')
-  .then((data) => {
-    alert("get thanh cong !") ;
-    console.log(data);
-    console.log(data.filter(post => post.title.includes(keyword)));
-    console.log(data.filter(post => post.title.includes(keyword) && post.category === category));
-  })
-  .catch((error) => {
-    alert('Error creating post! ' + error);
-  });
+const handleSearch = () => {
+  apiFacade.get('/api/posts')
+    .then((data) => {
+      posts = data;
+      handlefilterPostsSearch();
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
 }
-// apiFacade.get('/users')
-//   .then((data) => {
-//   })
-//   .catch((error) => {
-//   });
 
+const handlefilterPostsSearch = () => {
+  const keyword = document.querySelector('#keywordSearch').value;
+  const category = document.querySelector('#categorySelected').value;
+  
+  console.dir(keyword);
+  const filteredPosts = posts.filter(post => {
+    const keywordMatch = post.title.includes(keyword);
+    const categoryMatch = category === 'All' ? true : post.category === category;
+    console.log(post.category)
+    console.log(category)
+
+    return keywordMatch && categoryMatch;
+  });
+  console.log('Filtered posts:', filteredPosts);
+  
+  const container = document.querySelector("#searchResults");
+  container.innerHTML = '';
+  filteredPosts.forEach(post => {
+
+    const html = `
+      <div class="d-flex justify-content-center">
+        <div class="main-container-searchItems">
+          <img class="main-image" id="image-searchItems" src="${SERVER_URL}/uploaded/${post.imageurl}"/>
+          <div class="main-content">
+            <h2 class="main-title" id="title-searchItems">${post.title}</h2>
+            <div class="tags-container">
+              <div class="tag" id="category-searchItems">${post.category}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    
+    container.innerHTML += html;
+  });
+  
+
+}
+
+const handleLogin = () =>{
+
+  const inputList = [
+    { id: 'email' },
+    { id: 'pass' },
+  ];
+
+  const formDataBuilder = new FormDataBuilder(inputList);
+  const formData = formDataBuilder.buildFormData();
+
+  apiFacade
+    .post('/api/users/login', formData)
+    .then((data) => {
+      alert('Login successfully !');
+      window.location.href = '/';
+    })
+    .catch((error) => {
+      alert('Error  login ! ' + error);
+    });
+}
+
+const handleRegister = (event) =>{
+  event.preventDefault() ;
+  const inputList = [
+    { id: 'name' },
+    { id: 'email' },
+    { id: 'pass' },
+  ];
+
+  const formDataBuilder = new FormDataBuilder(inputList);
+  const formData = formDataBuilder.buildFormData();
+  console.log(formData);
+  apiFacade
+    .post('/api/users/register', formData)
+    .then((data) => {
+      alert('Register successfully !');
+      window.location.href = '/login';
+    })
+    .catch((error) => {
+      alert('Error  register ! ' + error);
+    });
+}
 
 
 //--------------------Function custom for display--------------------
@@ -199,6 +271,46 @@ function handleMenuNavbar() {
   });
 }
 
+function handleParseHTMLTopPost(){
+  const htmlElements = document.querySelectorAll('.htmlparse');
+  
+  for (let i = 0; i < htmlElements.length; i++) {
+    const htmlString = htmlElements[i].innerHTML;
+    const $html = $(htmlString);
+    const textContent = $html.text();
+    const formattedText = `${textContent.slice(0, 15)}...`;
+    
+    // create a new element to replace the old one
+    const newElement = document.createElement('p');
+    newElement.className = 'category-setting-ttem-content-content';
+    newElement.textContent = formattedText;
+    
+    // insert the new element after the old one, then remove the old one
+    htmlElements[i].parentNode.insertBefore(newElement, htmlElements[i].nextSibling);
+    htmlElements[i].parentNode.removeChild(htmlElements[i]);
+  }
+}
+
+function handleParseHTMLPost(){
+  const htmlElements = document.querySelectorAll('.htmlparsePost');
+  
+  for (let i = 0; i < htmlElements.length; i++) {
+    const htmlString = htmlElements[i].innerHTML;
+    const $html = $(htmlString);
+    const textContent = $html.text();
+    const formattedText = `${textContent.slice(0, 15)}...`;
+    
+    // create a new element to replace the old one
+    const newElement = document.createElement('p');
+    newElement.className = 'card-text-custom text-secondary-emphasis';
+    newElement.textContent = formattedText;
+    
+    // insert the new element after the old one, then remove the old one
+    htmlElements[i].parentNode.insertBefore(newElement, htmlElements[i].nextSibling);
+    htmlElements[i].parentNode.removeChild(htmlElements[i]);
+  }
+}
+
 //------------------Function when document is ready--------------------------------
 $(document).ready(function () {
   function fragment() {
@@ -247,3 +359,8 @@ $(document).ready(function () {
     info: false,
   });
 });
+//------------------------ Function Global Invoke ----------------------
+handleParseHTMLPost()
+handleParseHTMLTopPost()
+// handleLogin();
+// handleRegister();

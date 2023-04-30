@@ -27,7 +27,7 @@
     <div th:replace="product/fragment :: nav"></div>
     <nav id="nav"></nav>
     <!-- Page Header-->
-    <header class="masthead container hero-custom" th:style="'background-image: url(' + ${@environment.getProperty('SERVER_PATH')} + '/uploaded/image/post/' + ${post.getIdpost()}  +')'">
+    <header class="masthead container hero-custom" th:style="'background-image: url(' + ${@environment.getProperty('SERVER_PATH')} + '/uploaded/' + ${post.getImageurl()}  +')'">
       <div class="container position-relative px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
           <div class="col-md-10 col-lg-8 col-xl-7">

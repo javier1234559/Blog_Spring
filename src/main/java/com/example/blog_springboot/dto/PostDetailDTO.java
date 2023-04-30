@@ -11,12 +11,12 @@ import java.sql.Date;
 @NoArgsConstructor
 public class PostDetailDTO {
     private int idpost;
-    private String iduser;
+    private int iduser;
     private String userName;
     private String title;
     private String imageurl;
     private Date date;
-    private int content;
+    private String content;
     private int view;
     private String category;
 }

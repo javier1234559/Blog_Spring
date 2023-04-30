@@ -54,6 +54,15 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public List<PostDetailDTO> getAllPostDetailDTO() {
+        List<Post> list = postRepository.findAll();
+        List<PostDetailDTO> dtoList = list.stream()
+                .map(post -> mapper.map(post, PostDetailDTO.class))
+                .collect(Collectors.toList());
+        return dtoList;
+    }
+
+    @Override
     public Post createPost(Post post) {
         try {
             return postRepository.save(post);

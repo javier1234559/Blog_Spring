@@ -1,5 +1,6 @@
 package com.example.blog_springboot.dto;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,8 +9,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDTO {
+    @NotNull
     private String name;
+    @NotNull
     private String email;
+    @NotNull
     private String pass;
 
 }

@@ -1,5 +1,6 @@
 package com.example.blog_springboot.dto;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,11 +13,15 @@ import java.sql.Date;
 @NoArgsConstructor
 public class PostCreateDTO {
 
+    @NotNull
     private MultipartFile data;
 
+    @NotNull
     private String title;
 
+    @NotNull
     private String content;
 
+    @NotNull
     private String category;
 }

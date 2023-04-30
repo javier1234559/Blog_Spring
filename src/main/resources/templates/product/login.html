@@ -31,19 +31,19 @@
     <!-- Main Content-->
     <div class="container mt-8">
       <div class="center-custom form-forgot-custom">
-        <form class="row g-3 " style="height:400px ; width:400px; ">
+        <form class="row g-3 " style="height:400px ; width:400px; " method="POST" action="/login">
           <h1 class="col-md-12 h1">Login</h1>
           <div class="col-12">
-            <label for="inputAddress" class="form-label">Email</label>
-            <input type="email" class="form-control" id="inputAddress" placeholder="Email" />
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Email" />
           </div>
           <div class="col-12">
-            <label for="inputAddress2" class="form-label">Password</label>
-            <input type="password" class="form-control" id="inputAddress2" placeholder="Password" />
+            <label for="pass" class="form-label">Password</label>
+            <input type="password" class="form-control" id="pass" name="pass" placeholder="Password" />
           </div>
           <div class="col-12 d-flex flex-wrap justify-content-between" >
             <a href="/forgotpass" class="forgotpass-link" >Forgot password ?</a>
-            <button type="submit" class="btn btn-primary " style="height:2.6rem;">Login</button>
+            <button type="submit" class="btn btn-primary " style="height:2.6rem;"  >Login</button>
           </div>
         </form>
       </div>

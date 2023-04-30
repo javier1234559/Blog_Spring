@@ -1,11 +1,13 @@
 package com.example.blog_springboot.controller;
 
-import com.example.blog_springboot.dto.PostCreateDTO;
-import com.example.blog_springboot.dto.PostDetailDTO;
-import com.example.blog_springboot.dto.PostSearchDTO;
+import com.example.blog_springboot.dto.*;
 import com.example.blog_springboot.model.Post;
+import com.example.blog_springboot.model.TopPost;
+import com.example.blog_springboot.model.User;
 import com.example.blog_springboot.service.PostService;
+import com.example.blog_springboot.service.TopPostService;
 import com.example.blog_springboot.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,13 +23,18 @@ public class HomeProductController {
 
     @Autowired
     private PostService postService;
+
+    @Autowired
+    private TopPostService topPostService;
     @Autowired
     private UserService userService ;
 
     @GetMapping("/")
     public String getAllPostsHome(Model model) {
-        List<PostSearchDTO> listPost = postService.getAllPostSearchDTO();
+        List<PostDetailDTO> listPost = postService.getAllPostDetailDTO();
+        List<PostDetailDTO> listTopPost = topPostService.getAllTopPostsDTO();
         model.addAttribute("listPost", listPost);
+        model.addAttribute("listTopPost", listTopPost);
         return "product/index";
     }
 
@@ -45,8 +52,12 @@ public class HomeProductController {
     }
 
     @GetMapping("/login")
-    public String getLogin(){
-        return "/product/login";
+    public String getLogin( HttpSession session ){
+//        if (session.getAttribute("user") == null) {
+//            return "redirect:/register";
+//        } else {
+            return "/product/login";
+//        }
     }
 
     @GetMapping("/register")
@@ -81,9 +92,21 @@ public class HomeProductController {
         }
     }
 
+    @PostMapping ("/login")
+    public String Login(@ModelAttribute UserLoginDTO userdto , HttpSession session ) throws IOException {
+        System.out.print(userdto);
+        User loginuser = userService.getUserByEmailAndPassword(userdto);
+        if (loginuser == null) {
+            return "redirect:/login"; // or return an error message
+        } else {
+            session.setAttribute("user", loginuser); // add user to session
+            return "redirect:/";
+        }
+    }
+
+
     @PostMapping ("/createnewpost")
     public String createPost(@ModelAttribute PostCreateDTO postdto ) throws IOException {
-        System.out.print(postdto);
         postService.createPostDTO(postdto);
         return "redirect:/";
     }

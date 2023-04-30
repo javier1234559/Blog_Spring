@@ -1,20 +1,24 @@
 package com.example.blog_springboot.service.impl;
 
+import com.example.blog_springboot.dto.PostDetailDTO;
+import com.example.blog_springboot.dto.PostSearchDTO;
 import com.example.blog_springboot.model.TopPost;
 import com.example.blog_springboot.repository.TopPostRepository;
 import com.example.blog_springboot.service.TopPostService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TopPostServiceImpl implements TopPostService {
-    private final TopPostRepository topPostRepository;
+    @Autowired
+    private  TopPostRepository topPostRepository;
 
-    public TopPostServiceImpl(TopPostRepository topPostRepository) {
-        this.topPostRepository = topPostRepository;
-    }
+    @Autowired
+    private ModelMapper mapper;
 
     @Override
     public void addTopPost(TopPost topPost) {
@@ -34,5 +38,14 @@ public class TopPostServiceImpl implements TopPostService {
     @Override
     public List<TopPost> getAllTopPosts() {
         return topPostRepository.findAll();
+    }
+
+    @Override
+    public List<PostDetailDTO> getAllTopPostsDTO() {
+        List<TopPost> list = topPostRepository.findAll();
+        List<PostDetailDTO> dtoList = list.stream()
+                .map(post -> mapper.map(post, PostDetailDTO.class))
+                .collect(Collectors.toList());
+        return dtoList;
     }
 }

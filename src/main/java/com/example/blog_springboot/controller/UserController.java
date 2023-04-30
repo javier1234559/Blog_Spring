@@ -1,6 +1,8 @@
 package com.example.blog_springboot.controller;
 
 import com.example.blog_springboot.dto.UserDTO;
+import com.example.blog_springboot.dto.UserLoginDTO;
+import com.example.blog_springboot.dto.UserRegisterDTO;
 import com.example.blog_springboot.model.Post;
 import com.example.blog_springboot.model.User;
 import com.example.blog_springboot.service.UserService;
@@ -27,10 +29,15 @@ public class UserController {
     public ResponseEntity<User> getUserById(@PathVariable int id) {
         return ResponseEntity.ok(userService.getUserById(id));
     }
+    @PostMapping("/login")
+    public ResponseEntity<User> LoginUser(@ModelAttribute UserLoginDTO userdto) {
+        User loginuser = userService.getUserByEmailAndPassword(userdto);
+        return ResponseEntity.ok(loginuser);
+    }
 
-    @PostMapping
-    public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userdto) {
-        UserDTO savedUser = userService.createUser(userdto);
+    @PostMapping("/register")
+    public ResponseEntity<User> createUserRegister(@ModelAttribute UserRegisterDTO userdto) {
+        User savedUser = userService.createUserRegister(userdto);
         return ResponseEntity.ok(savedUser);
     }
 

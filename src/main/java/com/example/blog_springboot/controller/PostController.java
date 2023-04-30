@@ -12,12 +12,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/posts")
+//@CrossOrigin(origins = "http://localhost:8080")
 public class PostController {
 
     @Autowired
     private PostService postService ;
 
     @GetMapping
+
     public ResponseEntity<List<PostSearchDTO>> getAllPostSearchDTO() {
         return ResponseEntity.ok(postService.getAllPostSearchDTO());
     }
