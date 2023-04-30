@@ -30,10 +30,10 @@
     <!-- Page Header-->
     <header id="image-header" class="masthead container hero-custom" style="background-image: url('/static/product/assets/img/home-bg.jpg')">
       <div class="hero-custom-edit">
-        <label for="image-input">
+        <label for="data">
           <i class="bi bi-pencil-square"></i>
         </label>
-        <input id="image-input"  type="file" style="display: none;">
+        <input id="data"  type="file" style="display: none;">
       </div>
       <div class="container position-relative px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
@@ -57,11 +57,11 @@
       <div class="container article-wrapper-custom">
         <div class="row mb-4">
           <form action="" class="row g-3">
-            <input class="col-10  changetileEvent" type="text" name="" id="title-input" placeholder="Title ..." />
+            <input class="col-10  changetileEvent" type="text" name="" id="title" placeholder="Title ..." />
             <div class="col-2">
-              <label for="category-select" class="fs-6 ms-2">Category</label>
+              <label for="category" class="fs-6 ms-2">Category</label>
               <div class="input-group">
-                <select class="form-select" id="category-select" aria-label="Example select with button addon">
+                <select class="form-select" id="category" aria-label="Example select with button addon">
                   <option selected>Choose...</option>
                   <option value="Technology">Technology</option>
                   <option value="Education">Education</option>
@@ -103,10 +103,10 @@
           } );
           
       document.querySelector( '#submit' ).addEventListener( 'click', () => {
-          createPost();
+          handleWritePost();
       });
       changeTitleCreatePost();
-      previewImage("image-header","image-input");
+      previewImage("image-header","data");
     </script>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
