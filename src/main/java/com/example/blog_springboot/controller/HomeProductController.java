@@ -92,17 +92,17 @@ public class HomeProductController {
         }
     }
 
-    @PostMapping ("/login")
-    public String Login(@ModelAttribute UserLoginDTO userdto , HttpSession session ) throws IOException {
-        System.out.print(userdto);
-        User loginuser = userService.getUserByEmailAndPassword(userdto);
-        if (loginuser == null) {
-            return "redirect:/login"; // or return an error message
-        } else {
-            session.setAttribute("user", loginuser); // add user to session
-            return "redirect:/";
-        }
-    }
+//    @PostMapping ("/login")
+//    public String Login(@ModelAttribute UserLoginDTO userdto , HttpSession session ) throws IOException {
+//        System.out.print(userdto);
+//        User loginuser = userService.getUserByEmailAndPassword(userdto);
+//        if (loginuser == null) {
+//            return "redirect:/login";
+//        } else {
+//            session.setAttribute("user", loginuser); // add user to session
+//            return "redirect:/";
+//        }
+//    }
 
 
     @PostMapping ("/createnewpost")

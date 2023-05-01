@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService {
             newuser.setDescription("");
             newuser.setImageurl("defaultusericonurl");
             newuser.setPhone("");
-            newuser.setRole(1);
+            newuser.setRole("USER");
             newuser.setStatus(1);
             return userRepository.save(newuser);
         } catch (DataIntegrityViolationException ex) {

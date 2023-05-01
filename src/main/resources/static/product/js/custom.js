@@ -119,6 +119,7 @@ const handleSearch = () => {
   apiFacade.get('/api/posts')
     .then((data) => {
       posts = data;
+      console.log(data);
       handlefilterPostsSearch();
     })
     .catch((error) => {

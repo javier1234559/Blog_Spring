@@ -14,7 +14,8 @@ import org.springframework.web.filter.CorsFilter;
 
 
 @Configuration
-@SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
+//@SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
+@SpringBootApplication
 public class BlogSpringBootApplication {
 
     public static void main(String[] args) {
