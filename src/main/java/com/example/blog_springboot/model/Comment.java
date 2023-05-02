@@ -3,7 +3,7 @@ package com.example.blog_springboot.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.Date;
+import java.sql.Date;
 
 @Data
 @Entity
@@ -26,7 +26,6 @@ public class Comment {
     @Column(columnDefinition = "TEXT")
     private String content;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
     private Date date;
 

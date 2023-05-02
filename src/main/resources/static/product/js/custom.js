@@ -1,10 +1,11 @@
 //Function Post AJAX
 //--------------- Global Data -------------
-let posts = null ;
+let posts = null;
 const SERVER_URL = 'http://localhost:8080';
 
 //------------- COMMON CLASS ------------
-class ApiFacade { // This class is designed like Facade Pattern , will get (data,url) and return a promise 
+class ApiFacade {
+  // This class is designed like Facade Pattern , will get (data,url) and return a promise
   constructor() {
     this.baseUrl = SERVER_URL;
   }
@@ -30,8 +31,8 @@ class ApiFacade { // This class is designed like Facade Pattern , will get (data
   }
 
   get(url) {
-    console.log(url)
-    return this.sendRequest('GET', url , null);
+    console.log(url);
+    return this.sendRequest('GET', url, null);
   }
 
   post(url, data) {
@@ -47,7 +48,8 @@ class ApiFacade { // This class is designed like Facade Pattern , will get (data
   }
 }
 
-class FormDataBuilder { // This class is designed like a Builder Pattern , will get (inputList) and return FormData or Object Data 
+class FormDataBuilder {
+  // This class is designed like a Builder Pattern , will get (inputList) and return FormData or Object Data
   constructor(inputList) {
     this.inputList = inputList;
   }
@@ -68,7 +70,7 @@ class FormDataBuilder { // This class is designed like a Builder Pattern , will 
   buildFormData() {
     const formData = new FormData();
     for (const [name, value] of this) {
-      if(value === null ) alert("Please fill all input");
+      if (value === null) alert('Please fill all input');
       formData.append(name, value);
     }
     return formData;
@@ -87,15 +89,10 @@ class FormDataBuilder { // This class is designed like a Builder Pattern , will 
 const apiFacade = new ApiFacade();
 
 const handleWritePost = () => {
-
   //Declare Data , note ; id must be the same with object id
-  const inputList = [
-    { id: 'title' },
-    { id: 'category' },
-    { id: 'data' },
-  ];
+  const inputList = [{ id: 'title' }, { id: 'category' }, { id: 'data' }];
   const editorData = editor.getData();
-  
+
   //Use Class Builder to loop all value and get FormData
   const formDataBuilder = new FormDataBuilder(inputList);
   const formData = formDataBuilder.buildFormData();
@@ -116,7 +113,8 @@ const handleWritePost = () => {
 };
 
 const handleSearch = () => {
-  apiFacade.get('/api/posts')
+  apiFacade
+    .get('/api/posts')
     .then((data) => {
       posts = data;
       console.log(data);
@@ -125,27 +123,25 @@ const handleSearch = () => {
     .catch((error) => {
       console.error('Error:', error);
     });
-}
+};
 
 const handlefilterPostsSearch = () => {
   const keyword = document.querySelector('#keywordSearch').value;
   const category = document.querySelector('#categorySelected').value;
-  
-  console.dir(keyword);
-  const filteredPosts = posts.filter(post => {
+
+  const filteredPosts = posts.filter((post) => {
     const keywordMatch = post.title.includes(keyword);
     const categoryMatch = category === 'All' ? true : post.category === category;
-    console.log(post.category)
-    console.log(category)
+    console.log(post.category);
+    console.log(category);
 
     return keywordMatch && categoryMatch;
   });
   console.log('Filtered posts:', filteredPosts);
-  
-  const container = document.querySelector("#searchResults");
-  container.innerHTML = '';
-  filteredPosts.forEach(post => {
 
+  const container = document.querySelector('#searchResults');
+  container.innerHTML = '';
+  filteredPosts.forEach((post) => {
     const html = `
       <div class="d-flex justify-content-center">
         <div class="main-container-searchItems">
@@ -159,41 +155,14 @@ const handlefilterPostsSearch = () => {
         </div>
       </div>
     `;
-    
+
     container.innerHTML += html;
   });
-  
+};
 
-}
-
-// const handleLogin = () =>{
-//
-//   const inputList = [
-//     { id: 'email' },
-//     { id: 'pass' },
-//   ];
-//
-//   const formDataBuilder = new FormDataBuilder(inputList);
-//   const formData = formDataBuilder.buildFormData();
-//
-//   apiFacade
-//     .post('/api/users/login', formData)
-//     .then((data) => {
-//       alert('Login successfully !');
-//       window.location.href = '/';
-//     })
-//     .catch((error) => {
-//       alert('Error  login ! ' + error);
-//     });
-// }
-
-const handleRegister = (event) =>{
-  event.preventDefault() ;
-  const inputList = [
-    { id: 'name' },
-    { id: 'email' },
-    { id: 'pass' },
-  ];
+const handleRegister = (event) => {
+  event.preventDefault();
+  const inputList = [{ id: 'name' }, { id: 'email' }, { id: 'pass' }];
 
   const formDataBuilder = new FormDataBuilder(inputList);
   const formData = formDataBuilder.buildFormData();
@@ -207,8 +176,73 @@ const handleRegister = (event) =>{
     .catch((error) => {
       alert('Error  register ! ' + error);
     });
-}
+};
 
+const handleDisplayComment = (idpost) => {
+
+  let listData = null; // get all comment here
+
+  $(document).ready(function () {
+
+    // let idpost  = document.getElementById("#idpost").value;
+    apiFacade
+    .get(`/api/post/comments/${idpost}`)
+    .then((data) => {
+      listData = data;
+      console.log(data);
+      const container = document.querySelector('#commentAjaxContainer');
+      container.innerHTML = '';
+      listData.reverse();
+      listData.forEach((comment) => {
+        const html = `
+              <div class="mb-3">
+              <div class="d-flex post-comment-input-custom mt-5">
+                <img src=${SERVER_URL}/uploaded/${comment.imageurl}" id="imageurl" alt="" />
+                <div class="ms-4 detail-post-commented-custom">
+                  <p class="m-0 fs-4 font-inter">${comment.name}</p>
+                  <small class="fs-6" >${comment.date}</small>
+                  <small class="fs-4" >${comment.content}</small>
+                </div>
+              </div>
+            </div>
+            `;
+
+        container.innerHTML += html;
+      });
+    })
+    .catch((error) => {
+      alert('Error:', error);
+    });
+
+  });
+
+  
+};
+
+const handleCreateComment = (event) => {
+
+  event.preventDefault();
+
+  const inputList = [{ id: 'idpost' }, { id: 'content' }];
+
+  const formDataBuilder = new FormDataBuilder(inputList);
+  const formData = formDataBuilder.buildFormData();
+  console.log(formData);
+
+  apiFacade
+    .post('/api/post/comments', formData)
+    .then((data) => {
+      console.log(formData.get("idpost"));
+      handleDisplayComment(formData.get("idpost"));
+      
+      const clearValue = document.getElementById("content"); //clear value of comment input
+      clearValue.value = "" ;
+    })
+    .catch((error) => {
+      alert("Some error of comment");
+      console.log(error);
+    });
+};
 
 //--------------------Function custom for display--------------------
 
@@ -272,40 +306,40 @@ function handleMenuNavbar() {
   });
 }
 
-function handleParseHTMLTopPost(){
+function handleParseHTMLTopPost() {
   const htmlElements = document.querySelectorAll('.htmlparse');
-  
+
   for (let i = 0; i < htmlElements.length; i++) {
     const htmlString = htmlElements[i].innerHTML;
     const $html = $(htmlString);
     const textContent = $html.text();
     const formattedText = `${textContent.slice(0, 15)}...`;
-    
+
     // create a new element to replace the old one
     const newElement = document.createElement('p');
     newElement.className = 'category-setting-ttem-content-content';
     newElement.textContent = formattedText;
-    
+
     // insert the new element after the old one, then remove the old one
     htmlElements[i].parentNode.insertBefore(newElement, htmlElements[i].nextSibling);
     htmlElements[i].parentNode.removeChild(htmlElements[i]);
   }
 }
 
-function handleParseHTMLPost(){
+function handleParseHTMLPost() {
   const htmlElements = document.querySelectorAll('.htmlparsePost');
-  
+
   for (let i = 0; i < htmlElements.length; i++) {
     const htmlString = htmlElements[i].innerHTML;
     const $html = $(htmlString);
     const textContent = $html.text();
     const formattedText = `${textContent.slice(0, 15)}...`;
-    
+
     // create a new element to replace the old one
     const newElement = document.createElement('p');
     newElement.className = 'card-text-custom text-secondary-emphasis';
     newElement.textContent = formattedText;
-    
+
     // insert the new element after the old one, then remove the old one
     htmlElements[i].parentNode.insertBefore(newElement, htmlElements[i].nextSibling);
     htmlElements[i].parentNode.removeChild(htmlElements[i]);
@@ -361,7 +395,8 @@ $(document).ready(function () {
   });
 });
 //------------------------ Function Global Invoke ----------------------
-handleParseHTMLPost()
-handleParseHTMLTopPost()
+handleParseHTMLPost();
+handleParseHTMLTopPost();
+
 // handleLogin();
 // handleRegister();

@@ -102,7 +102,9 @@ public class HomeProductController {
         Optional<PostDetailDTO> optionalPost = Optional.ofNullable(postService.getPostById(id));
         if (optionalPost.isPresent()) {
             PostDetailDTO post = postService.getPostById(id);
+            List<PostDetailDTO> listTopPost = topPostService.getAllTopPostsDTO();
             model.addAttribute("post", post);
+            model.addAttribute("listTopPost", listTopPost);
             return "product/detailpost";
         } else {
             return "product/index";

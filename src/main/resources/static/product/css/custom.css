@@ -185,6 +185,11 @@ button {
     border-radius: 30px;
     overflow: hidden;
 }
+post-category-items-custom{
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 div.post-category-custom:hover{
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     transition: all 0.2s linear;
@@ -481,10 +486,15 @@ div.post-category-custom:hover{
     text-overflow: ellipsis;
     margin: 0;
 }
+.category-setting-item{
+    padding-right: 1rem ;
+    overflow: hidden;
+}
 
 .category-setting-item-image{
   flex-shrink: 0;
   width : 60px ;
+  height : 60px ;
   overflow:hidden;
   margin: 5px;
   border-radius: 10px;
