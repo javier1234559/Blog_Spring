@@ -1,9 +1,7 @@
 package com.example.blog_springboot.controller;
 
-import com.example.blog_springboot.dto.UserDTO;
 import com.example.blog_springboot.dto.UserLoginDTO;
 import com.example.blog_springboot.dto.UserRegisterDTO;
-import com.example.blog_springboot.model.Post;
 import com.example.blog_springboot.model.User;
 import com.example.blog_springboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

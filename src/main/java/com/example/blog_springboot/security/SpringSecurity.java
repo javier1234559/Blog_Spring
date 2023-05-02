@@ -27,21 +27,27 @@ public class SpringSecurity {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests (auth -> {
-                            auth.requestMatchers("/admin/**").hasRole("ADMIN");
-                            auth.requestMatchers("/","/about","/contact","/posts/**", "/register", "/error", "/admin/**","/uploaded/**").permitAll();
-                            auth.requestMatchers("/templates/**","/static/**","/product/**","/dashboard/**").permitAll();
-                            auth.requestMatchers("/api/posts/**","/api/posts").permitAll();
-                            auth.anyRequest().authenticated();
-                        })
+                .authorizeHttpRequests(auth -> {
+                    auth.requestMatchers("/admin/**").hasRole("ADMIN");
+                    auth.requestMatchers("/", "/about", "/contact", "/posts/**", "/register", "/error", "/admin/**", "/uploaded/**").permitAll();
+                    auth.requestMatchers("/templates/**", "/static/**", "/product/**", "/dashboard/**").permitAll();
+                    auth.requestMatchers("/api/posts/**", "/api/posts","/api/users/register").permitAll();
+                    auth.anyRequest().authenticated();
+                })
                 .formLogin(form -> {
-                            form.usernameParameter("email");
-                            form.passwordParameter("pass");
-                            form.loginPage("/login");
-                            form.loginProcessingUrl("/login");
-                            form.defaultSuccessUrl("/");
-                            form.permitAll();
-                        });
+                    form.usernameParameter("email");
+                    form.passwordParameter("pass");
+                    form.loginPage("/login");
+                    form.loginProcessingUrl("/login"); //url mac dinh login cua security
+                    form.defaultSuccessUrl("/", true);
+                    form.permitAll();
+                })
+                .logout(logout -> {
+                    logout.logoutUrl("/logout");
+                    logout.invalidateHttpSession(true);
+                    logout.deleteCookies("JSESSIONID");
+                    logout.logoutSuccessUrl("/login");
+                });
 
         return http.build();
     }

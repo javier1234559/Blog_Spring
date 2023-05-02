@@ -15,6 +15,7 @@ import com.example.blog_springboot.ultilies.Constant;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,6 +31,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private ModelMapper mapper;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public List<User> getAllUsers() {
@@ -60,11 +64,12 @@ public class UserServiceImpl implements UserService {
 //            if (userRepository.existsByMail(request.getMail())) {
 //                throw new ResourceExistException(AppConstant.USER_EXIST);
 //            }
+            userRegisterDTO.setPass(passwordEncoder.encode(userRegisterDTO.getPass()));
             User newuser  =  mapper.map(userRegisterDTO,User.class);
             newuser.setDescription("");
             newuser.setImageurl("defaultusericonurl");
             newuser.setPhone("");
-            newuser.setRole("USER");
+            newuser.setRole("ROLE_USER");
             newuser.setStatus(1);
             return userRepository.save(newuser);
         } catch (DataIntegrityViolationException ex) {

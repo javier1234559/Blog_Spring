@@ -9,6 +9,7 @@ import com.example.blog_springboot.service.TopPostService;
 import com.example.blog_springboot.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -30,12 +31,24 @@ public class HomeProductController {
     private UserService userService ;
 
     @GetMapping("/")
-    public String getAllPostsHome(Model model) {
-        List<PostDetailDTO> listPost = postService.getAllPostDetailDTO();
-        List<PostDetailDTO> listTopPost = topPostService.getAllTopPostsDTO();
-        model.addAttribute("listPost", listPost);
-        model.addAttribute("listTopPost", listTopPost);
-        return "product/index";
+    public String getAllPostsHome(Model model , Authentication authentication) {
+        if (authentication != null && authentication.isAuthenticated()) {
+            if (authentication.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"))) {
+                return "redirect:/admin";
+            } else {
+                List<PostDetailDTO> listPost = postService.getAllPostDetailDTO();
+                List<PostDetailDTO> listTopPost = topPostService.getAllTopPostsDTO();
+                model.addAttribute("listPost", listPost);
+                model.addAttribute("listTopPost", listTopPost);
+                return "product/index";
+            }
+        } else {
+            List<PostDetailDTO> listPost = postService.getAllPostDetailDTO();
+            List<PostDetailDTO> listTopPost = topPostService.getAllTopPostsDTO();
+            model.addAttribute("listPost", listPost);
+            model.addAttribute("listTopPost", listTopPost);
+            return "product/index";
+        }
     }
 
     @GetMapping("/about")
@@ -52,12 +65,16 @@ public class HomeProductController {
     }
 
     @GetMapping("/login")
-    public String getLogin( HttpSession session ){
-//        if (session.getAttribute("user") == null) {
-//            return "redirect:/register";
-//        } else {
+    public String getLogin(Authentication authentication) {
+        if (authentication != null && authentication.isAuthenticated()) {
+            if (authentication.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"))) {
+                return "redirect:/admin";
+            } else {
+                return "redirect:/";
+            }
+        } else {
             return "/product/login";
-//        }
+        }
     }
 
     @GetMapping("/register")

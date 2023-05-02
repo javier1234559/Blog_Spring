@@ -166,26 +166,26 @@ const handlefilterPostsSearch = () => {
 
 }
 
-const handleLogin = () =>{
-
-  const inputList = [
-    { id: 'email' },
-    { id: 'pass' },
-  ];
-
-  const formDataBuilder = new FormDataBuilder(inputList);
-  const formData = formDataBuilder.buildFormData();
-
-  apiFacade
-    .post('/api/users/login', formData)
-    .then((data) => {
-      alert('Login successfully !');
-      window.location.href = '/';
-    })
-    .catch((error) => {
-      alert('Error  login ! ' + error);
-    });
-}
+// const handleLogin = () =>{
+//
+//   const inputList = [
+//     { id: 'email' },
+//     { id: 'pass' },
+//   ];
+//
+//   const formDataBuilder = new FormDataBuilder(inputList);
+//   const formData = formDataBuilder.buildFormData();
+//
+//   apiFacade
+//     .post('/api/users/login', formData)
+//     .then((data) => {
+//       alert('Login successfully !');
+//       window.location.href = '/';
+//     })
+//     .catch((error) => {
+//       alert('Error  login ! ' + error);
+//     });
+// }
 
 const handleRegister = (event) =>{
   event.preventDefault() ;
