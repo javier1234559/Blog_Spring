@@ -30,10 +30,10 @@
     <!-- Page Header-->
     <header id="image-header" class="masthead container hero-custom" th:style="'background-image: url(' + ${@environment.getProperty('SERVER_PATH')} + '/uploaded/' + ${updatepost.getImageurl()}  +')'">
       <div class="hero-custom-edit">
-        <label for="data">
+        <label for="imagefile">
           <i class="bi bi-pencil-square"></i>
         </label>
-        <input id="data"  type="file" style="display: none;">
+        <input id="imagefile"  type="file" style="display: none;">
       </div>
       <div class="container position-relative px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
@@ -103,10 +103,10 @@
           } );
           
       document.querySelector( '#submit' ).addEventListener( 'click', () => {
-          // handleUpdatePost([[${updatepost.getIdpost()}]]);
+          handleUpdatePost([[${updatepost.getIdpost()}]]);
       });
       changeTitleCreatePost();
-      previewImage("image-header","data");
+      previewImage("image-header","imagefile");
     </script>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

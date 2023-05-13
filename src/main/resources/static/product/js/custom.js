@@ -289,7 +289,7 @@ const handleUpdateInfoUserSetting = (event) =>{
 const handleUpdatePost = (id) => {
 
   //Declare Data , note ; id must be the same with object id
-  const inputList = [{ id: 'title' }, { id: 'category' }, { id: 'data' }];
+  const inputList = [{ id: 'title' }, { id: 'category' }, { id: 'imagefile' }];
   const editorData = editor.getData();
 
   //Use Class Builder to loop all value and get FormData
@@ -298,10 +298,26 @@ const handleUpdatePost = (id) => {
   formData.append('content', editorData);
 
   //User apiFacade to post data to Server
+  console.log(formData);
   apiFacade
-    .put(`/savepost/${id}`, formData)
+    .put(`/api/posts/${id}`, formData)
     .then((data) => {
       alert('Post saved!');
+      window.location.href = '/updatepost';
+    })
+    .catch((error) => {
+      alert('Error occur when saving post! ' + error);
+    });
+};
+
+const handleDeletePost = () => {
+  const id = document.getElementById("idpost").value
+
+  console.log(id)
+  apiFacade
+    .delete(`/api/posts/${id}`)
+    .then((data) => {
+      alert('Post deleted!');
       window.location.href = '/updatepost';
     })
     .catch((error) => {

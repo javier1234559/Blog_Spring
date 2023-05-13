@@ -14,6 +14,8 @@ import com.example.blog_springboot.service.UserService;
 import com.example.blog_springboot.ultilies.Constant;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -37,6 +39,11 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private Environment environment;
+
+    @Value("${default.user.icon.url}")
+    private String defaultUserIconUrl;
 
     private boolean hasAdminRole() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -65,7 +72,7 @@ public class UserServiceImpl implements UserService {
             userRegisterDTO.setPass(passwordEncoder.encode(userRegisterDTO.getPass()));
             User newuser  =  mapper.map(userRegisterDTO,User.class);
             newuser.setDescription("");
-            newuser.setImageurl("defaultusericonurl");
+            newuser.setImageurl(defaultUserIconUrl);
             newuser.setPhone("");
             newuser.setRole("ROLE_USER");
             newuser.setStatus(1);
@@ -77,6 +84,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO updateUser(int id, UserDTO user) {
+        System.out.println(defaultUserIconUrl);
         Optional<User> optionalUser = userRepository.findById(id);
         if (optionalUser.isPresent()) {
             User updatedUser = optionalUser.get();

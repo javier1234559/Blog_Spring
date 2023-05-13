@@ -6,9 +6,14 @@ import com.example.blog_springboot.dto.PostSearchDTO;
 import com.example.blog_springboot.model.Post;
 import com.example.blog_springboot.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -41,10 +46,27 @@ public class PostController {
         return ResponseEntity.ok(postService.deletePost(id));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<PostCreateDTO> updatePost(@PathVariable("id") int id, @RequestBody Post post) {
-        PostCreateDTO test = new PostCreateDTO();
-        return ResponseEntity.ok(postService.updatePost(id,test));
+    @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<?> updatePost(
+            @PathVariable("id") int id,
+            @RequestParam("title") String title,
+            @RequestParam("category") String category,
+            @RequestParam("content") String content,
+            @RequestPart("imagefile") MultipartFile imagefile
+    ) {
+        PostCreateDTO postdto = new PostCreateDTO();
+        postdto.setTitle(title);
+        postdto.setCategory(category);
+        postdto.setContent(content);
+        postdto.setData(imagefile);
+
+        postService.updatePost(id, postdto);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Update successful");
+
+        return ResponseEntity.ok(response);
     }
+
 
 }

@@ -8,6 +8,8 @@ import com.example.blog_springboot.model.User;
 import com.example.blog_springboot.service.PictureStoredService;
 import com.example.blog_springboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -72,12 +74,6 @@ public class UserController {
         return ResponseEntity.ok(savedUser);
     }
 
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<String> deleteUser(@PathVariable int id) {
-//        String message = userService.deleteUser(id);
-//        return ResponseEntity.ok(message);
-//    }
-//
 
 }
 

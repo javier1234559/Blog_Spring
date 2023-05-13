@@ -4,6 +4,7 @@ import com.example.blog_springboot.dto.*;
 import com.example.blog_springboot.model.Post;
 import com.example.blog_springboot.model.TopPost;
 import com.example.blog_springboot.model.User;
+import com.example.blog_springboot.service.EmailService;
 import com.example.blog_springboot.service.PostService;
 import com.example.blog_springboot.service.TopPostService;
 import com.example.blog_springboot.service.UserService;
@@ -23,6 +24,8 @@ import java.util.Optional;
 @Controller
 public class HomeProductController {
 
+    @Autowired
+    private EmailService emailService;
     @Autowired
     private PostService postService;
 
@@ -85,7 +88,20 @@ public class HomeProductController {
     }
 
     @GetMapping("/forgotpass")
-    public String getForgotPass(){
+    public String getForgotPass( ){
+        return "/product/forgotpass";
+    }
+
+    @PostMapping("/forgotpass/{email}")
+    public String SendEmailCode(@PathVariable("email") String email){
+        emailService.sendVerificationCode(email);
+        return "/product/forgotpass";
+    }
+
+    @PostMapping("/forgotpass")
+    public String SendEmailCode(){
+
+
         return "/product/forgotpass";
     }
 
@@ -129,18 +145,14 @@ public class HomeProductController {
         return "redirect:/";
     }
 
-    @GetMapping("/editpost/{id}")
+    @GetMapping("/editposts/{id}")
     public String editPost(@PathVariable("id") int id, Model model) {
         PostDetailDTO updatepost = postService.getPostById(id);
         model.addAttribute("updatepost", updatepost);
         return "/product/savepost";
     }
 
-    @PutMapping("/savepost/${id}")
-    public String updatePost(@PathVariable("id") int id,@ModelAttribute PostCreateDTO postdto) throws IOException {
-        postService.updatePost( id ,postdto);
-        return "redirect:/";
-    }
+
 
 
 

@@ -69,14 +69,13 @@
             <td th:text="${post.getDate()}"></td>
             <td th:text="${post.getStatus()}"></td>
             <td>
-                <a th:href="@{/posts/{id}(id=${post.getIdpost()})}">
+                <a th:href="@{/editposts/{id}(id=${post.getIdpost()})}">
                     <button class="btn btn-outline-primary px-3 custom-button">Edit</button>
                 </a>
             </td>
             <td>
-                <a >
-                    <button class="btn btn-outline-danger px-3 custom-button-danger">Delete</button>
-                </a>
+                <input hidden  th:value="${post.getIdpost()}" id="idpost"></input>
+                <button class="btn btn-outline-danger px-3 custom-button-danger"  onclick="handleDeletePost()">Delete</button>
             </td>
           </tr>
         </tbody>

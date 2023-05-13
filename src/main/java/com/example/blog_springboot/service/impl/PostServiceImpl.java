@@ -112,16 +112,30 @@ public class PostServiceImpl implements PostService {
 
 
     @Override
-    public PostCreateDTO updatePost(int id, PostCreateDTO postCreateDTO) {
+    public Object updatePost(int id, PostCreateDTO postCreateDTO) {
         Optional<Post> optionalPost = postRepository.findById(id);
         if (optionalPost.isPresent()) {
             Post updatedPost = optionalPost.get();
-            updatedPost.setTitle(postCreateDTO.getTitle());
-            updatedPost.setContent(postCreateDTO.getContent());
-            updatedPost.setCategory(postCreateDTO.getCategory());
-//            updatedPost.setImageurl(postCreateDTO.getImageurl());
+
+            mapper.getConfiguration().setSkipNullEnabled(true);
+            mapper.map(postCreateDTO, updatedPost);
+
+            if (postCreateDTO.getData() != null) {
+                updatedPost.setImageurl(pictureStoredService.addPictureStoredString(postCreateDTO.getData()));
+            }
             postRepository.save(updatedPost);
-            return postCreateDTO;
+            return new Object() {
+                public String title = postCreateDTO.getTitle();
+                public String content = postCreateDTO.getContent();
+                public String category = postCreateDTO.getCategory();
+
+                public String getContent() {
+                    return updatedPost.getContent();
+                }
+                public String getCategory() {
+                    return updatedPost.getCategory();
+                }
+            };
         } else {
             throw new ResourceNotFoundException("Post not found with id: " + id);
         }
