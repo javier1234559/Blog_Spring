@@ -19,4 +19,7 @@ public class PostDetailDTO {
     private String content;
     private int view;
     private String category;
+
+    private int commentQuantity;
+    private String status;
 }

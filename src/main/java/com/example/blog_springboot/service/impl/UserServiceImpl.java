@@ -15,6 +15,8 @@ import com.example.blog_springboot.ultilies.Constant;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,35 +37,31 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+
+    private boolean hasAdminRole() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication.getAuthorities().stream()
+                .anyMatch(authority -> authority.getAuthority().equals("ROLE_ADMIN"));
+    }
+
     @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
-    @Override
-    public User createUser(UserDTO userdto) {
-        try {
-//            if (userRepository.existsByMail(request.getMail())) {
-//                throw new ResourceExistException(AppConstant.USER_EXIST);
-//            }
-            User newuser  =  mapper.map(userdto,User.class);
-//            newuser.setDescription("");
-//            newuser.setImageurl("defaultusericonurl");
-//            newuser.setPhone("");
-//            newuser.setRole(1);
-//            newuser.setStatus(1);
-            return userRepository.save(newuser);
-        } catch (DataIntegrityViolationException ex) {
-            throw new RuntimeException("Error creating user", ex);
+    public UserDTO getUserByEmail(String email) {
+        Optional<User> optionalUser = userRepository.getUserByEmail(email);
+        if (optionalUser.isPresent()) {
+            UserDTO userDTO  =  mapper.map(optionalUser.get(),UserDTO.class);
+            return userDTO;
+        } else {
+            throw new ResourceNotFoundException("User not found with id: " + email);
         }
     }
 
     @Override
     public User createUserRegister(UserRegisterDTO userRegisterDTO) {
         try {
-//            if (userRepository.existsByMail(request.getMail())) {
-//                throw new ResourceExistException(AppConstant.USER_EXIST);
-//            }
             userRegisterDTO.setPass(passwordEncoder.encode(userRegisterDTO.getPass()));
             User newuser  =  mapper.map(userRegisterDTO,User.class);
             newuser.setDescription("");
@@ -78,20 +76,33 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateUser(int id, User user) {
+    public UserDTO updateUser(int id, UserDTO user) {
         Optional<User> optionalUser = userRepository.findById(id);
         if (optionalUser.isPresent()) {
             User updatedUser = optionalUser.get();
-            updatedUser.setName(user.getName());
-            updatedUser.setEmail(user.getEmail());
-            updatedUser.setPass(user.getPass());
-            updatedUser.setPhone(user.getPhone());
-            updatedUser.setDescription(user.getDescription());
-//            updatedUser.setImage(user.getImage());
-            updatedUser.setStatus(user.getStatus());
-            updatedUser.setRole(user.getRole());
+            if (user.getName() != null) {
+                updatedUser.setName(user.getName());
+            }
+            if (user.getEmail() != null  && !user.getEmail().trim().isEmpty()) {
+                updatedUser.setEmail(user.getEmail());
+            }
+            if (user.getPhone() != null) {
+                updatedUser.setPhone(user.getPhone());
+            }
+            if (user.getDescription() != null) {
+                updatedUser.setDescription(user.getDescription());
+            }
+            if (user.getImageurl() != null) {
+                updatedUser.setImageurl(user.getImageurl());
+            }
+            if (user.getStatus() != 0 && hasAdminRole()) {
+                updatedUser.setStatus(user.getStatus());
+            }
+            if (user.getRole() != null && hasAdminRole()) {
+                updatedUser.setRole(user.getRole());
+            }
             userRepository.save(updatedUser);
-            return updatedUser;
+            return user;
         } else {
             throw new ResourceNotFoundException("User not found with id: " + id);
         }

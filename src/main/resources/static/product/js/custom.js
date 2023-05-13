@@ -143,6 +143,7 @@ const handlefilterPostsSearch = () => {
   container.innerHTML = '';
   filteredPosts.forEach((post) => {
     const html = `
+      <a href="/posts/${post.idpost}">
       <div class="d-flex justify-content-center">
         <div class="main-container-searchItems">
           <img class="main-image" id="image-searchItems" src="${SERVER_URL}/uploaded/${post.imageurl}"/>
@@ -154,6 +155,7 @@ const handlefilterPostsSearch = () => {
           </div>
         </div>
       </div>
+    </a>
     `;
 
     container.innerHTML += html;
@@ -232,7 +234,6 @@ const handleCreateComment = (event) => {
   apiFacade
     .post('/api/post/comments', formData)
     .then((data) => {
-      console.log(formData.get("idpost"));
       handleDisplayComment(formData.get("idpost"));
       
       const clearValue = document.getElementById("content"); //clear value of comment input
@@ -241,6 +242,70 @@ const handleCreateComment = (event) => {
     .catch((error) => {
       alert("Some error of comment");
       console.log(error);
+    });
+};
+
+const handleUpdateInfoUserSetting = (event) =>{
+
+  event.preventDefault();
+
+  const inputList = [
+    {
+       "id":"iduser"
+    },
+    {
+       "id":"imagefile"
+    },
+    {
+      "id":"name"
+   },
+    {
+      "id":"email"
+    },
+    {
+      "id":"phone"
+    },
+    {
+      "id":"description"
+    },
+  ];
+  const iduser = document.getElementById("iduser").value;
+  console.log(iduser)
+  const formDataBuilder = new FormDataBuilder(inputList);
+  const formData = formDataBuilder.buildFormData();
+  console.log(formData.get("imagefile"));
+
+  apiFacade
+  .put(`/api/users/${iduser}`, formData)
+  .then((data) => {
+    alert("Update Successfully !");
+  })
+  .catch((error) => {
+    alert("Some error of update user information");
+    console.log(error);
+  });
+};
+
+const handleUpdatePost = (id) => {
+
+  //Declare Data , note ; id must be the same with object id
+  const inputList = [{ id: 'title' }, { id: 'category' }, { id: 'data' }];
+  const editorData = editor.getData();
+
+  //Use Class Builder to loop all value and get FormData
+  const formDataBuilder = new FormDataBuilder(inputList);
+  const formData = formDataBuilder.buildFormData();
+  formData.append('content', editorData);
+
+  //User apiFacade to post data to Server
+  apiFacade
+    .put(`/savepost/${id}`, formData)
+    .then((data) => {
+      alert('Post saved!');
+      window.location.href = '/updatepost';
+    })
+    .catch((error) => {
+      alert('Error occur when saving post! ' + error);
     });
 };
 

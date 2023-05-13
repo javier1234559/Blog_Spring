@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
   <head th:replace="product/fragment :: head-meta"></head>
   <head>
     <meta charset="utf-8" />
@@ -76,17 +76,24 @@
                 <div th:utext="${post.getContent()}"></div>
               </div>
               <div class="col-12">
-                <form class="detail-post-form-comment-custom">
-                  <div class="mb-3">
-                    <label for="content" class="form-label font-inter">Comments</label>
-                    <div class="d-flex post-comment-input-custom">
-                      <img src="https://pbs.twimg.com/media/FkKORoyUcAErPlB.jpg:large" alt="" />
-                      <input id="idpost" style="display : none;" th:value="${post.getIdpost()}" ></input>
-                      <input type="text" class="form-control" id="content" aria-describedby="textHelp" />
+                <label for="content" class="form-label font-inter">Comments</label>
+
+                <div  th:if="${isAuthenticated == true}">
+                  <form class="detail-post-form-comment-custom">
+                    <div class="mb-3">
+                      <div class="d-flex post-comment-input-custom">
+                        <img src="https://pbs.twimg.com/media/FkKORoyUcAErPlB.jpg:large" alt="" />
+                        <input id="idpost" style="display : none;" th:value="${post.getIdpost()}" ></input>
+                        <input type="text" class="form-control" id="content" aria-describedby="textHelp" />
+                      </div>
                     </div>
-                  </div>
-                  <button type="submit" class="btn btn-primary" onclick="handleCreateComment(event)">Submit</button>
-                </form>
+                    <button type="submit" class="btn btn-primary" onclick="handleCreateComment(event)">Submit</button>
+                  </form>
+                </div>
+                <div th:if="${isAuthenticated == false}">
+                  <p>You must be logged in to post a comment.</p>
+                  <a href="/login" style="color:#f0c993 ; text-decoration: underline" >Login</a>
+                </div>
               </div>
               <div class="col-12" id="commentAjaxContainer">
                 <div class="mb-3">

@@ -1,19 +1,28 @@
 package com.example.blog_springboot.controller;
 
+import com.example.blog_springboot.dto.PostCreateDTO;
+import com.example.blog_springboot.dto.UserDTO;
 import com.example.blog_springboot.dto.UserLoginDTO;
 import com.example.blog_springboot.dto.UserRegisterDTO;
 import com.example.blog_springboot.model.User;
+import com.example.blog_springboot.service.PictureStoredService;
 import com.example.blog_springboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.security.Principal;
 import java.util.List;
 
 
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
+
+    @Autowired
+    private PictureStoredService pictureStoredService ;
 
     @Autowired
     private UserService userService;
@@ -35,13 +44,31 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<User> createUserRegister(@ModelAttribute UserRegisterDTO userdto) {
+        if (userService.getUserByEmail(userdto.getEmail()) != null){
+            return ResponseEntity.badRequest().build();
+        }
         User savedUser = userService.createUserRegister(userdto);
         return ResponseEntity.ok(savedUser);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable int id, @RequestBody User user) {
-        User savedUser = userService.updateUser(id, user);
+    public ResponseEntity<UserDTO> updateUser(@PathVariable int id,  MultipartFile imagefile, @ModelAttribute UserDTO userDTO , Principal principal) {
+        String email = userDTO.getEmail() ;
+
+        if (email != null && !email.trim().isEmpty()) {
+            System.out.println(principal.getName());
+            if (!principal.getName().equals(email)){
+                if (userService.getUserByEmail(email) != null ){
+                    return ResponseEntity.badRequest().build();
+                }
+            }
+        }
+        System.out.println(imagefile);
+        if (imagefile != null && !imagefile.isEmpty()) {
+            String imageUrl = pictureStoredService.addPictureStoredString(imagefile);
+            userDTO.setImageurl(imageUrl);
+        }
+        UserDTO savedUser = userService.updateUser(id, userDTO);
         return ResponseEntity.ok(savedUser);
     }
 

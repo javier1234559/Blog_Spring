@@ -43,30 +43,41 @@
             <th>Delete</th>
           </tr>
         </thead>
-        <tbody>
-          <tr style="cursor: pointer ;">
-            <td style="width:120px;">
-              <div class="post-image-setting">
-              <img src="https://images.unsplash.com/photo-1681933859581-55594c9a09a0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60" alt="">
-            <td>System Architect</td>
-            <td>2</td>
-            <td>61</td>
-            <td>2011-04-25</td>
-            <td>Pending</td>
-            <td><button class="btn btn-outline-primary px-3 custom-button">Edit</button></td>
-            <td><button class="btn btn-outline-danger px-3 custom-button-danger">Delete</button></td>
-          </tr>
+        <tbody th:each="post: ${listPostDetailDTO}">
+<!--          <tr style="cursor: pointer ;">-->
+<!--            <td style="width:120px;">-->
+<!--              <div class="post-image-setting">-->
+<!--              <img src="https://images.unsplash.com/photo-1681933859581-55594c9a09a0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60" alt="">-->
+<!--            <td>System Architect</td>-->
+<!--            <td>2</td>-->
+<!--            <td>61</td>-->
+<!--            <td>2011-04-25</td>-->
+<!--            <td>Pending</td>-->
+<!--            <td><button class="btn btn-outline-primary px-3 custom-button">Edit</button></td>-->
+<!--            <td><button class="btn btn-outline-danger px-3 custom-button-danger">Delete</button></td>-->
+<!--          </tr>-->
+<!--          -->
           <tr style="cursor:pointer">
             <td style="width:120px;">
               <div class="post-image-setting">
-              <img src="https://images.unsplash.com/photo-1681933859581-55594c9a09a0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60" alt="">
-            <td>System Architect</td>
-            <td>2</td>
-            <td>61</td>
-            <td>2011-04-25</td>
-            <td>Active</td>
-            <td><button class="btn btn-outline-primary px-3 custom-button">Edit</button></td>
-            <td><button class="btn btn-outline-danger px-3 custom-button-danger">Delete</button></td>
+                <img alt="Image for post" th:src="${@environment.getProperty('SERVER_PATH')} + '/uploaded/' + ${post.getImageurl()}">
+              </div>
+            </td>
+            <td th:text="${post.getTitle()}" ></td>
+            <td th:text="${post.getCommentQuantity()}" ></td>
+            <td th:text="${post.getView()}"></td>
+            <td th:text="${post.getDate()}"></td>
+            <td th:text="${post.getStatus()}"></td>
+            <td>
+                <a th:href="@{/posts/{id}(id=${post.getIdpost()})}">
+                    <button class="btn btn-outline-primary px-3 custom-button">Edit</button>
+                </a>
+            </td>
+            <td>
+                <a >
+                    <button class="btn btn-outline-danger px-3 custom-button-danger">Delete</button>
+                </a>
+            </td>
           </tr>
         </tbody>
       </table>

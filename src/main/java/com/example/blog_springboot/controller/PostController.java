@@ -1,5 +1,6 @@
 package com.example.blog_springboot.controller;
 
+import com.example.blog_springboot.dto.PostCreateDTO;
 import com.example.blog_springboot.dto.PostDetailDTO;
 import com.example.blog_springboot.dto.PostSearchDTO;
 import com.example.blog_springboot.model.Post;
@@ -29,10 +30,10 @@ public class PostController {
         return ResponseEntity.ok(postService.getPostById(id));
     }
 
-    @PostMapping
-    public ResponseEntity<Post> createPost(@RequestBody Post post ){
-        return ResponseEntity.ok(postService.createPost(post));
-    }
+//    @PostMapping
+//    public ResponseEntity<Post> createPost(@RequestBody Post post ){
+//        return ResponseEntity.ok(postService.createPost(post));
+//    }
 
 
     @DeleteMapping("/{id}")
@@ -41,8 +42,9 @@ public class PostController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Post> updatePost(@PathVariable("id") int id, @RequestBody Post post) {
-        return ResponseEntity.ok(postService.updatePost(id,post));
+    public ResponseEntity<PostCreateDTO> updatePost(@PathVariable("id") int id, @RequestBody Post post) {
+        PostCreateDTO test = new PostCreateDTO();
+        return ResponseEntity.ok(postService.updatePost(id,test));
     }
 
 }

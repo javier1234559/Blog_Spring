@@ -9,11 +9,12 @@ import com.example.blog_springboot.model.User;
 import java.util.List;
 
 public interface UserService {
-    User createUser(UserDTO userdto);
+
     User createUserRegister(UserRegisterDTO userRegisterDTO);
-    User updateUser(int id, User user);
+    UserDTO updateUser(int id, UserDTO userDTO);
     String deleteUser(int id);
     User getUserById(int id);
+    UserDTO getUserByEmail(String email);
     User getUserByEmailAndPassword(UserLoginDTO userLoginDTO);
     List<User> getAllUsers();
 }

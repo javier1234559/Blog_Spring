@@ -4,8 +4,10 @@ import com.example.blog_springboot.dto.PostDetailDTO;
 import com.example.blog_springboot.dto.PostSearchDTO;
 import com.example.blog_springboot.exception.ResourceExistException;
 import com.example.blog_springboot.exception.ResourceNotFoundException;
+import com.example.blog_springboot.model.Comment;
 import com.example.blog_springboot.model.Post;
 import com.example.blog_springboot.model.User;
+import com.example.blog_springboot.repository.CommentRepository;
 import com.example.blog_springboot.repository.PostRepository;
 import com.example.blog_springboot.repository.UserRepository;
 import com.example.blog_springboot.service.PictureStoredService;
@@ -18,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
@@ -34,6 +37,9 @@ public class PostServiceImpl implements PostService {
     private UserRepository userRepository ;
 
     @Autowired
+    private CommentRepository commentRepository ;
+
+    @Autowired
     private  ModelMapper mapper;
 
     @Autowired
@@ -42,6 +48,21 @@ public class PostServiceImpl implements PostService {
     @Override
     public List<Post> getAllPosts() {
         return postRepository.findAll() ;
+    }
+
+
+    @Override
+    public List<PostDetailDTO> getPostByEmailUser(String email) {
+        List<Post> list = postRepository.findPostsByUserEmail(email);
+        List<PostDetailDTO> dtoList = list.stream()
+                .map(post -> {
+                    PostDetailDTO postDetailDTO = mapper.map(post, PostDetailDTO.class);
+                    int listCommentToCount = commentRepository.getCommentQuantityByPost(post.getIdpost()) ;
+                    postDetailDTO.setCommentQuantity(listCommentToCount);
+                    return  postDetailDTO ;
+                })
+                .collect(Collectors.toList());
+        return dtoList;
     }
 
     @Override
@@ -72,15 +93,14 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Post createPostDTO (PostCreateDTO postcreatedto){
+    public Post createPostDTO (PostCreateDTO postcreatedto, Principal principal){
         try {
             Post post =  mapper.map(postcreatedto,Post.class);
-//            User currentUser = new User(1,"nhat","nh@gmail","123","0992342","dfdf","url",1,2);
-            User currentUser = userRepository.getById(1);
+            Optional<User> currentUser = userRepository.getUserByEmail(principal.getName());
             java.util.Date utilDate = new java.util.Date();
             java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
             post.setDate(sqlDate);
-            post.setUser(currentUser);
+            post.setUser(currentUser.get());
             post.setView(0);
             post.setStatus(Constant.STATUS_POST_PENDDING);
             post.setImageurl(pictureStoredService.addPictureStoredString(postcreatedto.getData()));
@@ -92,19 +112,16 @@ public class PostServiceImpl implements PostService {
 
 
     @Override
-    public Post updatePost(int id, Post post) {
+    public PostCreateDTO updatePost(int id, PostCreateDTO postCreateDTO) {
         Optional<Post> optionalPost = postRepository.findById(id);
         if (optionalPost.isPresent()) {
             Post updatedPost = optionalPost.get();
-            updatedPost.setTitle(post.getTitle());
-            updatedPost.setContent(post.getContent());
-            updatedPost.setImageurl(post.getImageurl());
-            updatedPost.setCategory(post.getCategory());
-            updatedPost.setDate(post.getDate());
-            updatedPost.setView(post.getView());
-            updatedPost.setStatus(post.getStatus());
+            updatedPost.setTitle(postCreateDTO.getTitle());
+            updatedPost.setContent(postCreateDTO.getContent());
+            updatedPost.setCategory(postCreateDTO.getCategory());
+//            updatedPost.setImageurl(postCreateDTO.getImageurl());
             postRepository.save(updatedPost);
-            return updatedPost;
+            return postCreateDTO;
         } else {
             throw new ResourceNotFoundException("Post not found with id: " + id);
         }

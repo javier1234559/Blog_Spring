@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,6 +28,7 @@ public class HomeProductController {
 
     @Autowired
     private TopPostService topPostService;
+
     @Autowired
     private UserService userService ;
 
@@ -88,28 +90,59 @@ public class HomeProductController {
     }
 
     @GetMapping("/updatepost")
-    public String getPostSetting(){
+    public String getPostSetting(Model model,Principal principal){
+        String email = principal.getName();
+        List<PostDetailDTO> listPostDetailDTO = postService.getPostByEmailUser(email);
+        model.addAttribute("listPostDetailDTO",listPostDetailDTO);
         return "/product/updatepost";
     }
 
     @GetMapping("/usersetting")
-    public String getUserSetting(){
+    public String getUserSetting(Model model , Principal principal){
+        System.out.println(principal.getName());
+        UserDTO currentUser = userService.getUserByEmail(principal.getName());
+        model.addAttribute("currentUser", currentUser);
         return "/product/usersetting";
     }
 
     @GetMapping("/posts/{id}")
-    public String getPostById(@PathVariable("id") int id, Model model) {
+    public String getPostById(@PathVariable("id") int id, Model model , Authentication authentication) {
         Optional<PostDetailDTO> optionalPost = Optional.ofNullable(postService.getPostById(id));
         if (optionalPost.isPresent()) {
             PostDetailDTO post = postService.getPostById(id);
             List<PostDetailDTO> listTopPost = topPostService.getAllTopPostsDTO();
             model.addAttribute("post", post);
             model.addAttribute("listTopPost", listTopPost);
+
+            // Add a boolean variable to the model that represents whether the user is authenticated or not
+            boolean isAuthenticated = authentication != null && authentication.isAuthenticated();
+            model.addAttribute("isAuthenticated", isAuthenticated);
             return "product/detailpost";
         } else {
             return "product/index";
         }
     }
+
+    @PostMapping ("/createnewpost")
+    public String createPost(@ModelAttribute PostCreateDTO postdto , Principal principal) throws IOException {
+        postService.createPostDTO(postdto , principal);
+        return "redirect:/";
+    }
+
+    @GetMapping("/editpost/{id}")
+    public String editPost(@PathVariable("id") int id, Model model) {
+        PostDetailDTO updatepost = postService.getPostById(id);
+        model.addAttribute("updatepost", updatepost);
+        return "/product/savepost";
+    }
+
+    @PutMapping("/savepost/${id}")
+    public String updatePost(@PathVariable("id") int id,@ModelAttribute PostCreateDTO postdto) throws IOException {
+        postService.updatePost( id ,postdto);
+        return "redirect:/";
+    }
+
+
 
 //    @PostMapping ("/login")
 //    public String Login(@ModelAttribute UserLoginDTO userdto , HttpSession session ) throws IOException {
@@ -124,34 +157,6 @@ public class HomeProductController {
 //    }
 
 
-    @PostMapping ("/createnewpost")
-    public String createPost(@ModelAttribute PostCreateDTO postdto ) throws IOException {
-        postService.createPostDTO(postdto);
-        return "redirect:/";
-    }
-
-//    @PostMapping("/createpost")
-//    public String createPost(@RequestParam("image") MultipartFile image,
-//                             @RequestParam("title") String title,
-//                             @RequestParam("category") String category,
-//                             @RequestParam("editorData") String editorData) {
-//        Post post = new Post();
-//        User currentUser = userService.getUserById(1);
-//        try {
-////            post.setDate(new Date());
-//            post.setTitle(title);
-//            post.setUser(currentUser);
-//            post.setContent(editorData);
-//            byte[] convertToByte = image.getBytes();
-////            post.setImage(convertToByte);
-//
-//
-//            return "redirect:/";
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return "redirect:/test/";
-//    }
 
 
 
