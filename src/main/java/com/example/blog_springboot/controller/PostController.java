@@ -8,6 +8,7 @@ import com.example.blog_springboot.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,17 +36,14 @@ public class PostController {
         return ResponseEntity.ok(postService.getPostById(id));
     }
 
-//    @PostMapping
-//    public ResponseEntity<Post> createPost(@RequestBody Post post ){
-//        return ResponseEntity.ok(postService.createPost(post));
-//    }
 
-
+    @PreAuthorize("@postService.canDeletePost(#postId, authentication)")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deletePost(@PathVariable("id") int id) {
         return ResponseEntity.ok(postService.deletePost(id));
     }
 
+    @PreAuthorize("@postService.canEditPost(#postId, authentication)")
     @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> updatePost(
             @PathVariable("id") int id,

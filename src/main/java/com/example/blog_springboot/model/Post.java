@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -42,4 +43,12 @@ public class Post {
 
     @Column(nullable = false)
     private String status;
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    private List<Comment> comments;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idtoppost")
+    private TopPost topPost;
+
 }

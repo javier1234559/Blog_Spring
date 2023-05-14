@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -24,10 +25,28 @@ import java.util.List;
 public class UserController {
 
     @Autowired
+    private Environment environment;
+
+    @Value("${default.user.icon.url}")
+    private String defaultUserIconUrl;
+
+    @Autowired
     private PictureStoredService pictureStoredService ;
 
     @Autowired
     private UserService userService;
+
+    @GetMapping("/userImage")
+    public ResponseEntity<String> getUserImage(Principal principal) {
+        if (principal != null) {
+            String email = principal.getName();
+            UserDTO user = userService.getUserByEmail(email);
+            if (user != null && user.getImageurl() != null) {
+                return ResponseEntity.ok(user.getImageurl());
+            }
+        }
+        return ResponseEntity.ok(defaultUserIconUrl);
+    }
 
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
@@ -73,6 +92,7 @@ public class UserController {
         UserDTO savedUser = userService.updateUser(id, userDTO);
         return ResponseEntity.ok(savedUser);
     }
+
 
 
 }

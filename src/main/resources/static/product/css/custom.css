@@ -1,6 +1,5 @@
 :root{
     --main-font: 'Roboto', sans-serif;
-
 }
 .text-overflow-custom{
     overflow: hidden;
@@ -180,6 +179,13 @@ button {
     position: fixed !important;
     height: 65px;
 }
+.nav-userIcon-custom{
+    width: 40px; /* Đặt chiều rộng của ảnh là 100% để nó có kích thước bằng với thẻ <i> */
+    height: 40px;
+    margin:0 0 0.5rem 0.5rem;
+    object-fit: cover;
+    border-radius: 50px;
+}
 .hero-custom{
     margin-top: 80px;
     border-radius: 30px;
@@ -219,22 +225,9 @@ div.post-category-custom:hover{
     overflow: hidden;
     align-items: start;
 }
-.post-comment-input-custom >img{
-    width: 40px;
-    height: 40px;
-    object-fit: cover;
-    border-radius: 50%;
-    padding: 0;
-    box-sizing: border-box;
-    line-height: normal;
-    flex-shrink: 0;
-}
 .post-comment-input-custom > input{
-    /* border: none; */
-    margin-left: 1rem;
+    margin-left: 0.2rem;
     flex: 1;
-
-
 }
 .detail-post-form-comment-custom{
     display: flex;
@@ -594,3 +587,24 @@ font-size: 12px;
     height: 100%;
     object-fit: cover;
   }
+
+.comment-input-custom {
+    border: none !important;
+    outline: none;
+    border-bottom: 1px solid #000 !important;
+    border-radius: 0% !important;
+}
+.comment-avatar-custom{
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border: 2px solid #ccc ;
+    border-radius: 50%;
+}
+.comment-content-custom{
+    font-size: 1rem;
+}
+.comment-title-custom{
+    font-size: 1.1rem !important;
+    font-weight: 600;
+}

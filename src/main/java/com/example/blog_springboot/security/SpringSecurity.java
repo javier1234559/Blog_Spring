@@ -31,7 +31,7 @@ public class SpringSecurity {
                     auth.requestMatchers("/admin/**").hasRole("ADMIN");
                     auth.requestMatchers("/", "/about", "/contact", "/posts/**", "/register", "/error", "/admin/**", "/uploaded/**").permitAll();
                     auth.requestMatchers("/templates/**", "/static/**", "/product/**", "/dashboard/**").permitAll();
-                    auth.requestMatchers("/api/posts/**", "/api/posts","/api/users/register", "/api/post/comments","/api/post/comments/**").permitAll();
+                    auth.requestMatchers("/api/posts/**", "/api/posts","/api/users/register", "/api/post/comments","/api/post/comments/**","/api/users/userImage/**").permitAll();
                     auth.anyRequest().authenticated();
                 })
                 .formLogin(form -> {

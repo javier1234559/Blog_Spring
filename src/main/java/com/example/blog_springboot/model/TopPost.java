@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -13,8 +15,7 @@ public class TopPost {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idtoppost;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "idpost")
-    private Post post;
+    @OneToMany(mappedBy = "topPost", cascade = CascadeType.REMOVE)
+    private List<Post> posts;
 
 }

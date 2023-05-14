@@ -10,6 +10,8 @@ import com.example.blog_springboot.service.TopPostService;
 import com.example.blog_springboot.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +26,8 @@ import java.util.Optional;
 @Controller
 public class HomeProductController {
 
+
+
     @Autowired
     private EmailService emailService;
     @Autowired
@@ -34,6 +38,8 @@ public class HomeProductController {
 
     @Autowired
     private UserService userService ;
+
+
 
     @GetMapping("/")
     public String getAllPostsHome(Model model , Authentication authentication) {
@@ -60,10 +66,12 @@ public class HomeProductController {
     public String getAbout(){
         return "/product/about";
     }
+
     @GetMapping("/contact")
     public String getContact(){
         return "/product/contact";
     }
+
     @GetMapping("/createpost")
     public String getCreatePost(){
         return "/product/createpost";

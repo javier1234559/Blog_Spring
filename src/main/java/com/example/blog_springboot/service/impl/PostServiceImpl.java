@@ -16,6 +16,7 @@ import com.example.blog_springboot.ultilies.Constant;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -163,9 +164,22 @@ public class PostServiceImpl implements PostService {
         }
     }
 
-//
-//    @Override
-//    public List<Post> getPostsByUserId(int userId) {
-//        return postRepository.findByUserId(userId);
-//    }
+    public boolean canEditPost(int postId, Authentication authentication) {
+        String currentUser = authentication.getName();
+        Optional<Post> post = postRepository.findById(postId);
+
+        return post != null && (post.get().getUser().getEmail().equals(currentUser) || isAdmin(authentication));
+    }
+
+    public boolean canDeletePost(int postId, Authentication authentication) {
+        String currentUser = authentication.getName();
+        Optional<Post> post = postRepository.findById(postId);
+        return post != null && (post.get().getUser().getEmail().equals(currentUser) || isAdmin(authentication));
+    }
+
+    private boolean isAdmin(Authentication authentication) {
+        return authentication.getAuthorities().stream()
+                .anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"));
+    }
+
 }

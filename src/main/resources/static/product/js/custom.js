@@ -181,48 +181,45 @@ const handleRegister = (event) => {
 };
 
 const handleDisplayComment = (idpost) => {
-
   let listData = null; // get all comment here
 
   $(document).ready(function () {
-
     // let idpost  = document.getElementById("#idpost").value;
     apiFacade
-    .get(`/api/post/comments/${idpost}`)
-    .then((data) => {
-      listData = data;
-      console.log(data);
-      const container = document.querySelector('#commentAjaxContainer');
-      container.innerHTML = '';
-      listData.reverse();
-      listData.forEach((comment) => {
-        const html = `
-              <div class="mb-3">
-              <div class="d-flex post-comment-input-custom mt-5">
-                <img src=${SERVER_URL}/uploaded/${comment.imageurl}" id="imageurl" alt="" />
+      .get(`/api/post/comments/${idpost}`)
+      .then((data) => {
+        listData = data;
+        console.log(data);
+        const container = document.querySelector('#commentAjaxContainer');
+        container.innerHTML = '';
+        listData.reverse();
+        listData.forEach((comment) => {
+          const html = `
+          <div class="mb-3">
+            <div class="d-flex post-comment-input-custom mt-5">
+                <img src="${SERVER_URL}/uploaded/${comment.imageurl}" class="comment-avatar-custom" id="imageurl" alt="" />
                 <div class="ms-4 detail-post-commented-custom">
-                  <p class="m-0 fs-4 font-inter">${comment.name}</p>
-                  <small class="fs-6" >${comment.date}</small>
-                  <small class="fs-4" >${comment.content}</small>
+                    <p class="m-0 fs-4 font-inter comment-title-custom" id="name">${comment.name}</p>
+                    <div>
+                        <small style="display:none" >${comment.date}</small>
+                    </div>
+                    <div>
+                        <small class="comment-content-custom">${comment.content}</small>
+                    </div>
                 </div>
               </div>
-            </div>
-            `;
+          </div>`;
 
-        container.innerHTML += html;
+          container.innerHTML += html;
+        });
+      })
+      .catch((error) => {
+        alert('Error:', error);
       });
-    })
-    .catch((error) => {
-      alert('Error:', error);
-    });
-
   });
-
-  
 };
 
 const handleCreateComment = (event) => {
-
   event.preventDefault();
 
   const inputList = [{ id: 'idpost' }, { id: 'content' }];
@@ -234,60 +231,58 @@ const handleCreateComment = (event) => {
   apiFacade
     .post('/api/post/comments', formData)
     .then((data) => {
-      handleDisplayComment(formData.get("idpost"));
-      
-      const clearValue = document.getElementById("content"); //clear value of comment input
-      clearValue.value = "" ;
+      handleDisplayComment(formData.get('idpost'));
+
+      const clearValue = document.getElementById('content'); //clear value of comment input
+      clearValue.value = '';
     })
     .catch((error) => {
-      alert("Some error of comment");
+      alert('Some error of comment');
       console.log(error);
     });
 };
 
-const handleUpdateInfoUserSetting = (event) =>{
-
+const handleUpdateInfoUserSetting = (event) => {
   event.preventDefault();
 
   const inputList = [
     {
-       "id":"iduser"
+      id: 'iduser',
     },
     {
-       "id":"imagefile"
+      id: 'imagefile',
     },
     {
-      "id":"name"
-   },
-    {
-      "id":"email"
+      id: 'name',
     },
     {
-      "id":"phone"
+      id: 'email',
     },
     {
-      "id":"description"
+      id: 'phone',
+    },
+    {
+      id: 'description',
     },
   ];
-  const iduser = document.getElementById("iduser").value;
-  console.log(iduser)
+  const iduser = document.getElementById('iduser').value;
+  console.log(iduser);
   const formDataBuilder = new FormDataBuilder(inputList);
   const formData = formDataBuilder.buildFormData();
-  console.log(formData.get("imagefile"));
+  console.log(formData.get('imagefile'));
 
   apiFacade
-  .put(`/api/users/${iduser}`, formData)
-  .then((data) => {
-    alert("Update Successfully !");
-  })
-  .catch((error) => {
-    alert("Some error of update user information");
-    console.log(error);
-  });
+    .put(`/api/users/${iduser}`, formData)
+    .then((data) => {
+      alert('Update Successfully !');
+    })
+    .catch((error) => {
+      alert('Some error of update user information');
+      console.log(error);
+    });
 };
 
 const handleUpdatePost = (id) => {
-
   //Declare Data , note ; id must be the same with object id
   const inputList = [{ id: 'title' }, { id: 'category' }, { id: 'imagefile' }];
   const editorData = editor.getData();
@@ -311,9 +306,9 @@ const handleUpdatePost = (id) => {
 };
 
 const handleDeletePost = () => {
-  const id = document.getElementById("idpost").value
+  const id = document.getElementById('idpost').value;
 
-  console.log(id)
+  console.log(id);
   apiFacade
     .delete(`/api/posts/${id}`)
     .then((data) => {
@@ -323,6 +318,10 @@ const handleDeletePost = () => {
     .catch((error) => {
       alert('Error occur when saving post! ' + error);
     });
+};
+
+const handleDisplayImageUser = () => {
+
 };
 
 //--------------------Function custom for display--------------------
