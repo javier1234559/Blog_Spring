@@ -102,6 +102,7 @@ public class HomeProductController {
 
     @PostMapping("/forgotpass/{email}")
     public String SendEmailCode(@PathVariable("email") String email){
+        System.out.println(email);
         emailService.sendVerificationCode(email);
         return "/product/forgotpass";
     }

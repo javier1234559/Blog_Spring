@@ -45,6 +45,7 @@ public class UserController {
                 return ResponseEntity.ok(user.getImageurl());
             }
         }
+        System.out.println(defaultUserIconUrl);
         return ResponseEntity.ok(defaultUserIconUrl);
     }
 

@@ -44,11 +44,10 @@ public class Post {
     @Column(nullable = false)
     private String status;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "idtoppost")
+    @OneToOne(mappedBy = "post", cascade = CascadeType.REMOVE)
     private TopPost topPost;
 
 }

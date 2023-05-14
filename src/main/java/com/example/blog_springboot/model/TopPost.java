@@ -15,7 +15,9 @@ public class TopPost {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idtoppost;
 
-    @OneToMany(mappedBy = "topPost", cascade = CascadeType.REMOVE)
-    private List<Post> posts;
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idpost")
+    private Post post;
+
 
 }
