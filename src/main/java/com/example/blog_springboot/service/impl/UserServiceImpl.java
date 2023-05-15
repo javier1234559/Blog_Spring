@@ -67,6 +67,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public String resetPassword(String email , String pass){
+         String encode = passwordEncoder.encode(pass);
+         Optional<User> optionalUser = userRepository.getUserByEmail(email);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            user.setPass(encode);
+            userRepository.save(user);
+            return "Reset password successful";
+        }
+        return "Not found user name with that email !";
+    }
+
+    @Override
     public User createUserRegister(UserRegisterDTO userRegisterDTO) {
         try {
             userRegisterDTO.setPass(passwordEncoder.encode(userRegisterDTO.getPass()));

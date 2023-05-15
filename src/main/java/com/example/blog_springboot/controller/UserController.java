@@ -5,6 +5,7 @@ import com.example.blog_springboot.dto.UserDTO;
 import com.example.blog_springboot.dto.UserLoginDTO;
 import com.example.blog_springboot.dto.UserRegisterDTO;
 import com.example.blog_springboot.model.User;
+import com.example.blog_springboot.service.EmailService;
 import com.example.blog_springboot.service.PictureStoredService;
 import com.example.blog_springboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +18,17 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
 
+    @Autowired
+    private EmailService emailService;
     @Autowired
     private Environment environment;
 
@@ -71,6 +76,28 @@ public class UserController {
         }
         User savedUser = userService.createUserRegister(userdto);
         return ResponseEntity.ok(savedUser);
+    }
+
+    @PostMapping("/forgotpass")
+    public ResponseEntity<?> createUserRegister(@RequestParam("code") String code ,@RequestParam("email") String email, @RequestParam("newpass") String newpass) {
+        Map<String, Object> response = new HashMap<>();
+
+        boolean check =  emailService.checkVerificationCode(code);
+        if(check){
+            System.out.println("Code match");
+        }
+
+
+        System.out.println(code);
+        System.out.println(email);
+        System.out.println(newpass);
+
+        if (userService.getUserByEmail(email) == null){
+            response.put("message", "Not found user name with that email !");
+            return ResponseEntity.badRequest().body(response);
+        }
+        response.put("message", "Reset password successful");
+        return ResponseEntity.ok(response);
     }
 
     @PutMapping("/{id}")

@@ -10,6 +10,7 @@ import java.util.List;
 
 public interface UserService {
 
+    String resetPassword(String email , String pass);
     User createUserRegister(UserRegisterDTO userRegisterDTO);
     UserDTO updateUser(int id, UserDTO userDTO);
     String deleteUser(int id);

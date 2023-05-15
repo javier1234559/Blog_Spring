@@ -95,24 +95,18 @@ public class HomeProductController {
         return "/product/register";
     }
 
-    @GetMapping("/forgotpass")
-    public String getForgotPass( ){
-        return "/product/forgotpass";
-    }
+//    @GetMapping("/forgotpass")
+//    public String getForgotPass( ){
+//        return "/product/forgotpass";
+//    }
 
-    @PostMapping("/forgotpass/{email}")
+    @GetMapping("/forgotpass/{email}")
     public String SendEmailCode(@PathVariable("email") String email){
         System.out.println(email);
         emailService.sendVerificationCode(email);
         return "/product/forgotpass";
     }
 
-    @PostMapping("/forgotpass")
-    public String SendEmailCode(){
-
-
-        return "/product/forgotpass";
-    }
 
     @GetMapping("/updatepost")
     public String getPostSetting(Model model,Principal principal){

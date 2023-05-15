@@ -29,9 +29,9 @@ public class SpringSecurity {
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/admin/**").hasRole("ADMIN");
-                    auth.requestMatchers("/", "/about", "/contact", "/posts/**", "/register", "/error", "/admin/**","/forgotpass/**", "/uploaded/**").permitAll();
+                    auth.requestMatchers("/", "/about", "/contact", "/posts/**", "/register", "/error", "/admin/**","/forgotpass/**", "/uploaded/**","/forgotpass/**").permitAll();
                     auth.requestMatchers("/templates/**", "/static/**", "/product/**", "/dashboard/**").permitAll();
-                    auth.requestMatchers("/api/posts/**", "/api/posts","/api/users/register", "/api/post/comments","/api/post/comments/**","/api/users/userImage/**").permitAll();
+                    auth.requestMatchers("/api/posts/**", "/api/posts","/api/users/register","/api/users/forgotpass", "/api/post/comments","/api/post/comments/**","/api/users/userImage/**").permitAll();
                     auth.anyRequest().authenticated();
                 })
                 .formLogin(form -> {

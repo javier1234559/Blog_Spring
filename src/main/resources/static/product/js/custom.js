@@ -324,17 +324,41 @@ const handleDisplayImageUser = () => {
   const avatar = document.getElementById('avatar');
   const avatarComment = document.getElementById('avatarComment');
   apiFacade
-  .get('/api/users/userImage')
-  .then((data) => {
-    let imageurl = data;
-    let avatarImageUser = SERVER_URL + '/uploaded/' + imageurl;
+    .get('/api/users/userImage')
+    .then((data) => {
+      let imageurl = data;
+      let avatarImageUser = SERVER_URL + '/uploaded/' + imageurl;
 
-    avatar.src = avatarImageUser ;
-    avatarComment.src = avatarImageUser;
-  })
-  .catch((error) => {
-    console.error('Error:', error);
-  });
+      avatar.src = avatarImageUser;
+      avatarComment.src = avatarImageUser;
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+};
+
+const handlePostForgotPass = (e) => {
+  const inputList = [
+    {
+      id: 'email',
+    },
+    {
+      id: 'imagefile',
+    },
+  ];
+
+  apiFacade
+    .get('/api/users/userImage')
+    .then((data) => {
+      let imageurl = data;
+      let avatarImageUser = SERVER_URL + '/uploaded/' + imageurl;
+
+      avatar.src = avatarImageUser;
+      avatarComment.src = avatarImageUser;
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
 };
 
 //--------------------Function custom for display--------------------
