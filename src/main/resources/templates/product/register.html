@@ -46,7 +46,7 @@
             <input type="password" class="form-control" id="pass" placeholder="Password" />
           </div>
           <div class="col-md-12 offset-md-10" >
-            <button  class="btn btn-primary" onclick="handleRegister(event)" >Register</button>
+            <button  class="btn btn-primary" id="register-btn" >Register</button>
           </div>
         </form>
       </div>
@@ -65,5 +65,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
     <script src="js/scripts.js"></script>
+    <script>
+      document.getElementById('register-btn').addEventListener('click', handleRegister);
+
+    </script>
   </body>
 </html>

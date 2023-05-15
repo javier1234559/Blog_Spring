@@ -18,7 +18,7 @@ public class EmailService {
 
     private String code;
 
-    public void sendVerificationCode(String email) {
+    public String sendVerificationCode(String email) {
         code = generateRandomCode();
         String subject = "Forgot Password";
 //        String text = "Your verification code is: " + code;
@@ -437,14 +437,15 @@ public class EmailService {
             helper.setSubject(subject);
             helper.setText(htmlContent, true);
             mailSender.send(message);
+            return code ;
         } catch (MessagingException e) {
-            // Xử lý lỗi khi gửi email
+            return null ;
         }
     }
 
-    public boolean checkVerificationCode(String inputCode) {
-        return code != null && code.equals(inputCode);
-    }
+//    public boolean checkVerificationCode(String inputCode) {
+//        return code != null && code.equals(inputCode);
+//    }
 
     private String generateRandomCode() {
         Random random = new Random();

@@ -87,7 +87,7 @@
                         <input type="text" class="form-control comment-input-custom" id="content" aria-describedby="textHelp" />
                       </div>
                     </div>
-                    <button type="submit" class="btn btn-primary" onclick="handleCreateComment(event)">Submit</button>
+                    <button  class="btn btn-primary" id="submit-btn">Submit</button>
                   </form>
                 </div>
                 <div th:if="${isAuthenticated == false}">
@@ -161,6 +161,8 @@
     <script src="js/scripts.js"></script>
     <script th:inline="javascript">
       handleDisplayComment([[${post.getIdpost()}]]);
+      document.getElementById('submit-btn').addEventListener('click', handleCreateComment);
+
     </script>
   </body>
 </html>

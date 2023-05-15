@@ -31,39 +31,36 @@
     <div class="container mt-8">
       <form class="row g-3 form-forgot-custom">
         <div class="row form-container form-usersetting">
-          <input type="hidden" name="id" id="iduser" th:value="${currentUser.getIduser()} ">
+          <input type="hidden" name="id" id="iduser" th:value="${currentUser.getIduser()} " />
           <div class="col-md-4 form-image-usersetting" id="imageurl" th:style="'background-image: url(' + ${@environment.getProperty('SERVER_PATH')} + '/uploaded/' + ${currentUser.getImageurl()}  +')'">
             <label for="imagefile">
               <i class="bi bi-pencil-square"></i>
             </label>
-            <input id="imagefile"   type="file" style="display: none;">
+            <input id="imagefile" type="file" style="display: none" />
           </div>
           <div class="col-md-4 form-padding">
             <div class="mb-3">
-              <label for="username" class="form-label" >Username:</label>
-              <input type="text" class="form-control" id="username" placeholder="Enter Username" th:value="${currentUser.getName()}"/>
+              <label for="username" class="form-label">Username:</label>
+              <input type="text" class="form-control" id="username" placeholder="Enter Username" th:value="${currentUser.getName()}" />
             </div>
-            <!-- <div class="mb-3">
-              <label for="password" class="form-label">Password:</label>
-              <input type="text" class="form-control" id="password" placeholder="Enter Password" />
-            </div> -->
+            <div class="mb-3">
+              <label for="email" class="form-label">Email:</label>
+              <input type="text" class="form-control" id="email" placeholder="Enter Email" th:value="${currentUser.getEmail()}" />
+            </div>
+            <a id="forgotpass-link" class="forgotpass-link" >Forgot password ?</a>
           </div>
           <div class="col-md-4 form-padding">
             <form>
               <div class="mb-3">
-                <label for="email" class="form-label">Email:</label>
-                <input type="text" class="form-control" id="email" placeholder="Enter Email" th:value="${currentUser.getEmail()}"/>
-              </div>
-              <div class="mb-3">
                 <label for="phone" class="form-label">Phone:</label>
-                <input type="text" class="form-control" id="phone" placeholder="Enter Phone" th:value="${currentUser.getPhone()}"/>
+                <input type="text" class="form-control" id="phone" placeholder="Enter Phone" th:value="${currentUser.getPhone()}" />
               </div>
               <div class="mb-3">
                 <label for="description" class="form-label">Description:</label>
-                <input type="text" class="form-control" id="description" placeholder="Description" th:value="${currentUser.getDescription()}"/>
+                <input type="text" class="form-control" id="description" placeholder="Description" th:value="${currentUser.getDescription()}" />
               </div>
               <div class="d-flex justify-content-end mt-3">
-                <button type="submit" onclick="handleUpdateInfoUserSetting(event)" class="btn btn-primary">Submit</button>
+                <button id="submit-btn" class="btn btn-primary">Submit</button>
               </div>
             </form>
           </div>
@@ -84,8 +81,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
     <script>
-      
-      previewImage("imageurl","imagefile");
+      document.getElementById('submit-btn').addEventListener('click', handleUpdateInfoUserSetting);
+      previewImage('imageurl', 'imagefile');
+      document.getElementById('forgotpass-link').addEventListener('click', updateForgotPasswordLink);
     </script>
     <script src="js/scripts.js"></script>
   </body>

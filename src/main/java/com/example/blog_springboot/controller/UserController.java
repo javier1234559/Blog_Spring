@@ -8,6 +8,7 @@ import com.example.blog_springboot.model.User;
 import com.example.blog_springboot.service.EmailService;
 import com.example.blog_springboot.service.PictureStoredService;
 import com.example.blog_springboot.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
@@ -79,25 +80,26 @@ public class UserController {
     }
 
     @PostMapping("/forgotpass")
-    public ResponseEntity<?> createUserRegister(@RequestParam("code") String code ,@RequestParam("email") String email, @RequestParam("newpass") String newpass) {
+    public ResponseEntity<?> createUserRegister(HttpSession session, @RequestParam("code") String code , @RequestParam("email") String email, @RequestParam("newpass") String newpass) {
         Map<String, Object> response = new HashMap<>();
-
-        boolean check =  emailService.checkVerificationCode(code);
-        if(check){
-            System.out.println("Code match");
+        if (userService.getUserByEmail(email) == null){
+            response.put("error", "Not found user name with that email !");
+            return ResponseEntity.badRequest().body(response);
         }
-
-
+        String sessionCode = (String) session.getAttribute("code");
         System.out.println(code);
         System.out.println(email);
         System.out.println(newpass);
-
-        if (userService.getUserByEmail(email) == null){
-            response.put("message", "Not found user name with that email !");
+        if (code.equals(sessionCode)) {
+            System.out.println("Code match");
+            userService.resetPassword(email,newpass);
+            response.put("message", "Reset password successful");
+            return ResponseEntity.ok(response);
+        } else {
+            System.out.println("Code does not match");
+            response.put("error", "Code not match !");
             return ResponseEntity.badRequest().body(response);
         }
-        response.put("message", "Reset password successful");
-        return ResponseEntity.ok(response);
     }
 
     @PutMapping("/{id}")

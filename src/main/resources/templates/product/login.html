@@ -42,7 +42,7 @@
             <input type="password" class="form-control" id="pass" name="pass" placeholder="Password" />
           </div>
           <div class="col-12 d-flex flex-wrap justify-content-between" >
-            <a href="/forgotpass" class="forgotpass-link" >Forgot password ?</a>
+            <a id="forgotpass-link" class="forgotpass-link" >Forgot password ?</a>
             <button type="submit" class="btn btn-primary " style="height:2.6rem;"  >Login</button>
           </div>
         </form>
@@ -62,5 +62,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
     <script src="js/scripts.js"></script>
+    <script>
+      document.getElementById('forgotpass-link').addEventListener('click', updateForgotPasswordLink);
+    </script>
   </body>
 </html>

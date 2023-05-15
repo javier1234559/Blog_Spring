@@ -221,7 +221,6 @@ const handleDisplayComment = (idpost) => {
 
 const handleCreateComment = (event) => {
   event.preventDefault();
-
   const inputList = [{ id: 'idpost' }, { id: 'content' }];
 
   const formDataBuilder = new FormDataBuilder(inputList);
@@ -242,8 +241,7 @@ const handleCreateComment = (event) => {
     });
 };
 
-const handleUpdateInfoUserSetting = (event) => {
-  event.preventDefault();
+const handleUpdateInfoUserSetting = () => {
 
   const inputList = [
     {
@@ -337,27 +335,59 @@ const handleDisplayImageUser = () => {
     });
 };
 
-const handlePostForgotPass = (e) => {
+const updateForgotPasswordLink = () => {
+  const email = document.getElementById('email').value;
+  const forgotPassLink = document.getElementById('forgotpass-link');
+
+  forgotPassLink.href = '/forgotpass/' + email;
+};
+
+const handlePostForgotPass = (event) => {
+  event.preventDefault();
+
+  const newpass = document.getElementById('newpass');
+  const repeatpass = document.getElementById('repeatpass');
+
+  if (newpass.value !== repeatpass.value) {
+    repeatpass.style.outline = '1px solid red'; 
+    repeatpass.addEventListener('input', () => {
+        const newpass = document.getElementById('newpass');
+        const repeatpass = document.getElementById('repeatpass');
+
+        if (newpass.value !== repeatpass.value) {
+          repeatpass.style.outline = '1px solid red';
+        } else {
+          repeatpass.style.outline = '1px solid green'; 
+        }
+    });
+    return;
+  }
+
   const inputList = [
+    {
+      id: 'code',
+    },
     {
       id: 'email',
     },
     {
-      id: 'imagefile',
-    },
+      id: 'newpass',
+    }
   ];
 
-  apiFacade
-    .get('/api/users/userImage')
-    .then((data) => {
-      let imageurl = data;
-      let avatarImageUser = SERVER_URL + '/uploaded/' + imageurl;
+  const formDataBuilder = new FormDataBuilder(inputList);
+  const formData = formDataBuilder.buildFormData();
+  console.log(formData);
 
-      avatar.src = avatarImageUser;
-      avatarComment.src = avatarImageUser;
+  apiFacade
+    .post('/api/users/forgotpass',formData)
+    .then((response) => {
+      const message = response.message;
+      alert(message);
+      window.location.href = '/login';
     })
     .catch((error) => {
-      console.error('Error:', error);
+      alert("Reset password ís not successfully ");
     });
 };
 

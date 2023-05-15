@@ -101,9 +101,10 @@ public class HomeProductController {
 //    }
 
     @GetMapping("/forgotpass/{email}")
-    public String SendEmailCode(@PathVariable("email") String email){
+    public String SendEmailCode(@PathVariable("email") String email,HttpSession session){
         System.out.println(email);
-        emailService.sendVerificationCode(email);
+        String code = emailService.sendVerificationCode(email);
+        session.setAttribute("code", code);
         return "/product/forgotpass";
     }
 
