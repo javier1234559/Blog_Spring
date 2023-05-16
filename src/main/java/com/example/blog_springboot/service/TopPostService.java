@@ -6,7 +6,8 @@ import com.example.blog_springboot.model.TopPost;
 import java.util.List;
 
 public interface TopPostService {
-    void addTopPost(TopPost topPost);
+    boolean checkExistPost(int idpost);
+    void addTopPost(int idpost);
     void updateTopPost(TopPost topPost);
     void deleteTopPost(int id);
     List<TopPost> getAllTopPosts();

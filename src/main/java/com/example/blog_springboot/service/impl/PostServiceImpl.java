@@ -47,6 +47,29 @@ public class PostServiceImpl implements PostService {
     private PictureStoredService pictureStoredService ;
 
     @Override
+    public int getPostCount() {
+        List<Post> posts = postRepository.findAll();
+        return posts.size();
+    }
+
+    @Override
+    public int getViewCount() {
+        List<Post> posts = postRepository.findAll();
+        int totalViews = 0;
+        for (Post post : posts) {
+            totalViews += post.getView();
+        }
+        return totalViews;
+    }
+
+
+    @Override
+    public int getPendingPostCount() {
+        List<Post> pendingPosts = postRepository.findByStatus(Constant.STATUS_POST_PENDDING);
+        return pendingPosts.size();
+    }
+
+    @Override
     public List<Post> getAllPosts() {
         return postRepository.findAll() ;
     }
@@ -187,7 +210,7 @@ public class PostServiceImpl implements PostService {
             PostDetailDTO entityDTO =  mapper.map(post.get(),PostDetailDTO.class);
             return entityDTO;
         } else {
-            throw new ResourceNotFoundException(Constant.NOT_FOUND_WITH_ID + id);
+            return null;
         }
     }
 

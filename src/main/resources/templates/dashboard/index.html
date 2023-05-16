@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
+    <link rel="icon" type="image/x-icon" th:href="@{/dashboard/img/BlogLogo.png}" />
     <title>Dashboard</title>
     <!-- Custom fonts for this template-->
     <link th:href="@{/dashboard/vendor/fontawesome-free/css/all.min.css}" href="/static/dashboard/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
@@ -45,7 +46,15 @@
                     </svg>
                   </label>
                   <input type="file" class="form-control-file" id="file" style="display: none" />
+                  <div class="input-group pt-4">
+                    <select class="form-select" id="category" aria-label="Example select with button addon">
+                      <option selected value="HomeBanner">Home Banner</option>
+                      <option value="ContactBanner">Contact</option>
+                      <option value="AboutBanner">About</option>
+                    </select>
+                  </div>
                 </div>
+                
                 <div class="form-group">
                   <label for="input1">Title</label>
                   <input type="text" class="form-control" id="input1" />
@@ -55,8 +64,8 @@
                   <input type="text" class="form-control" id="input2" />
                 </div>
                 <div class="text-right">
-                  <button type="submit" class="btn btn-primary">Delete</button>
-                  <button type="submit" class="btn btn-secondary">Publish</button>
+                  <button type="submit" class="btn btn-outline-warning">Update</button>
+                  <button type="submit" class="btn btn-outline-success">Publish</button>
                 </div>
               </form>
             </div>
@@ -74,40 +83,46 @@
                     <th>Action</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody th:each="post: ${listPost}">
                   <tr>
                     <td style="width:120px;">
                       <div class="post-image-setting">
-                      <img src="https://images.unsplash.com/photo-1681933859581-55594c9a09a0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60" alt="">
-                    </div></td>
-                    <td>System Architect</td>
-                    <td>2</td>
-                      <td><button class="btn btn-outline-success px-3" type="submit">Add</button></td>
-                    
+                        <img th:src="${@environment.getProperty('SERVER_PATH')} + '/uploaded/' + ${post.getImageurl()}"  alt="">
+                      </div>
+                    </td>
+                    <td th:text="${post.getTitle()}"></td>
+                    <td th:text="${post.getView()}" ></td>
+                    <td>
+                      <button class="btn btn-outline-success px-3" type="submit" th:onclick="'handleAddTopPost(event,' + ${post.getIdpost()} + ')'" >Add</button>
+                    </td>
                   </tr>
-                 
                 </tbody>
               </table>
             </div>
             <div class="right-column">
               <div class="my-div p-2">
                 <h1 class="text-center mb-3">Top Blogs</h1>
-                <a class="dropdown-item p-0" href="#">
-                  <div class="d-flex category-setting-item">
+                <div  id="topPostAjaxContainer">
+                  <div class="d-flex category-setting-item" th:each="post: ${listTopPost}" >
                     <div class="category-setting-item-image">
-                      <img src="http://127.0.0.1:5501/static/product/assets/img/home-bg.jpg" alt="User Profile Picture" />
+                      <!-- <a class="dropdown-item p-0" th:href="@{/posts/} + ${post.getIdpost()}"> -->
+                      <img th:src="${@environment.getProperty('SERVER_PATH')} + '/uploaded/' + ${post.getImageurl()}" alt="Top Post" />
+                      <!-- </a> -->
                     </div>
                     <div class="category-setting-item-content">
-                      <p class="category-setting-item-content-heading">John Doe</p>
-                      <p class="category-setting-ttem-content-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur nam doloremque dignissimos qui autem nobis laudantium consequuntur iste explicabo veritatis, fuga mollitia nemo? Ad, ea iste accusantium voluptate beatae excepturi! Eius numquam praesentium, modi quae molestias quisquam amet omnis facilis accusamus harum minus repellat ducimus dolorem a perspiciatis ea. Illo at quia beatae aliquam et ipsam, officiis eaque sunt quasi!</p>
+                      <p class="category-setting-item-content-heading" th:text="${post.getTitle()}"></p>
+                      <p class="category-setting-ttem-content-content" >
+                      <div class="htmlparse" style="display:contents" th:utext="${post.getContent()}">
+                      </div>
+                      </p>
                     </div>
-                    <div class="pointer p-2">
+                    <div style="cursor: pointer;" class="pointer p-4" th:onclick="'handleDeleteTopPost(' + ${post.getIdpost()} + ')'">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
                         <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
                       </svg>
                     </div>
                   </div>
-                </a>
+                </div>
               </div>
             </div>
           </div>

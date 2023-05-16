@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-
     <title>Dashboard</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/dashboard/img/BlogLogo.png}" />
     <!-- Custom fonts for this template-->
     <link th:href="@{/dashboard/vendor/fontawesome-free/css/all.min.css}" href="/static/dashboard/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
@@ -47,7 +47,7 @@
                     <div class="row no-gutters align-items-center">
                       <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Post</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">3</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${statistic.getPostCount()}"></div>
                       </div>
                       <div class="col-auto">
                         <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -63,7 +63,7 @@
                     <div class="row no-gutters align-items-center">
                       <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Views</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">215,000</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${statistic.getViewCount()}"></div>
                       </div>
                       <div class="col-auto">
                        
@@ -82,7 +82,7 @@
                         <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Comment</div>
                         <div class="row no-gutters align-items-center">
                           <div class="col-auto">
-                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50</div>
+                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" th:text="${statistic.getCommentCount()}"></div>
                           </div>
                           <div class="col">
                             <!-- <div class="progress progress-sm mr-2">
@@ -105,7 +105,7 @@
                     <div class="row no-gutters align-items-center">
                       <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Pending Posts</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${statistic.getPendingPostCount()}"></div>
                       </div>
                       <div class="col-auto">
                         <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>

@@ -2,7 +2,9 @@ package com.example.blog_springboot.service.impl;
 
 import com.example.blog_springboot.dto.PostDetailDTO;
 import com.example.blog_springboot.dto.PostSearchDTO;
+import com.example.blog_springboot.model.Post;
 import com.example.blog_springboot.model.TopPost;
+import com.example.blog_springboot.repository.PostRepository;
 import com.example.blog_springboot.repository.TopPostRepository;
 import com.example.blog_springboot.service.TopPostService;
 import org.modelmapper.ModelMapper;
@@ -18,10 +20,25 @@ public class TopPostServiceImpl implements TopPostService {
     private  TopPostRepository topPostRepository;
 
     @Autowired
+    private PostRepository postRepository;
+    @Autowired
     private ModelMapper mapper;
 
     @Override
-    public void addTopPost(TopPost topPost) {
+    public boolean checkExistPost(int idpost) {
+        if(topPostRepository.findPostInTopPost(idpost) != null) {
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    @Override
+    public void addTopPost(int idpost) {
+        Post post = postRepository.getById(idpost);
+        TopPost topPost = new TopPost();
+        topPost.setIdtoppost(idpost);
+        topPost.setPost(post);
         topPostRepository.save(topPost);
     }
 
@@ -32,7 +49,7 @@ public class TopPostServiceImpl implements TopPostService {
 
     @Override
     public void deleteTopPost(int id) {
-        topPostRepository.deleteById(id);
+        topPostRepository.deleteTopPostByIdPost(id);
     }
 
     @Override

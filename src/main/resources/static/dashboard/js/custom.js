@@ -88,22 +88,20 @@ function isNullOrEmpty(inputList) {
   for (let i = 0; i < inputList.length; i++) {
     const input = inputList[i];
     const value = document.getElementById(input.id).value;
-    
+
     if (value === null || value.trim() === '') {
-      return true; 
+      return true;
     }
   }
-  
-  return false; 
-}
 
+  return false;
+}
 
 //------------- Handle AJAX ------------
 
 const apiFacade = new ApiFacade();
 
 const handleUpdateAccount = () => {
-
   const inputList = [
     {
       id: 'iduser',
@@ -124,9 +122,6 @@ const handleUpdateAccount = () => {
       id: 'description',
     },
   ];
-
- 
-
 
   const iduser = document.getElementById('iduser').value;
   console.log(iduser);
@@ -155,7 +150,7 @@ const handleUpdateAccount = () => {
     });
 };
 
-const handleCreateAccount = () =>{
+const handleCreateAccount = () => {
   const inputList = [
     {
       id: 'pass',
@@ -177,9 +172,9 @@ const handleCreateAccount = () =>{
     },
   ];
 
-  if(isNullOrEmpty(inputList)){
-    alert("Please check fill all input");
-    return ;
+  if (isNullOrEmpty(inputList)) {
+    alert('Please check fill all input');
+    return;
   }
 
   const formDataBuilder = new FormDataBuilder(inputList);
@@ -207,7 +202,100 @@ const handleCreateAccount = () =>{
     });
 };
 
+const handleDeleteTopPost = (id) => {
+  if (id === null || id === 0) return;
+  console.log(id);
+  apiFacade
+    .delete(`/api/topposts/${id}`)
+    .then((data) => {
+      alert("Delete Successfully !")
+      console.log(data);
+      handleDisplayTopPostList();
+    })
+    .catch((error) => {
+      alert('Some error of delete Top Post ');
+      console.log(error);
+    });
+};
+
+const handleDisplayTopPostList = () => {
+  
+  apiFacade
+    .get(`/api/topposts`)
+    .then((data) => {
+      let listData = data;
+      console.log(data);
+      const container = document.querySelector('#topPostAjaxContainer');
+      container.innerHTML = '';
+      listData.forEach((post) => {
+        const html = `
+          <div class="d-flex category-setting-item">
+              <div class="category-setting-item-image">
+                  <img src="${SERVER_URL}/uploaded/${post.imageurl}" alt="Top Post" />
+              </div>
+              <div class="category-setting-item-content" style="overflow:hidden;">
+                <p class="category-setting-item-content-heading">${post.title}</p>
+                <p class="category-setting-ttem-content-content">
+                  <div class="htmlparse" style="display:contents">${post.content}</div>
+                </p>
+              </div>
+              <div style="cursor: pointer;" class="pointer p-4" onclick="handleDeleteTopPost(${post.idpost})">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                  <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                </svg>
+              </div>
+            </div>
+        `;
+        container.innerHTML += html;
+      });
+
+      handleParseHTMLTopPost();
+    })
+    .catch((error) => {
+      alert('Error:', error);
+    });
+};
+
+const handleAddTopPost = (event, idpost) => {
+  event.preventDefault();
+
+  const formData = new FormData();
+  formData.append('idpost', idpost);
+
+  apiFacade
+    .post(`/api/topposts/addTopPost`, formData)
+    .then((data) => {
+      alert('Done');
+      handleDisplayTopPostList();
+      console.log(data);
+    })
+    .catch((error) => {
+      alert('Some error of add Top Post ');
+      console.log(error);
+    });
+};
+
 //--------------------Function custom for display--------------------
+function handleParseHTMLTopPost() {
+  const htmlElements = document.querySelectorAll('.htmlparse');
+
+  for (let i = 0; i < htmlElements.length; i++) {
+    const htmlString = htmlElements[i].innerHTML;
+    const $html = $(htmlString);
+    const textContent = $html.text();
+    const formattedText = `${textContent.slice(0, 15)}...`;
+
+    // create a new element to replace the old one
+    const newElement = document.createElement('p');
+    newElement.className = 'category-setting-ttem-content-content';
+    newElement.textContent = formattedText;
+
+    // insert the new element after the old one, then remove the old one
+    htmlElements[i].parentNode.insertBefore(newElement, htmlElements[i].nextSibling);
+    htmlElements[i].parentNode.removeChild(htmlElements[i]);
+  }
+}
+
 const handleDisplayImageUser = () => {
   const avatar = document.getElementById('avatar');
   apiFacade
@@ -250,11 +338,11 @@ function previewImage(imageId, fileId) {
   });
 }
 //------------------Function when document is ready--------------------------------
-$(document).ready(function() {
-  fragment ();
+$(document).ready(function () {
+  fragment();
 
-  //Fragment in jquery 
-  function fragment () {
+  //Fragment in jquery
+  function fragment() {
     $('#sidebar').load('/templates/dashboard/fragmentjquery/sidebar.html');
     $('#topbar').load('/templates/dashboard/fragmentjquery/topbar.html');
     $('#footer').load('/templates/dashboard/fragmentjquery/footer.html');
@@ -263,7 +351,6 @@ $(document).ready(function() {
 });
 
 $(document).ready(function () {
-
   $('#my-table').DataTable({
     // Add search functionality
     searching: true,
@@ -280,3 +367,4 @@ $(document).ready(function () {
 
 //------------------------ Function Global Invoke ----------------------
 handleDisplayImageUser();
+handleParseHTMLTopPost();

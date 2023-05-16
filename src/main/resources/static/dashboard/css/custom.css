@@ -110,12 +110,16 @@ button{
   object-fit: cover;  
 }
 .category-setting-item-content{
+  overflow: hidden;
   margin-left: 10px;
 }
 .category-setting-item-content-heading{
   font-size: 16px;
   font-weight: bolder;
   margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .category-setting-ttem-content-content{
   white-space:initial;
@@ -151,3 +155,4 @@ button{
   height: 100%;
   object-fit: cover;
 }
+

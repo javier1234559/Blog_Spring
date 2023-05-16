@@ -117,7 +117,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO updateUser(int id, UserDTO user) {
-        System.out.println(defaultUserIconUrl);
         Optional<User> optionalUser = userRepository.findById(id);
         if (optionalUser.isPresent()) {
             User updatedUser = optionalUser.get();
@@ -165,7 +164,7 @@ public class UserServiceImpl implements UserService {
         if (optionalUser.isPresent()) {
             return optionalUser.get();
         } else {
-            throw new ResourceNotFoundException("User not found with id: " + userLoginDTO.getEmail());
+            return null;
         }
     }
 

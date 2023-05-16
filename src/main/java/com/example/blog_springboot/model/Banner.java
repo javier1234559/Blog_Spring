@@ -19,7 +19,11 @@ public class Banner {
     @Column(nullable = false)
     private String subtitle;
 
+    @Column(nullable = false)
+    private String category;
+
     @Lob
-    private byte[] image;
+    @Column(columnDefinition = "TEXT")
+    private String imageurl;
 
 }

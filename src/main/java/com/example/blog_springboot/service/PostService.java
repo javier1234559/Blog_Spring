@@ -9,6 +9,9 @@ import java.security.Principal;
 import java.util.List;
 
 public interface PostService {
+    int getPostCount();
+    int getViewCount();
+    int getPendingPostCount();
     List<Post> getAllPosts();
     List<PostDetailDTO> getAllPostDetailDTOByStatus(String status) ;
     List<PostSearchDTO> getAllPostSearchDTO();

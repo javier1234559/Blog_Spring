@@ -241,8 +241,8 @@ const handleCreateComment = (event) => {
     });
 };
 
-const handleUpdateInfoUserSetting = () => {
-
+const handleUpdateInfoUserSetting = (event) => {
+  event.preventDefault();
   const inputList = [
     {
       id: 'iduser',

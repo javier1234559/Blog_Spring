@@ -2,6 +2,7 @@ package com.example.blog_springboot.service.impl;
 
 import com.example.blog_springboot.dto.CommentDTO;
 import com.example.blog_springboot.model.Comment;
+import com.example.blog_springboot.model.Post;
 import com.example.blog_springboot.model.User;
 import com.example.blog_springboot.repository.CommentRepository;
 import com.example.blog_springboot.repository.PostRepository;
@@ -86,6 +87,16 @@ public class CommentServiceImpl implements CommentService {
         } catch (DataIntegrityViolationException ex) {
             throw new RuntimeException("Error creating comment", ex);
         }
+    }
+
+    @Override
+    public int getCommentCount() {
+        List<Post> posts = postRepository.findAll();
+        int totalComments = 0;
+        for (Post post : posts) {
+            totalComments += post.getComments().size();
+        }
+        return totalComments;
     }
 
 

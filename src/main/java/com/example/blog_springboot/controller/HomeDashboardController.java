@@ -1,9 +1,11 @@
 package com.example.blog_springboot.controller;
 
 import com.example.blog_springboot.dto.PostDetailDTO;
+import com.example.blog_springboot.dto.StatisticDTO;
 import com.example.blog_springboot.dto.UserDTO;
 import com.example.blog_springboot.model.Post;
 import com.example.blog_springboot.model.User;
+import com.example.blog_springboot.service.CommentService;
 import com.example.blog_springboot.service.PostService;
 import com.example.blog_springboot.service.TopPostService;
 import com.example.blog_springboot.service.UserService;
@@ -30,6 +32,9 @@ public class HomeDashboardController {
     private TopPostService topPostService;
 
     @Autowired
+    private CommentService commentService;
+
+    @Autowired
     private UserService userService ;
 
     @GetMapping("/error")
@@ -38,15 +43,29 @@ public class HomeDashboardController {
     }
 
     @GetMapping({"","/"})
-    public String HomeDashboard() {
+    public String HomeDashboard(Model model) {
         //GetBanner
+
         //GetTopPost
+        List<PostDetailDTO> listPost = postService.getAllPostDetailDTO();
+        List<PostDetailDTO> listTopPost = topPostService.getAllTopPostsDTO();
+        model.addAttribute("listPost", listPost);
+        model.addAttribute("listTopPost", listTopPost);
+
         //- CRUD o ben controlerr rieng
         return "dashboard/index";
     }
 
     @GetMapping("/accoundashboard")
     public String AccountDashboard(Model model) {
+        //GetStatistic
+        StatisticDTO statistic = new StatisticDTO();
+        statistic.setPostCount(postService.getPostCount());
+        statistic.setViewCount(postService.getViewCount());
+        statistic.setCommentCount(commentService.getCommentCount());
+        statistic.setPendingPostCount(postService.getPendingPostCount());
+        model.addAttribute("statistic", statistic);
+
         //GetAllUserAccount
         List<UserDTO> listUserDTO = userService.getAllUsers();
         model.addAttribute("listUserDTO", listUserDTO);

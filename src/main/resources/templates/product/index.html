@@ -7,7 +7,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Clean Blog</title>
-    <link rel="icon" type="image/x-icon" href="/static/product/assets/favicon.ico" />
+    <link rel="icon" type="image/x-icon" th:href="@{/product/assets/img/BlogLogo.png}" />
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
@@ -76,7 +76,7 @@
                 </div>
               </a>
             </div>
-            <div class="col">
+            <!-- <div class="col">
               <div class="card card-rounded-custom" style="width: 20rem">
                 <div class="card-img-custom">
                   <span class="ps-4 car-img-view-custom">
@@ -94,7 +94,7 @@
                   <p class="card-text-custom text-secondary-emphasis">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
         <!-- Post Category-->
@@ -108,17 +108,16 @@
                     <img  alt="Picture Top Post" th:src="${@environment.getProperty('SERVER_PATH')} + '/uploaded/' + ${post.getImageurl()}"/>
                   </div>
                   <div class="category-setting-item-content">
-                    <p class="category-setting-item-content-heading" th:text="${post.getTitle()}">titke</p>
+                    <p class="category-setting-item-content-heading" th:text="${post.getTitle()}"></p>
                     <p class="category-setting-ttem-content-content" >
                       <div class="htmlparse" style="display:contents" th:utext="${post.getContent()}">
-                        <h1>Hello World</h1>
                       </div>
                     </p>
                   </div>
                 </div>
               </a>
             </div>
-            <a class="dropdown-item p-0" href="#">
+            <!-- <a class="dropdown-item p-0" href="#">
               <div class="d-flex category-setting-item">
                 <div class="category-setting-item-image">
                   <img src="http://127.0.0.1:5501/static/product/assets/img/home-bg.jpg" alt="User Profile Picture" />
@@ -128,7 +127,7 @@
                   <p class="category-setting-ttem-content-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur nam doloremque dignissimos qui autem nobis laudantium consequuntur iste explicabo veritatis, fuga mollitia nemo? Ad, ea iste accusantium voluptate beatae excepturi! Eius numquam praesentium, modi quae molestias quisquam amet omnis facilis accusamus harum minus repellat ducimus dolorem a perspiciatis ea. Illo at quia beatae aliquam et ipsam, officiis eaque sunt quasi!</p>
                 </div>
               </div>
-            </a>
+            </a> -->
           </div>
         </div>
       </div>

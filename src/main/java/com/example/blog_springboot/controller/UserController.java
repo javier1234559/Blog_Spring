@@ -65,11 +65,11 @@ public class UserController {
     public ResponseEntity<User> getUserById(@PathVariable int id) {
         return ResponseEntity.ok(userService.getUserById(id));
     }
-    @PostMapping("/login")
-    public ResponseEntity<User> LoginUser(@ModelAttribute UserLoginDTO userdto) {
-        User loginuser = userService.getUserByEmailAndPassword(userdto);
-        return ResponseEntity.ok(loginuser);
-    }
+//    @PostMapping("/login")
+////    public ResponseEntity<User> LoginUser(@ModelAttribute UserLoginDTO userdto) {
+////        User loginuser = userService.getUserByEmailAndPassword(userdto);
+////        return ResponseEntity.ok(loginuser);
+////    }
 
     @PostMapping("/register")
     public ResponseEntity<User> createUserRegister(@ModelAttribute UserRegisterDTO userdto) {

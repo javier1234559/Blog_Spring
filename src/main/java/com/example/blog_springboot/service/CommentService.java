@@ -10,7 +10,5 @@ public interface CommentService {
     List<Object> getAllComment();
     List<Object> getAllCommentByPost(int id);
     CommentDTO createComment(CommentDTO comments , Authentication authentication);
-//    Comment updateComment(int id, Comment comments);
-//    void deleteComment(int id);
-//    Comment getCommentById(int id);
+    int getCommentCount();
 }
