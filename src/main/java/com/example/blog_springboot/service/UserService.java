@@ -9,6 +9,7 @@ import com.example.blog_springboot.model.User;
 import java.util.List;
 
 public interface UserService {
+    User createUserDashBoard(User user);
 
     String resetPassword(String email , String pass);
     User createUserRegister(UserRegisterDTO userRegisterDTO);
@@ -17,5 +18,5 @@ public interface UserService {
     User getUserById(int id);
     UserDTO getUserByEmail(String email);
     User getUserByEmailAndPassword(UserLoginDTO userLoginDTO);
-    List<User> getAllUsers();
+    List<UserDTO> getAllUsers();
 }

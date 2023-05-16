@@ -8,6 +8,7 @@ import com.example.blog_springboot.service.EmailService;
 import com.example.blog_springboot.service.PostService;
 import com.example.blog_springboot.service.TopPostService;
 import com.example.blog_springboot.service.UserService;
+import com.example.blog_springboot.ultilies.Constant;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -47,14 +48,14 @@ public class HomeProductController {
             if (authentication.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"))) {
                 return "redirect:/admin";
             } else {
-                List<PostDetailDTO> listPost = postService.getAllPostDetailDTO();
+                List<PostDetailDTO> listPost = postService.getAllPostDetailDTOByStatus(Constant.STATUS_POST_ACCEPTED);
                 List<PostDetailDTO> listTopPost = topPostService.getAllTopPostsDTO();
                 model.addAttribute("listPost", listPost);
                 model.addAttribute("listTopPost", listTopPost);
                 return "product/index";
             }
         } else {
-            List<PostDetailDTO> listPost = postService.getAllPostDetailDTO();
+            List<PostDetailDTO> listPost = postService.getAllPostDetailDTOByStatus(Constant.STATUS_POST_ACCEPTED);
             List<PostDetailDTO> listTopPost = topPostService.getAllTopPostsDTO();
             model.addAttribute("listPost", listPost);
             model.addAttribute("listTopPost", listTopPost);
@@ -95,10 +96,10 @@ public class HomeProductController {
         return "/product/register";
     }
 
-//    @GetMapping("/forgotpass")
-//    public String getForgotPass( ){
-//        return "/product/forgotpass";
-//    }
+    @GetMapping("/forgotpass")
+    public String getForgotPass( ){
+        return "/product/forgotpass";
+    }
 
     @GetMapping("/forgotpass/{email}")
     public String SendEmailCode(@PathVariable("email") String email,HttpSession session){
@@ -107,7 +108,6 @@ public class HomeProductController {
         session.setAttribute("code", code);
         return "/product/forgotpass";
     }
-
 
     @GetMapping("/updatepost")
     public String getPostSetting(Model model,Principal principal){
@@ -119,7 +119,6 @@ public class HomeProductController {
 
     @GetMapping("/usersetting")
     public String getUserSetting(Model model , Principal principal){
-        System.out.println(principal.getName());
         UserDTO currentUser = userService.getUserByEmail(principal.getName());
         model.addAttribute("currentUser", currentUser);
         return "/product/usersetting";
@@ -134,6 +133,9 @@ public class HomeProductController {
             model.addAttribute("post", post);
             model.addAttribute("listTopPost", listTopPost);
 
+            //IncreateView
+            postService.increaseView(post.getIdpost());
+
             // Add a boolean variable to the model that represents whether the user is authenticated or not
             boolean isAuthenticated = authentication != null && authentication.isAuthenticated();
             model.addAttribute("isAuthenticated", isAuthenticated);
@@ -143,10 +145,15 @@ public class HomeProductController {
         }
     }
 
+//    @PostMapping ("/updatepost")
+//    public String createPost(@ModelAttribute PostCreateDTO postdto , Principal principal) throws IOException {
+//        postService.createPostDTO(postdto , principal);
+//        return "redirect:/";
+//    }
     @PostMapping ("/createnewpost")
     public String createPost(@ModelAttribute PostCreateDTO postdto , Principal principal) throws IOException {
         postService.createPostDTO(postdto , principal);
-        return "redirect:/";
+        return "redirect:/updatepost";
     }
 
     @GetMapping("/editposts/{id}")
@@ -155,25 +162,6 @@ public class HomeProductController {
         model.addAttribute("updatepost", updatepost);
         return "/product/savepost";
     }
-
-
-
-
-
-//    @PostMapping ("/login")
-//    public String Login(@ModelAttribute UserLoginDTO userdto , HttpSession session ) throws IOException {
-//        System.out.print(userdto);
-//        User loginuser = userService.getUserByEmailAndPassword(userdto);
-//        if (loginuser == null) {
-//            return "redirect:/login";
-//        } else {
-//            session.setAttribute("user", loginuser); // add user to session
-//            return "redirect:/";
-//        }
-//    }
-
-
-
 
 
 }

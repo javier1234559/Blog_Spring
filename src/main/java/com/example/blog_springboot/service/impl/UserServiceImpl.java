@@ -25,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -45,6 +46,21 @@ public class UserServiceImpl implements UserService {
     @Value("${default.user.icon.url}")
     private String defaultUserIconUrl;
 
+
+    @Override
+    public User createUserDashBoard(User user) {
+        String email = user.getEmail();
+        Optional<User> existingUser = userRepository.findByEmail(email);
+        if (existingUser.isPresent()) {
+            throw new IllegalArgumentException("Email already exists");
+        }
+
+        user.setPass(passwordEncoder.encode(user.getPass()));
+
+        return userRepository.save(user);
+    }
+
+
     private boolean hasAdminRole() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return authentication.getAuthorities().stream()
@@ -52,8 +68,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public List<UserDTO> getAllUsers() {
+        List<User> list = userRepository.findAll();
+        List<UserDTO> dtoList = list.stream()
+                .map(post -> mapper.map(post, UserDTO.class))
+                .collect(Collectors.toList());
+       return dtoList ;
     }
 
     public UserDTO getUserByEmail(String email) {
@@ -62,7 +82,7 @@ public class UserServiceImpl implements UserService {
             UserDTO userDTO  =  mapper.map(optionalUser.get(),UserDTO.class);
             return userDTO;
         } else {
-            throw new ResourceNotFoundException("User not found with id: " + email);
+            return  null ;
         }
     }
 

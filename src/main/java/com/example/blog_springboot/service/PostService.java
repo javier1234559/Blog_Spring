@@ -10,12 +10,14 @@ import java.util.List;
 
 public interface PostService {
     List<Post> getAllPosts();
+    List<PostDetailDTO> getAllPostDetailDTOByStatus(String status) ;
     List<PostSearchDTO> getAllPostSearchDTO();
     List<PostDetailDTO> getAllPostDetailDTO();
     List<PostDetailDTO> getPostByEmailUser(String email);
     PostDetailDTO getPostById(int id);
-    Post createPost(Post post);
+    void increaseView(int idpost);
     Post createPostDTO(PostCreateDTO post , Principal principal);
     Object updatePost(int id, PostCreateDTO postDTO);
     String deletePost(int id);
+    void changeStatus(int idpost, String status);
 }

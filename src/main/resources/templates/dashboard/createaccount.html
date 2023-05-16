@@ -32,7 +32,8 @@
           <div class="form-usersetting-dashboard">
             <div class="row">
               <div class="col-md-4">
-                <div class=" form-image-usersetting" id="imageurl" th:style="'background-image: url(' + ${@environment.getProperty('SERVER_PATH')} + '/uploaded/' + ${updateUser.getImageurl()}  +')'">
+                <!-- <img src="https://via.placeholder.com/150" alt="placeholder image" /> -->
+                <div class=" form-image-usersetting" id="imageurl" style="background-image: url('https://images.immediate.co.uk/production/volatile/sites/30/2020/08/flat-white-3402c4f.jpg')">
                   <label for="imagefile">
                     <!-- <i class="bi bi-pencil-square"></i> -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16" style="color:#fff">
@@ -45,11 +46,11 @@
                 <p class="pt-4">Choose Role:</p>
                 <div id="roleGroup" class="form-group d-flex justify-content-around " >
                   <div class="form-check">
-                    <input th:checked="${updateUser.getRole() == 'ROLE_ADMIN' }" class="form-check-input" type="radio" name="role-input" id="roleAdmin" value="ROLE_ADMIN" />
+                    <input class="form-check-input" type="radio" name="role-input" id="roleAdmin" value="ROLE_ADMIN" />
                     <label class="form-check-label" for="roleAdmin">Admin</label>
                   </div>
                   <div class="form-check">
-                    <input th:checked="${updateUser.getRole() == 'ROLE_USER' }" class="form-check-input" type="radio" name="role-input" id="rolesUser" value="ROLE_USER" />
+                    <input class="form-check-input" type="radio" name="role-input" id="rolesUser" value="ROLE_USER"  checked/>
                     <label class="form-check-label" for="rolesUser">User</label>
                   </div>
                 </div>
@@ -58,23 +59,22 @@
               <div class="col-md-8">
                 <div class="row">
                   <div class="col-md-6">
-                    <input type="hidden" name="id" id="iduser" th:value="${updateUser.getIduser()} " />
                     <div class="mb-3">
                       <label for="username" class="form-label">Username:</label>
-                      <input th:value="${updateUser.getName()}"  type="text" class="form-control" id="name" placeholder="Enter Username" />
+                      <input type="text" class="form-control" id="name" placeholder="Enter Username" />
                     </div>
                     <div class="mb-3">
                       <label for="password" class="form-label">Password:</label>
-                      <input disabled th:value="${updateUser.getPass()}"  type="text" class="form-control" id="pass" placeholder="Enter Password" />
+                      <input type="password" class="form-control" id="pass" placeholder="Enter Password" />
                     </div>
                     <p class="pt-5">Choose status:</p>
-                <div id="statusGroup" class="form-group d-flex justify-content-around"  >
+                <div id="statusGroup" class="form-group d-flex justify-content-around" >
                   <div class="form-check">
-                    <input th:checked="${updateUser.getStatus() == 1 }" class="form-check-input" type="radio" name="status-input" id="active" value="1" />
-                    <label class="form-check-label" for="active">Active</label>
+                    <input class="form-check-input" type="radio" name="status" id="active" value="0" />
+                    <label class="form-check-label" for="active">Acitve</label>
                   </div>
                   <div class="form-check">
-                    <input th:checked="${updateUser.getStatus() == 0 }" class="form-check-input" type="radio" name="status-input" id="disable" value="0" />
+                    <input class="form-check-input" type="radio" name="status" id="disable" value="1" checked/>
                     <label class="form-check-label" for="disable">Disable</label>
                   </div>
                 </div>
@@ -82,19 +82,19 @@
                   <div class="col-md-6">
                     <div class="mb-3">
                       <label for="email" class="form-label">Email:</label>
-                      <input th:value="${updateUser.getEmail()}"  type="email" class="form-control" id="email" placeholder="Enter email" />
+                      <input type="email" class="form-control" id="email" placeholder="Enter email" />
                     </div>
                     <div class="mb-3">
                       <label for="phone" class="form-label">Phone:</label>
-                      <input th:value="${updateUser.getPhone()}"  type="number" class="form-control" id="phone" placeholder="Enter phone" />
+                      <input type="number" class="form-control" id="phone" placeholder="Enter phone" />
                     </div>
                     <div class="mb-3">
                       <label for="description" class="form-label">Description:</label>
-                      <input th:value="${updateUser.getDescription()}"  type="text" class="form-control" id="description" placeholder="Enter description" />
+                      <input type="text" class="form-control" id="description" placeholder="Enter description" />
                     </div>
                   </div>
                   <div class="col-md-12 text-right">
-                    <button type="submit" class="btn btn-primary" id="submit-btn" >Submit</button>
+                    <button type="submit" id="submit-btn" class="btn btn-primary">Submit</button>
                   </div>
                 </div>
               </div>
@@ -119,9 +119,8 @@
     <script src="/static/dashboard/js/sb-admin-2.min.js" th:href="@{/dashboard/js/sb-admin-2.min.js}"></script>
     <script src="/static/dashboard/js/custom.js" th:src="@{/dashboard/js/custom.js}"></script>
     <script>
-      document.getElementById('submit-btn').addEventListener('click', handleUpdateAccount);
+      document.getElementById('submit-btn').addEventListener('click', handleCreateAccount);
       previewImage('imageurl', 'imagefile');
     </script>
-
   </body>
 </html>

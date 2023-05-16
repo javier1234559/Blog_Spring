@@ -85,13 +85,40 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Post createPost(Post post) {
-        try {
-            return postRepository.save(post);
-        } catch (DataIntegrityViolationException ex) {
-            throw new RuntimeException("Error creating post", ex);
+    public List<PostDetailDTO> getAllPostDetailDTOByStatus(String status) {
+        List<Post> list = postRepository.findByStatus(status);
+        List<PostDetailDTO> dtoList = list.stream()
+                .map(post -> {
+                    PostDetailDTO postDetailDTO = mapper.map(post, PostDetailDTO.class);
+                    int listCommentToCount = commentRepository.getCommentQuantityByPost(post.getIdpost()) ;
+                    postDetailDTO.setCommentQuantity(listCommentToCount);
+                    return  postDetailDTO ;
+                })
+                .collect(Collectors.toList());
+        return dtoList;
+    }
+
+
+    @Override
+    public void changeStatus(int idpost, String status) {
+        Optional<Post> optionalPost = postRepository.findById(idpost);
+        if (optionalPost.isPresent()) {
+            Post post = optionalPost.get();
+            post.setStatus(status);
+            postRepository.save(post);
+        } else {
+            throw new IllegalArgumentException("Invalid post ID: " + idpost);
         }
     }
+
+//    @Override
+//    public Post createPost(Post post) {
+//        try {
+//            return postRepository.save(post);
+//        } catch (DataIntegrityViolationException ex) {
+//            throw new RuntimeException("Error creating post", ex);
+//        }
+//    }
 
     @Override
     public Post createPostDTO (PostCreateDTO postcreatedto, Principal principal){
@@ -161,6 +188,17 @@ public class PostServiceImpl implements PostService {
             return entityDTO;
         } else {
             throw new ResourceNotFoundException(Constant.NOT_FOUND_WITH_ID + id);
+        }
+    }
+
+    @Override
+    public void increaseView(int idpost) {
+        Optional<Post> optionalPost = postRepository.findById(idpost);
+        if (optionalPost.isPresent()){
+            Post post = optionalPost.get();
+            int increaseView = post.getView() + 1 ;
+            post.setView(increaseView);
+            postRepository.save(post);
         }
     }
 

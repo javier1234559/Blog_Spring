@@ -50,13 +50,15 @@ public class PostController {
             @RequestParam("title") String title,
             @RequestParam("category") String category,
             @RequestParam("content") String content,
-            @RequestPart("imagefile") MultipartFile imagefile
+            @RequestPart(value = "imagefile", required = false) MultipartFile imagefile
     ) {
         PostCreateDTO postdto = new PostCreateDTO();
         postdto.setTitle(title);
         postdto.setCategory(category);
         postdto.setContent(content);
-        postdto.setData(imagefile);
+        if (imagefile != null) {
+            postdto.setData(imagefile);
+        }
 
         postService.updatePost(id, postdto);
 

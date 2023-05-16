@@ -10,6 +10,5 @@ public interface TopPostService {
     void updateTopPost(TopPost topPost);
     void deleteTopPost(int id);
     List<TopPost> getAllTopPosts();
-
     List<PostDetailDTO> getAllTopPostsDTO();
 }

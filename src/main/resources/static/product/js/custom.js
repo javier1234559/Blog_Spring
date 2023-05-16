@@ -303,7 +303,8 @@ const handleUpdatePost = (id) => {
     });
 };
 
-const handleDeletePost = () => {
+const handleDeletePost = (e) => {
+  e.preventDefault();
   const id = document.getElementById('idpost').value;
 
   console.log(id);

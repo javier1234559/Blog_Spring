@@ -12,4 +12,8 @@ import java.util.List;
 public interface PostRepository extends JpaRepository<Post,Integer> {
     @Query("SELECT p FROM Post p WHERE p.user.email = :email")
     List<Post> findPostsByUserEmail(@Param("email") String email);
+
+    @Query("SELECT p FROM Post p WHERE p.status = :status")
+    List<Post> findByStatus(@Param("status") String status);
+
 }

@@ -7,13 +7,22 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <title>SB Admin 2 - Tables</title>
+    <title>Dashboard</title>
+     <!-- Custom fonts for this template-->
+     <link th:href="@{/dashboard/vendor/fontawesome-free/css/all.min.css}" href="/static/dashboard/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
+     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+     <!-- Custom styles for this template-->
+     <link rel="stylesheet" href="/static/dashboard/css/sb-admin-2.min.css" th:href="@{/dashboard/css/sb-admin-2.min.css}" />
+     <link rel="stylesheet" href="/static/dashboard/css/custom.css" th:href="@{/dashboard/css/custom.css}" />
+     <!-- Include the required DataTables.net CSS and JS files -->
+     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4-4.6.0/jq-3.6.0/dt-1.11.2/datatables.min.css" />
+     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4-4.6.0/jq-3.6.0/dt-1.11.2/datatables.min.js"></script>
     <!-- Custom fonts for this template -->
-    <link th:href="@{/dashboard/vendor/fontawesome-free/css/all.min.css}" href="/static/dashboard/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
+    <!-- <link th:href="@{/dashboard/vendor/fontawesome-free/css/all.min.css}" href="/static/dashboard/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
     <link rel="stylesheet" href="/static/dashboard/css/sb-admin-2.min.css" th:href="@{/dashboard/css/sb-admin-2.min.css}" />
     <link href="/static/dashboard/vendor/datatables/dataTables.bootstrap4.min.css" th:href="@{/dashboard/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet" />
-    <link rel="stylesheet" href="/static/dashboard/css/custom.css" th:href="@{/dashboard/css/custom.css}" />
+    <link rel="stylesheet" href="/static/dashboard/css/custom.css" th:href="@{/dashboard/css/custom.css}" /> -->
   </head>
 
   <body id="page-top">
@@ -58,18 +67,26 @@
                         <th>Accept</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody th:each="post: ${listPostDetailDTO}">
                       <tr>
-                        <td>1</td>
-                        <td style="width:120px;">
-                          <div class="post-image-setting">
-                          <img src="https://images.unsplash.com/photo-1681933859581-55594c9a09a0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60" alt="">
-                        </div></td>
-                        <td>System Architect</td>
-                        <td>2</td>
-                        <td>61</td>
-                        <td>2011-04-25</td>
-                        <td><button class="btn btn-outline-success px-3" type="submit">Accept</button></td>
+                        <td th:text="${post.getIdpost()}" ></td>
+                        <td  style="width:120px;cursor: pointer">
+                          <a th:href="@{/posts/{id}(id=${post.getIdpost()})}">
+                            <div class="post-image-setting">
+                              <img th:src="${@environment.getProperty('SERVER_PATH')} + '/uploaded/' + ${post.getImageurl()}" alt="">
+                            </div>
+                          </a>
+                        </td>
+                        <td th:text="${post.getTitle()}" ></td>
+                        <td th:text="${post.getCommentQuantity()}"></td>
+                        <td th:text="${post.getView()}" ></td>
+                        <td th:text="${post.getDate()}"></td>
+                        <td>
+                          <a th:href="@{posts/action/{idpost}/{status}(idpost=${post.getIdpost()}, status='Accepted')}">
+                            <button class="btn btn-outline-success px-3">Accept</button>
+                          </a>
+                        </td>
+<!--                        <td><button class="btn btn-outline-success px-3" type="submit">Accept</button></td>-->
                       </tr>
                     </tbody>
                   </table>
@@ -89,19 +106,28 @@
     <!-- Modal -->
     <div th:replace="dashboard/fragment :: modal"></div>
     <nav id="modal"></nav>
+      <!-- Bootstrap core JavaScript-->
+  <script src="/static/dashboard/vendor/jquery/jquery.min.js" th:href="@{/dashboard/vendor/jquery/jquery.min.js}"></script>
+  <script src="/static/dashboard/vendor/bootstrap/js/bootstrap.bundle.min.js" th:href="@{/dashboard/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="/static/dashboard/vendor/jquery-easing/jquery.easing.min.js" th:href="@{/dashboard/vendor/jquery-easing/jquery.easing.min.js}"></script>
+  <!-- Custom scripts for all pages-->
+  <script src="/static/dashboard/js/sb-admin-2.min.js" th:href="@{/dashboard/js/sb-admin-2.min.js}"></script>
+  <script src="/static/dashboard/js/custom.js" th:src="@{/dashboard/js/custom.js}"></script>
+  <link rel="stylesheet" href="/static/dashboard/css/custom2.css" th:href="@{/dashboard/css/custom2.css}" />
 
-    <script src="/static/dashboard/vendor/jquery/jquery.min.js" th:href="@{/dashboard/vendor/jquery/jquery.min.js}"></script>
+   <!-- <script src="/static/dashboard/vendor/jquery/jquery.min.js" th:href="@{/dashboard/vendor/jquery/jquery.min.js}"></script>
     <script src="/static/dashboard/vendor/bootstrap/js/bootstrap.bundle.min.js" th:href="@{/dashboard/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
-    <!-- Core plugin JavaScript-->
+   
     <script src="/static/dashboard/vendor/jquery-easing/jquery.easing.min.js" th:href="@{/dashboard/vendor/jquery-easing/jquery.easing.min.js}"></script>
 
-    <!-- Page level plugins -->
     <script src="/static/dashboard/vendor/datatables/jquery.dataTables.min.js" th:href="@{/dashboard/vendor/datatables/jquery.dataTables.min.js}"></script>
     <script src="/static/dashboard/vendor/datatables/dataTables.bootstrap4.min.js" th:href="@{/dashboard/vendor/datatables/dataTables.bootstrap4.min.js}"></script>
-    <!-- Page level custom scripts -->
+
     <script src="/static/dashboard/js/demo/datatables-demo.js" th:href="@{/dashboard/js/demo/datatables-demo.js}"></script>
-    <!-- Custom scripts for all pages-->
+
     <script src="/static/dashboard/js/sb-admin-2.min.js" th:href="@{/dashboard/js/sb-admin-2.min.js}"></script>
     <script src="/static/dashboard/js/custom.js" th:src="@{/dashboard/js/custom.js}"></script>
+    <link rel="stylesheet" href="/static/dashboard/css/custom2.css" th:href="@{/dashboard/css/custom2.css}" />  -->
   </body>
 </html>
