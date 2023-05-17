@@ -1,6 +1,7 @@
 package com.example.blog_springboot.service.impl;
 
 import com.example.blog_springboot.dto.CommentDTO;
+import com.example.blog_springboot.dto.NotificationDTO;
 import com.example.blog_springboot.model.Comment;
 import com.example.blog_springboot.model.Post;
 import com.example.blog_springboot.model.User;
@@ -67,6 +68,15 @@ public class CommentServiceImpl implements CommentService {
                 })
                 .collect(Collectors.toList());
         return resultList;
+    }
+
+    @Override
+    public List<NotificationDTO>  getAllCommentByUserEmail(String email) {
+        Optional<User> user = userRepository.getUserByEmail(email);
+        if(!user.isPresent()){
+            return null;
+        }
+      return  commentRepository.findAllCommentByUserEmail(email);
     }
 
 

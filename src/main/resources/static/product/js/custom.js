@@ -411,6 +411,55 @@ const handleDisplayBannerProduct = (category) => {
     });
 };
 
+const handleDisplayCommentNotification = (category) => {
+  let listData = null
+
+  $(document).ready(function () {
+    apiFacade
+    .get(`/api/post/comments/allcommentByUser`)
+    .then((data) => {
+      console.log(data);
+      listData = data;
+      const container = document.querySelector('#notificationAjaxContainer');
+      container.innerHTML = '';
+      // listData.reverse();
+      listData.forEach((noti) => {
+        const html = `
+        <li class="g-5">
+        <a class="dropdown-item p-0" href="/posts/${noti.idpost}">
+          <div class="d-flex comment-item">
+            <div class="comment-item-image"  >
+              <img src="${SERVER_URL}/uploaded/${noti.imageurl}" alt="User Profile Picture" style="object-fit:cover;"/>
+            </div>
+            <div class="comment-item-content">
+              <p class="comment-item-content-heading">${noti.name}</p>
+              <p class="comment-ttem-content-content">${noti.content}</p>
+            </div>
+          </div>
+        </a>
+      </li>
+        `;
+
+        container.innerHTML += html;
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+      const container = document.querySelector('#notificationAjaxContainer');
+      container.innerHTML = '';
+        const html = `
+        <li class="g-5">
+          <div class="d-flex comment-item" style="font-style: normal;">
+            Nothing to show here !
+          </div>
+        </li>`;
+        container.innerHTML = html;
+    });
+  });
+  
+};
+
+
 //--------------------Function custom for display--------------------
 
 function changeTitleCreatePost() {
@@ -513,6 +562,14 @@ function handleParseHTMLPost() {
   }
 }
 
+function hideSpinner() {
+  var spinnerElement = document.getElementById("spinner");
+  spinnerElement.classList.add("hide");
+  setTimeout(function() {
+      spinnerElement.style.display = "none";
+  }, 1000);
+}
+
 //------------------Function when document is ready--------------------------------
 $(document).ready(function () {
   function fragment() {
@@ -548,6 +605,8 @@ $(document).ready(function () {
 
   fragment();
 
+  hideSpinner();
+
   $('#example').DataTable({
     // Add search functionality
     searching: true,
@@ -562,6 +621,7 @@ $(document).ready(function () {
   });
 });
 //------------------------ Function Global Invoke ----------------------
+
 handleParseHTMLPost();
 handleParseHTMLTopPost();
 handleDisplayImageUser();

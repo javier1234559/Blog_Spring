@@ -48,28 +48,15 @@
         </div>
         <div class="nav-item dropdown text-light no-arrow">
           <i class="dropdown position-relative">
-            <i class="bi bi-bell-fill dropdown-toggle position-relative fs-3" data-bs-toggle="dropdown" id="notification-dropdown">
+            <i class="bi bi-bell-fill dropdown-toggle position-relative fs-3" data-bs-toggle="dropdown" id="notification-dropdown" onclick="handleDisplayCommentNotification()">
               <span class="position-absolute translate-middle badge border border-light rounded-circle p-1 mt-n2" style="top: 24%; left: calc(100% - 10px); background-color: #f1b45f"><span class="visually-hidden">unread messages</span></span>
             </i>
-            <ul class="dropdown-menu position-absolute show-block scaleIn notifaction-menu-custom list-unstyled" aria-labelledby="notification-dropdown">
+            <ul class="dropdown-menu position-absolute show-block scaleIn notifaction-menu-custom list-unstyled" aria-labelledby="notification-dropdown" id="notificationAjaxContainer">
               <li class="g-5">
                 <a class="dropdown-item p-0" href="#">
                   <div class="d-flex comment-item">
                     <div class="comment-item-image">
                       <img src="https://cdn.vectorstock.com/i/preview-1x/65/30/default-image-icon-missing-picture-page-vector-40546530.jpg" alt="User Profile Picture" />
-                    </div>
-                    <div class="comment-item-content">
-                      <p class="comment-item-content-heading">John Doe</p>
-                      <p class="comment-ttem-content-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur nam doloremque dignissimos qui autem nobis laudantium consequuntur iste explicabo veritatis, fuga mollitia nemo? Ad, ea iste accusantium voluptate beatae excepturi! Eius numquam praesentium, modi quae molestias quisquam amet omnis facilis accusamus harum minus repellat ducimus dolorem a perspiciatis ea. Illo at quia beatae aliquam et ipsam, officiis eaque sunt quasi!</p>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li class="g-5">
-                <a class="dropdown-item p-0" href="#">
-                  <div class="d-flex comment-item">
-                    <div class="comment-item-image">
-                      <img src="http://127.0.0.1:5501/static/product/assets/img/home-bg.jpg" alt="User Profile Picture" />
                     </div>
                     <div class="comment-item-content">
                       <p class="comment-item-content-heading">John Doe</p>

@@ -23,6 +23,12 @@
     <!-- Jquery - Js  -->
   </head>
   <body>
+    <div class="spinner" id="spinner">
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+    </div>
+
     <!-- Navigation-->
     <div th:replace="product/fragment :: nav"></div>
    <nav id="nav"></nav>
@@ -41,11 +47,11 @@
     </header>
     <!-- Main Content-->
     <div class="container px-4 px-lg-5">
-      <div class="row gx-4 gx-lg-5">
+      <div class="row gx-4 gx-lg-5 d-flex justify-content-center align-center flex-wrap-reverse">
         <!-- Cards -->
-        <div class="col-md-8 col-12 row">
+        <div class="col-md-8 col-sm-12  row">
           <div class="row g-1 g-2 gy-4" th:if="${listPost != null }">
-            <div class="col" th:each="post: ${listPost}">
+            <div class="col d-flex justify-content-center justify-content-md-start" th:each="post: ${listPost}" >
               <a th:href="@{/posts/} + ${post.getIdpost()}">
                 <!-- th:href="@{/post(id=${post.getIdpost()})}" -->
                 <div class="card card-rounded-custom" style="width: 20rem">
@@ -98,7 +104,7 @@
           </div>
         </div>
         <!-- Post Category-->
-        <div class="col-md-4 col-12">
+        <div class="col-md-4 col-sm-12">
           <div class="border bg-blue top-post mb-5 p-4 post-category-custom post-category-items-custom">
             <p class="text-center">Top Post</p>
             <div th:each="post: ${listTopPost}">

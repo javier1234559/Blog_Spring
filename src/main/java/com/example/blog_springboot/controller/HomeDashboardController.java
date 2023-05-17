@@ -37,14 +37,9 @@ public class HomeDashboardController {
     @Autowired
     private UserService userService ;
 
-    @GetMapping("/error")
-    public String ErrorDashboard() {
-        return "dashboard/404";
-    }
-
     @GetMapping({"","/"})
     public String HomeDashboard(Model model) {
-        //GetBanner
+        //GetBanner - Already handle in js file
 
         //GetTopPost
         List<PostDetailDTO> listPost = postService.getAllPostDetailDTO();

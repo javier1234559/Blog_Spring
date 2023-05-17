@@ -19,6 +19,11 @@
   <script type="text/javascript" src="https://cdn.datatables.net/v/bs4-4.6.0/jq-3.6.0/dt-1.11.2/datatables.min.js"></script>
 
   <body id="page-top">
+    <div class="spinner" id="spinner">
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+    </div>
     <div th:replace="dashboard/fragment :: topbar"></div>
     <nav id="topbar"></nav>
     <div id="wrapper">
@@ -34,9 +39,9 @@
             <div class="row">
               <div class="col-md-4">
                 <div class=" form-image-usersetting" id="imageurl" th:style="'background-image: url(' + ${@environment.getProperty('SERVER_PATH')} + '/uploaded/' + ${updateUser.getImageurl()}  +')'">
-                  <label for="imagefile">
+                  <label for="imagefile" style="color:#000; cursor:pointer;">
                     <!-- <i class="bi bi-pencil-square"></i> -->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16" style="color:#fff">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16" style="color:#000000">
                       <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                       <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                     </svg>

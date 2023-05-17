@@ -24,6 +24,11 @@
     <link rel="stylesheet" href="/static/product/css/custom.css" th:href="@{/product/css/custom.css}" />
   </head>
   <body>
+    <div class="spinner" id="spinner">
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+    </div>
     <!-- Navigation-->
     <div th:replace="product/fragment :: nav"></div>
     <nav id = "nav"></nav>
@@ -42,7 +47,10 @@
             <input type="password" class="form-control" id="pass" name="pass" placeholder="Password" />
           </div>
           <div class="col-12 d-flex flex-wrap justify-content-between" >
-            <a id="forgotpass-link" class="forgotpass-link" >Forgot password ?</a>
+            <div class="row ">
+              <a id="forgotpass-link" class="forgotpass-link" >Forgot password ?</a>
+              <a href="/register" class="forgotpass-link" >Register</a>
+            </div>
             <button type="submit" class="btn btn-primary " style="height:2.6rem;"  >Login</button>
           </div>
         </form>

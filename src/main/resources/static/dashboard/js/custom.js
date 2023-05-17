@@ -419,10 +419,20 @@ function previewImage(imageId, fileId) {
     image.src = url;
   });
 }
+
+function hideSpinner() {
+  var spinnerElement = document.getElementById("spinner");
+  spinnerElement.classList.add("hide");
+  setTimeout(function() {
+      spinnerElement.style.display = "none";
+  }, 1000);
+}
+
 //------------------Function when document is ready--------------------------------
 $(document).ready(function () {
   fragment();
 
+  hideSpinner();
   //Fragment in jquery
   function fragment() {
     $('#sidebar').load('/templates/dashboard/fragmentjquery/sidebar.html');

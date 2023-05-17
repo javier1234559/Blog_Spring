@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -30,6 +31,14 @@ public class CommentController {
         return ResponseEntity.ok(commentService.getAllCommentByPost(id));
     }
 
+    @GetMapping("/allcommentByUser")
+    public ResponseEntity<List<?>> getAllCommentByUser(Principal principal) {
+        if(principal == null){
+            return ResponseEntity.badRequest().build();
+        }
+
+        return ResponseEntity.ok(commentService.getAllCommentByUserEmail(principal.getName()));
+    }
 
     @PostMapping
     public ResponseEntity<?> createComment(@ModelAttribute CommentDTO comment , Authentication authentication){
