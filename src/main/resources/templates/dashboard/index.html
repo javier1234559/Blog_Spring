@@ -34,38 +34,38 @@
         <div class="container-fluid setting-dashboard-custom">
           <div class="row">
             <div class="col-md-6 setting-dashboard-custom-image">
-              <img src="https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="Your image" />
+              <img src="https://cdn.vectorstock.com/i/preview-1x/65/30/default-image-icon-missing-picture-page-vector-40546530.jpg" alt="Your image" id="imageBanner"/>
             </div>
             <div class="col-md-5 setting-dashboard-custom-form">
               <form>
                 <div class="form-group">
-                  <label for="file" class="file-label" style="cursor: pointer">
+                  <label for="imagefile" class="file-label" style="cursor: pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 16 16" fill="currentColor" class="bi bi-plus-square">
                       <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
                       <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
                     </svg>
                   </label>
-                  <input type="file" class="form-control-file" id="file" style="display: none" />
+                  <input type="file" class="form-control-file" id="imagefile" style="display: none" />
                   <div class="input-group pt-4">
                     <select class="form-select" id="category" aria-label="Example select with button addon">
                       <option selected value="HomeBanner">Home Banner</option>
-                      <option value="ContactBanner">Contact</option>
-                      <option value="AboutBanner">About</option>
+                      <option value="ContactBanner">Contact Banner</option>
+                      <option value="AboutBanner">About Banner</option>
                     </select>
                   </div>
                 </div>
                 
                 <div class="form-group">
-                  <label for="input1">Title</label>
-                  <input type="text" class="form-control" id="input1" />
+                  <label for="title">Title</label>
+                  <input type="text" class="form-control" id="title" />
                 </div>
                 <div class="form-group pb-4">
-                  <label for="input2">Description</label>
-                  <input type="text" class="form-control" id="input2" />
+                  <label for="subtitle">Subtile</label>
+                  <input type="text" class="form-control" id="subtitle" />
                 </div>
                 <div class="text-right">
-                  <button type="submit" class="btn btn-outline-warning">Update</button>
-                  <button type="submit" class="btn btn-outline-success">Publish</button>
+                  <!-- <button type="submit" class="btn btn-outline-warning">Update</button> -->
+                  <button id="btn-publish" type="submit" class="btn btn-outline-success">Publish</button>
                 </div>
               </form>
             </div>
@@ -148,5 +148,11 @@
   <script src="/static/dashboard/js/sb-admin-2.min.js" th:href="@{/dashboard/js/sb-admin-2.min.js}"></script>
   <script src="/static/dashboard/js/custom.js" th:src="@{/dashboard/js/custom.js}"></script>
   <link rel="stylesheet" href="/static/dashboard/css/custom2.css" th:href="@{/dashboard/css/custom2.css}" />
+  <script>
+    handlePublishDisplayBanner();
+    previewImage('imageBanner', 'imagefile');
+    document.getElementById('btn-publish').addEventListener('click', handlePublishBanner);
+    document.getElementById('category').addEventListener('change', handlePublishDisplayBanner);
+  </script>
 </body>
 </html>

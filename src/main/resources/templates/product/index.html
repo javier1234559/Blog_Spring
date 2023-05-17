@@ -27,13 +27,13 @@
     <div th:replace="product/fragment :: nav"></div>
    <nav id="nav"></nav>
     <!-- Page Header-->
-    <header class="masthead container hero-custom" style="background-image: url('/static/product/assets/img/home-bg.jpg')" th:style="'background-image: url(' + @{/product/assets/img/home-bg.jpg} + ')'">
+    <header id="bannerImage" class="masthead container hero-custom" style="background-image: url('/static/product/assets/img/home-bg.jpg')" th:style="'background-image: url(' + ${@environment.getProperty('SERVER_PATH')} + '/uploaded/banners/HomeBanner'+ ')'">
       <div class="container position-relative px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
           <div class="col-md-10 col-lg-8 col-xl-7">
             <div class="site-heading">
-              <h1>Clean Blog</h1>
-              <span class="subheading">A Blog Theme by Start Bootstrap</span>
+              <h1 id="title" >Clean Blog</h1>
+              <span id="subtitle" class="subheading"></span>
             </div>
           </div>
         </div>
@@ -148,4 +148,9 @@
   </body>
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="/static/product/js/custom.js" th:src="@{/product/js/custom.js}"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      handleDisplayBannerProduct('HomeBanner');
+    });
+  </script>
 </html>

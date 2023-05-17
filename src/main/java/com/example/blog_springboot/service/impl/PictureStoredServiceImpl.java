@@ -57,19 +57,6 @@ public class PictureStoredServiceImpl implements PictureStoredService {
         return randomNameImage;
     }
 
-    @Override
-    public PictureStored addPictureStored(PictureStored picture) {
-        try {
-            return pictureStoredRepository.save(picture);
-        } catch (DataIntegrityViolationException ex) {
-            throw new RuntimeException("Error insert picture", ex);
-        }
-    }
-
-    @Override
-    public PictureStored updatePictureStored(PictureStored picture) {
-        return null;
-    }
 
     @Override
     public String deletePictureStored(String id) {

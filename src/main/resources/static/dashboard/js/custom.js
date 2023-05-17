@@ -87,10 +87,23 @@ class FormDataBuilder {
 function isNullOrEmpty(inputList) {
   for (let i = 0; i < inputList.length; i++) {
     const input = inputList[i];
-    const value = document.getElementById(input.id).value;
+    const element = document.getElementById(input.id);
+    if(element === null){
+      console.log(input);
+      return false;
+    } 
 
-    if (value === null || value.trim() === '') {
-      return true;
+    console.log(element.type);
+    if (element.type === 'file') {
+      const file = element.files[0];
+      if (file === undefined) {
+        return true;
+      }
+    } else {
+      const value = element.value;
+      if (value === null || value.trim() === '') {
+        return true;
+      }
     }
   }
 
@@ -275,6 +288,74 @@ const handleAddTopPost = (event, idpost) => {
     });
 };
 
+const handlePublishBanner = (event) => {
+  event.preventDefault();
+
+  const inputList = [
+    {
+      id: 'imagefile',
+    },
+    {
+      id: 'title',
+    },
+    {
+      id: 'subtitle',
+    },
+    {
+      id: 'category',
+    }
+  ];
+
+  if (isNullOrEmpty(inputList)) {
+    alert('Please check fill all input');
+    return;
+  }
+
+  const formDataBuilder = new FormDataBuilder(inputList);
+  const formData = formDataBuilder.buildFormData();
+
+  console.log(formData);
+
+  apiFacade
+    .post(`/api/banners/uploadbanner`, formData)
+    .then((data) => {
+
+      alert('Publish Banner successfully !');
+    })
+    .catch((error) => {
+      alert('Some error of create user ');
+      console.log(error);
+    });
+
+};
+
+const handlePublishDisplayBanner = () => {
+
+  let checkcategory = document.getElementById("category").value;
+  const category = checkcategory || 'HomeBanner';
+
+  apiFacade
+    .get(`/api/banners/${category}`)
+    .then((data) => {
+      console.log(data);
+      document.getElementById('title').value = data.title;
+      document.getElementById('subtitle').value = data.subtitle;
+      document.getElementById('category').value = data.category;
+      document.getElementById('imageBanner').src = `${SERVER_URL}/uploaded/banners/${data.category}`;
+
+    })
+    .catch((error) => {
+      console.log('Error:', error);
+      document.getElementById('title').value = '';
+      document.getElementById('subtitle').value = '';
+      document.getElementById('category').value = 'HomeBanner';
+      document.getElementById('imageBanner').src = "https://cdn.vectorstock.com/i/preview-1x/65/30/default-image-icon-missing-picture-page-vector-40546530.jpg";
+
+    });
+};
+
+
+
 //--------------------Function custom for display--------------------
 function handleParseHTMLTopPost() {
   const htmlElements = document.querySelectorAll('.htmlparse');
@@ -335,6 +416,7 @@ function previewImage(imageId, fileId) {
     const url = URL.createObjectURL(file);
     console.log(url);
     image.style.backgroundImage = `url(${url})`;
+    image.src = url;
   });
 }
 //------------------Function when document is ready--------------------------------

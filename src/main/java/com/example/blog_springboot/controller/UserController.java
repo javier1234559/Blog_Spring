@@ -56,20 +56,10 @@ public class UserController {
         return ResponseEntity.ok(defaultUserIconUrl);
     }
 
-//    @GetMapping
-//    public ResponseEntity<List<User>> getAllUsers() {
-//        return ResponseEntity.ok(userService.getAllUsers());
-//    }
-
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable int id) {
         return ResponseEntity.ok(userService.getUserById(id));
     }
-//    @PostMapping("/login")
-////    public ResponseEntity<User> LoginUser(@ModelAttribute UserLoginDTO userdto) {
-////        User loginuser = userService.getUserByEmailAndPassword(userdto);
-////        return ResponseEntity.ok(loginuser);
-////    }
 
     @PostMapping("/register")
     public ResponseEntity<User> createUserRegister(@ModelAttribute UserRegisterDTO userdto) {
@@ -142,8 +132,6 @@ public class UserController {
         UserDTO savedUser = userService.updateUser(id, userDTO);
         return ResponseEntity.ok(savedUser);
     }
-
-
 
 }
 

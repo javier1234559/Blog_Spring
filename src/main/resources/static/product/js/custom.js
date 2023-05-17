@@ -392,6 +392,25 @@ const handlePostForgotPass = (event) => {
     });
 };
 
+const handleDisplayBannerProduct = (category) => {
+
+  apiFacade
+    .get(`/api/banners/${category}`)
+    .then((data) => {
+      console.log(data);
+      console.log(data.title);
+      document.getElementById('title').textContent  = data.title;
+      document.getElementById('subtitle').textContent  = data.subtitle;
+      document.getElementById('bannerImage').style.background = `${SERVER_URL}/uploaded/banners/${data.category}`;
+    })
+    .catch((error) => {
+      console.log('Error:', error);
+      document.getElementById('title').textContent  = 'Clean Blog';
+      document.getElementById('subtitle').textContent  = 'A Blog Theme created by Javier';
+      document.getElementById('bannerImage').style.background = "https://cdn.vectorstock.com/i/preview-1x/65/30/default-image-icon-missing-picture-page-vector-40546530.jpg";
+    });
+};
+
 //--------------------Function custom for display--------------------
 
 function changeTitleCreatePost() {

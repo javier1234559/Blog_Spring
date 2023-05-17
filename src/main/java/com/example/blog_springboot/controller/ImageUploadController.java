@@ -1,6 +1,8 @@
 package com.example.blog_springboot.controller;
 
+import com.example.blog_springboot.model.Banner;
 import com.example.blog_springboot.model.PictureStored;
+import com.example.blog_springboot.service.BannerService;
 import com.example.blog_springboot.service.PictureStoredService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -18,10 +20,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ImageUploadController {
 
     @Autowired
+    private BannerService bannerService;
+
+    @Autowired
     private PictureStoredService pictureStoredService;
 
     @GetMapping("/{name}")
     public ResponseEntity<byte[]> getImage(@PathVariable String name) {
+        PictureStored pic = pictureStoredService.getPictureStored(name);
+        if (pic != null) {
+            byte[] imageData = pic.getImage();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.IMAGE_JPEG);
+            return new ResponseEntity<>(imageData, headers, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/banners/{category}")
+    public ResponseEntity<byte[]> getImageBanner(@PathVariable("category") String category) {
+        Banner banner = bannerService.findByCategory(category);
+        String name = banner.getImageurl();
+
         PictureStored pic = pictureStoredService.getPictureStored(name);
         if (pic != null) {
             byte[] imageData = pic.getImage();

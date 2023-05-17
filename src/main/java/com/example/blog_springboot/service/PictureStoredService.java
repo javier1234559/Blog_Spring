@@ -11,9 +11,6 @@ public interface PictureStoredService {
 
     String addPictureStoredString(MultipartFile file);
 
-    PictureStored addPictureStored(PictureStored picture);
-
-    PictureStored updatePictureStored(PictureStored picture);
 
     String deletePictureStored(String id);
 
