@@ -17,7 +17,8 @@ public interface CommentRepository extends JpaRepository<Comment,Integer> {
     @Query("SELECT COUNT(c.idcomment) FROM Comment c JOIN c.post p WHERE p.idpost = :idpost")
     int getCommentQuantityByPost(int idpost);
 
-    @Query("SELECT NEW com.example.blog_springboot.dto.NotificationDTO(p.idpost, u.name, u.imageurl, c.content) FROM Comment c JOIN c.post p JOIN c.user u WHERE u.email = :email")
+    @Query("SELECT NEW com.example.blog_springboot.dto.NotificationDTO(p.idpost, c.user.name, c.user.imageurl, c.content) FROM Comment c JOIN c.post p JOIN p.user u WHERE u.email = :email")
     List<NotificationDTO> findAllCommentByUserEmail(String email);
+
 
 }
