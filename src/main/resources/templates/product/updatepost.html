@@ -74,8 +74,7 @@
                 </a>
             </td>
             <td>
-                <input hidden  th:value="${post.getIdpost()}" id="idpost"></input>
-                <button type="submit" class="btn btn-outline-danger px-3 custom-button-danger"  id="delete-btn" >Delete</button>
+                <button th:onclick="'handleDeletePost(event,' + ${post.getIdpost()} + ')'" type="submit" class="btn btn-outline-danger px-3 custom-button-danger"  id="delete-btn" >Delete</button>
             </td>
           </tr>
         </tbody>
@@ -99,10 +98,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="/static/product/js/custom.js" th:src="@{/product/js/custom.js}"></script>
     <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('delete-btn').addEventListener('click', handleDeletePost);
-     });
-    
 
     </script>
   </body>
