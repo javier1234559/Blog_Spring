@@ -145,15 +145,15 @@ public class HomeProductController {
         }
     }
 
-//    @PostMapping ("/updatepost")
-//    public String createPost(@ModelAttribute PostCreateDTO postdto , Principal principal) throws IOException {
-//        postService.createPostDTO(postdto , principal);
-//        return "redirect:/";
-//    }
     @PostMapping ("/createnewpost")
-    public String createPost(@ModelAttribute PostCreateDTO postdto , Principal principal) throws IOException {
+    public String createPost(@ModelAttribute PostCreateDTO postdto ,Model model , Principal principal) throws IOException {
         postService.createPostDTO(postdto , principal);
-        return "redirect:/updatepost";
+
+        //alternative for redirect
+        String email = principal.getName();
+        List<PostDetailDTO> listPostDetailDTO = postService.getPostByEmailUser(email);
+        model.addAttribute("listPostDetailDTO",listPostDetailDTO);
+        return "updatepost";
     }
 
     @GetMapping("/editposts/{id}")
