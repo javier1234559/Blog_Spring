@@ -1,8 +1,8 @@
 //Function Post AJAX
 //--------------- Global Data -------------
 let posts = null;
-const SERVER_URL = 'http://localhost:8080';
-// const SERVER_URL = 'https://blogspring-production.up.railway.app';
+// const SERVER_URL = 'http://localhost:8080';
+const SERVER_URL = 'https://blogspring-production.up.railway.app';
 
 //------------- COMMON CLASS ------------
 class ApiFacade {
