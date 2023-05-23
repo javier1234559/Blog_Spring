@@ -65,17 +65,17 @@ public class HomeProductController {
 
     @GetMapping("/about")
     public String getAbout(){
-        return "/product/about";
+        return "product/about";
     }
 
     @GetMapping("/contact")
     public String getContact(){
-        return "/product/contact";
+        return "product/contact";
     }
 
     @GetMapping("/createpost")
     public String getCreatePost(){
-        return "/product/createpost";
+        return "product/createpost";
     }
 
     @GetMapping("/login")
@@ -87,18 +87,18 @@ public class HomeProductController {
                 return "redirect:/";
             }
         } else {
-            return "/product/login";
+            return "product/login";
         }
     }
 
     @GetMapping("/register")
     public String getRegister(){
-        return "/product/register";
+        return "product/register";
     }
 
     @GetMapping("/forgotpass")
     public String getForgotPass( ){
-        return "/product/forgotpass";
+        return "product/forgotpass";
     }
 
     @GetMapping("/forgotpass/{email}")
@@ -106,7 +106,7 @@ public class HomeProductController {
         System.out.println(email);
         String code = emailService.sendVerificationCode(email);
         session.setAttribute("code", code);
-        return "/product/forgotpass";
+        return "product/forgotpass";
     }
 
     @GetMapping("/updatepost")
@@ -114,14 +114,14 @@ public class HomeProductController {
         String email = principal.getName();
         List<PostDetailDTO> listPostDetailDTO = postService.getPostByEmailUser(email);
         model.addAttribute("listPostDetailDTO",listPostDetailDTO);
-        return "/product/updatepost";
+        return "product/updatepost";
     }
 
     @GetMapping("/usersetting")
     public String getUserSetting(Model model , Principal principal){
         UserDTO currentUser = userService.getUserByEmail(principal.getName());
         model.addAttribute("currentUser", currentUser);
-        return "/product/usersetting";
+        return "product/usersetting";
     }
 
     @GetMapping("/posts/{id}")
@@ -160,7 +160,7 @@ public class HomeProductController {
     public String editPost(@PathVariable("id") int id, Model model) {
         PostDetailDTO updatepost = postService.getPostById(id);
         model.addAttribute("updatepost", updatepost);
-        return "/product/savepost";
+        return "product/savepost";
     }
 
 
