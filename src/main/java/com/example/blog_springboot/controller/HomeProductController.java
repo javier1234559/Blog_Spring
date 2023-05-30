@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -146,14 +147,18 @@ public class HomeProductController {
     }
 
     @PostMapping ("/createnewpost")
-    public String createPost(@ModelAttribute PostCreateDTO postdto ,Model model , Principal principal) throws IOException {
+    public ResponseEntity createPost(@ModelAttribute PostCreateDTO postdto ,Model model , Principal principal) throws IOException {
         postService.createPostDTO(postdto , principal);
 
-        //alternative for redirect
-        String email = principal.getName();
-        List<PostDetailDTO> listPostDetailDTO = postService.getPostByEmailUser(email);
-        model.addAttribute("listPostDetailDTO",listPostDetailDTO);
-        return "updatepost";
+//        String email = principal.getName();
+//        List<PostDetailDTO> listPostDetailDTO = postService.getPostByEmailUser(email);
+//        model.addAttribute("listPostDetailDTO",listPostDetailDTO);
+//        return "updatepost";
+//        String email = principal.getName();
+//        List<PostDetailDTO> listPostDetailDTO = postService.getPostByEmailUser(email);
+
+        // Assuming the post creation was successful
+        return ResponseEntity.ok("{\"message\": \"Post created successfully\"}");
     }
 
     @GetMapping("/editposts/{id}")

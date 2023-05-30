@@ -106,7 +106,7 @@ const handleWritePost = () => {
     .post('/createnewpost', formData)
     .then((data) => {
       alert('Post created!');
-      window.location.href = '/';
+      window.location.href = '/updatepost';
     })
     .catch((error) => {
       alert('Error creating post! ' + error);
