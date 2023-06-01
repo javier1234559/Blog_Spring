@@ -1,31 +1,24 @@
-Danh sách các thành viên :
-- 20110043 - Định Quân 
-- 19110219 - Trịnh Công Huynh
-- 20161347 - Nguyễn Bùi Minh Nhật
+# How to use this project
+👉 [Link blog 😎](https://javier1234559.notion.site/Ngu-n-h-c-Spring-Blog-3b47089798e54dca87b00e287c20cce4)
 
-Note ghi chú [Tại đây](https://javier1234559.notion.site/Blog-SpringBoot-111717df189840d1a5d886b680624f85)
 
-Link drive : [Tại đây](https://drive.google.com/drive/u/1/folders/11fKJN6ufK2utgba8H3zy1VMuP7jiPV8d)
+- Đầu tiên là cài đặt IDE intellij và mysql
+- Clone project về máy
 
-Khởi chạy 
-Đầu tiên là phải có Inteliji . Các trình IDE khác sợ không thống nhất được vì có nhiều file inteliji tự tạo ra để cấu hình nên ko biết các loại khác chạy được không 
-
-Thứ hai là phải có Mysql workbench 
-
-Clone project về máy 
-
-```
+```java
 git clone https://github.com/javier1234559/Blog_Spring.git
 ```
 
-Sau khi clone thành công thì kiểm tra ở file maven xem nó tải hết depencedency cần thiết về hết chưa , gồm có lombok, mysql connector , spring boot starter ,  devtool, jpa ..
+- Sau khi clone thành công thì kiểm tra ở file pom.xml xem nó tải hết depencedency cần thiết về hết chưa , gồm có lombok, mysql connector , spring boot starter ,  devtool, jpa ..
+- Mở comment đầu tiên để import một file [password.properties]()
 
-Vào mysql workbench tạo database trống cùng tên với project hiện tại spring_blog
-![image info](https://file.notion.so/f/s/1f45d27e-762a-4426-a656-6a9a618a77cd/Untitled.png?id=a3bf8b55-5d6c-4b16-af66-8426bbe65977&table=block&spaceId=8a1945d2-d14b-4e07-98bb-3f861a39ff81&expirationTimestamp=1680178917914&signature=CF9qiIcADgf7TRscpO-_CY2hDcJ_xm-HMEUDyMe1EUE&downloadName=Untitled.png)
+![Untitled](https://javier1234559.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F8487ab3c-7369-47fa-b73b-8e60a9795797%2FUntitled.png?id=97f7e004-8adb-4138-83b1-3a9d6576b2dc&table=block&spaceId=8a1945d2-d14b-4e07-98bb-3f861a39ff81&width=960&userId=&cache=v2)
 
+- Thêm các cấu hình cần thiết của database và Email vào bên dưới .
 
-Đổi lại tên kết nối 
+![Untitled](https://javier1234559.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F1b731fc7-91f4-4b27-8015-c71a60656bc1%2FUntitled.png?id=e0d7902a-2bf7-4d16-b03f-c1d96625f62d&table=block&spaceId=8a1945d2-d14b-4e07-98bb-3f861a39ff81&width=960&userId=&cache=v2)
 
-![Untitled](https://file.notion.so/f/s/012f82f1-1cd0-4e78-81c8-ffc3f54fbd65/Untitled.png?id=37681df9-b589-45fe-a40b-93290655647a&table=block&spaceId=8a1945d2-d14b-4e07-98bb-3f861a39ff81&expirationTimestamp=1680179085182&signature=Eof6dmTiNg3DHga5mlATglY7IMWilYAAD9e4PHc92b8&downloadName=Untitled.png)
+- Cuối dùng tạo một cấu hình Spring Boot để đặt tên class main để khởi chương trình
 
-Quay lại inteliji và khởi chạy nếu maven đã cập nhật xong .
+![Untitled](https://javier1234559.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fecf1b37f-b54d-4dda-8262-b6f90c435413%2FUntitled.png?id=37656056-fa49-447c-83da-395817c04505&table=block&spaceId=8a1945d2-d14b-4e07-98bb-3f861a39ff81&width=1060&userId=&cache=v2)
+
